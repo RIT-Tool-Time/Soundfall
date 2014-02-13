@@ -30,7 +30,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x46056e0>
+			<function <lambda> at 0x60bbc80>
 			</div>
 		</div>
 
@@ -155,7 +155,8 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </li>
 <li><a class="reference internal" href="helpers/inflector_helper.html"><em>Inflector Helper</em></a> changes include:<ul>
 <li>Changed <a class="reference internal" href="helpers/inflector_helper.html#humanize" title="humanize"><tt class="xref py py-func docutils literal"><span class="pre">humanize()</span></tt></a> to allow passing an input separator as its second parameter.</li>
-<li>Refactored <a class="reference internal" href="helpers/inflector_helper.html#plural" title="plural"><tt class="xref py py-func docutils literal"><span class="pre">plural()</span></tt></a> and <a class="reference internal" href="helpers/inflector_helper.html#singular" title="singular"><tt class="xref py py-func docutils literal"><span class="pre">singular()</span></tt></a> to avoid double pluralization and support more words.</li>
+<li>Changed <a class="reference internal" href="helpers/inflector_helper.html#humanize" title="humanize"><tt class="xref py py-func docutils literal"><span class="pre">humanize()</span></tt></a> and <a class="reference internal" href="helpers/inflector_helper.html#underscore" title="underscore"><tt class="xref py py-func docutils literal"><span class="pre">underscore()</span></tt></a> to utilize <a class="reference external" href="http://php.net/mbstring">mbstring</a>, if available.</li>
+<li>Changed <a class="reference internal" href="helpers/inflector_helper.html#plural" title="plural"><tt class="xref py py-func docutils literal"><span class="pre">plural()</span></tt></a> and <a class="reference internal" href="helpers/inflector_helper.html#singular" title="singular"><tt class="xref py py-func docutils literal"><span class="pre">singular()</span></tt></a> to avoid double pluralization and support more words.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="helpers/download_helper.html"><em>Download Helper</em></a> changes include:<ul>
@@ -198,10 +199,14 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added <em>filename</em> to the returned array elements.</li>
 </ul>
 </li>
+<li><a class="reference internal" href="helpers/text_helper.html"><em>Text Helper</em></a> changes include:<ul>
+<li>Changed the default tag for use in <a class="reference internal" href="helpers/text_helper.html#highlight_phrase" title="highlight_phrase"><tt class="xref py py-func docutils literal"><span class="pre">highlight_phrase()</span></tt></a> to <tt class="docutils literal"><span class="pre">&lt;mark&gt;</span></tt> (formerly <tt class="docutils literal"><span class="pre">&lt;strong&gt;</span></tt>).</li>
+<li>Changed <a class="reference internal" href="helpers/text_helper.html#character_limiter" title="character_limiter"><tt class="xref py py-func docutils literal"><span class="pre">character_limiter()</span></tt></a>, <a class="reference internal" href="helpers/text_helper.html#word_wrap" title="word_wrap"><tt class="xref py py-func docutils literal"><span class="pre">word_wrap()</span></tt></a> and <a class="reference internal" href="helpers/text_helper.html#ellipsize" title="ellipsize"><tt class="xref py py-func docutils literal"><span class="pre">ellipsize()</span></tt></a> to utilize <a class="reference external" href="http://php.net/mbstring">mbstring</a> or <a class="reference external" href="http://php.net/iconv">iconv</a>, if available.</li>
+</ul>
+</li>
 <li><a class="reference internal" href="helpers/directory_helper.html"><em>Directory Helper</em></a> <a class="reference internal" href="helpers/directory_helper.html#directory_map" title="directory_map"><tt class="xref py py-func docutils literal"><span class="pre">directory_map()</span></tt></a> will now append <tt class="docutils literal"><span class="pre">DIRECTORY_SEPARATOR</span></tt> to directory names in the returned array.</li>
 <li><a class="reference internal" href="helpers/array_helper.html"><em>Array Helper</em></a> <a class="reference internal" href="helpers/array_helper.html#element" title="element"><tt class="xref py py-func docutils literal"><span class="pre">element()</span></tt></a> and <a class="reference internal" href="helpers/array_helper.html#elements" title="elements"><tt class="xref py py-func docutils literal"><span class="pre">elements()</span></tt></a> now return NULL instead of FALSE when the required elements don&#8217;t exist.</li>
 <li><a class="reference internal" href="helpers/language_helper.html"><em>Language Helper</em></a> <a class="reference internal" href="helpers/language_helper.html#lang" title="lang"><tt class="xref py py-func docutils literal"><span class="pre">lang()</span></tt></a> now accepts an optional list of additional HTML attributes.</li>
-<li>Changed the default tag for use in <a class="reference internal" href="helpers/text_helper.html"><em>Text Helper</em></a> <a class="reference internal" href="helpers/text_helper.html#highlight_phrase" title="highlight_phrase"><tt class="xref py py-func docutils literal"><span class="pre">highlight_phrase()</span></tt></a> to <tt class="docutils literal"><span class="pre">&lt;mark&gt;</span></tt> (formerly <tt class="docutils literal"><span class="pre">&lt;strong&gt;</span></tt>).</li>
 <li>Deprecated the <a class="reference internal" href="helpers/email_helper.html"><em>Email Helper</em></a> as its <tt class="docutils literal"><span class="pre">valid_email()</span></tt>, <tt class="docutils literal"><span class="pre">send_email()</span></tt> functions are now only aliases for PHP native functions <tt class="docutils literal"><span class="pre">filter_var()</span></tt> and <tt class="docutils literal"><span class="pre">mail()</span></tt> respectively.</li>
 </ul>
 </li>
@@ -362,11 +367,12 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/cart.html"><em>Cart Library</em></a> changes include:<ul>
-<li><tt class="docutils literal"><span class="pre">insert()</span></tt> now auto-increments quantity for an item when inserted twice instead of resetting it, this is the default behaviour of large e-commerce sites.</li>
-<li><em>Product Name</em> strictness can be disabled by switching the <tt class="docutils literal"><span class="pre">$product_name_safe</span></tt> property to FALSE.</li>
 <li>Added method <tt class="docutils literal"><span class="pre">remove()</span></tt> to remove a cart item, updating with quantity of 0 seemed like a hack but has remained to retain compatibility.</li>
 <li>Added method <tt class="docutils literal"><span class="pre">get_item()</span></tt> to enable retrieving data for a single cart item.</li>
 <li>Added unicode support for product names.</li>
+<li>Added support for disabling product name strictness via the <tt class="docutils literal"><span class="pre">$product_name_safe</span></tt> property.</li>
+<li>Changed <tt class="docutils literal"><span class="pre">insert()</span></tt> method to auto-increment quantity for an item when inserted twice instead of resetting it.</li>
+<li>Changed <tt class="docutils literal"><span class="pre">update()</span></tt> method to support updating all properties attached to an item.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/image_lib.html"><em>Image Manipulation Library</em></a> changes include:<ul>
@@ -425,11 +431,12 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/pagination.html"><em>Pagination Library</em></a> changes include:<ul>
+<li>Deprecated usage of the &#8220;anchor_class&#8221; setting (use the new &#8220;attributes&#8221; setting instead).</li>
 <li>Added method chaining support to <tt class="docutils literal"><span class="pre">initialize()</span></tt> method.</li>
 <li>Added support for the anchor &#8220;rel&#8221; attribute.</li>
 <li>Added support for setting custom attributes.</li>
-<li>Deprecated usage of the &#8220;anchor_class&#8221; setting (use the new &#8220;attributes&#8221; setting instead).</li>
-<li>Added $config[&#8216;reuse_query_string&#8217;] to allow automatic repopulation of query string arguments, combined with normal URI segments.</li>
+<li>Added support for language translations of the <em>first_link</em>, <em>next_link</em>, <em>prev_link</em> and <em>last_link</em> values.</li>
+<li>Added <tt class="docutils literal"><span class="pre">$config['reuse_query_string']</span></tt> to allow automatic repopulation of query string arguments, combined with normal URI segments.</li>
 <li>Removed the default <tt class="docutils literal"><span class="pre">&amp;nbsp;</span></tt> from a number of the configuration variables.</li>
 </ul>
 </li>
@@ -461,6 +468,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/zip.html"><em>Zip Library</em></a> method <tt class="docutils literal"><span class="pre">read_file()</span></tt> can now also alter the original file path/name while adding files to an archive.</li>
+<li><a class="reference internal" href="libraries/trackback.html"><em>Trackback Library</em></a> method <tt class="docutils literal"><span class="pre">receive()</span></tt> will now utilize <tt class="docutils literal"><span class="pre">iconv()</span></tt> if it is available but <tt class="docutils literal"><span class="pre">mb_convert_encoding()</span></tt> is not.</li>
 </ul>
 </li>
 <li>Core<ul>
@@ -553,9 +561,17 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Language files are now loaded in a cascading style with the one in <strong>system/</strong> always loaded and overriden afterwards, if another one is found.</li>
 </ul>
 </li>
-<li><a class="reference internal" href="general/hooks.html"><em>Hooks Library</em></a> changes include:
--  Renamed method <tt class="docutils literal"><span class="pre">_call_hook()</span></tt> to <tt class="docutils literal"><span class="pre">call_hook()</span></tt>.
--  Class instances are now stored in order to maintain their state.</li>
+<li><a class="reference internal" href="general/hooks.html"><em>Hooks Library</em></a> changes include:<ul>
+<li>Renamed method <tt class="docutils literal"><span class="pre">_call_hook()</span></tt> to <tt class="docutils literal"><span class="pre">call_hook()</span></tt>.</li>
+<li>Class instances are now stored in order to maintain their state.</li>
+</ul>
+</li>
+<li>UTF-8 Library changes include:<ul>
+<li><tt class="docutils literal"><span class="pre">UTF8_ENABLED</span></tt> now requires only one of <a class="reference external" href="http://php.net/mbstring">Multibyte String</a> or <a class="reference external" href="http://php.net/iconv">iconv</a> to be available instead of both.</li>
+<li>Changed method <tt class="docutils literal"><span class="pre">clean_string()</span></tt> to utilize <tt class="docutils literal"><span class="pre">mb_convert_encoding()</span></tt> if it is available but <tt class="docutils literal"><span class="pre">iconv()</span></tt> is not.</li>
+</ul>
+</li>
+<li>Added compatibility layers for PHP&#8217;s <a class="reference external" href="http://php.net/mbstring">mbstring</a> (limited support) and <a class="reference external" href="http://php.net/password">password</a> extensions.</li>
 <li>Removed <tt class="docutils literal"><span class="pre">CI_CORE</span></tt> boolean constant from <em>CodeIgniter.php</em> (no longer Reactor and Core versions).</li>
 <li>Log Library will now try to create the <strong>log_path</strong> directory if it doesn&#8217;t exist.</li>
 <li>Added support for HTTP-Only cookies with new config option <em>cookie_httponly</em> (default FALSE).</li>
@@ -758,6 +774,9 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2771) - <a class="reference internal" href="libraries/security.html"><em>Security Library</em></a> method <tt class="docutils literal"><span class="pre">xss_clean()</span></tt> didn&#8217;t take into account HTML5 entities.</li>
 <li>Fixed a bug in the <a class="reference internal" href="libraries/sessions.html"><em>Session Library</em></a> &#8216;cookie&#8217; driver where authentication was not performed for encrypted cookies.</li>
 <li>Fixed a bug (#2856) - ODBC method <tt class="docutils literal"><span class="pre">affected_rows()</span></tt> passed an incorrect value to <tt class="docutils literal"><span class="pre">odbc_num_rows()</span></tt>.</li>
+<li>Fixed a bug (#43) <a class="reference internal" href="libraries/image_lib.html"><em>Image Manipulation Library</em></a> method <tt class="docutils literal"><span class="pre">text_watermark()</span></tt> didn&#8217;t properly determine watermark placement.</li>
+<li>Fixed a bug where <a class="reference internal" href="libraries/table.html"><em>HTML Table Library</em></a> ignored its <em>auto_heading</em> setting if headings were not already set.</li>
+<li>Fixed a bug (#2364) - <a class="reference internal" href="libraries/pagination.html"><em>Pagination Library</em></a> appended the query string (if used) multiple times when there are successive calls to <tt class="docutils literal"><span class="pre">create_links()</span></tt> with no <tt class="docutils literal"><span class="pre">initialize()</span></tt> in between them.</li>
 </ul>
 </div>
 </div>
@@ -3037,7 +3056,7 @@ and fixed various typos.</li>
 		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
-			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>
+			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2014, EllisLab, Inc.</a></p>
 		</div><!-- /#footer -->
 	</body>
 </html>
