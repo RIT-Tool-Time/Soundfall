@@ -1,3 +1,36 @@
+-- -----------------------------------------------------
+-- Table `music`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `music` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `owner` BIGINT(20) NULL,
+  `email` VARCHAR(55) NULL,
+  `name` VARCHAR(55) NOT NULL,
+  `description` TEXT NULL,
+  `picture` VARCHAR(255) NULL,
+  `date` DATETIME NOT NULL,
+  `file` VARCHAR(255) NOT NULL,
+  `likes` INT NOT NULL DEFAULT 0,
+  `downloads` INT NOT NULL DEFAULT 0,
+  `private` TINYINT(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+-- --------------------------------------------------------
+
+-- -----------------------------------------------------
+-- Table `users_following`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `users_following` (
+  `user_id` BIGINT(20) NOT NULL,
+  `following` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`user_id`, `following`))
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `a3m_account`
 --
@@ -17,14 +50,7 @@ CREATE TABLE IF NOT EXISTS `a3m_account` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
-
---
--- Adding default user as admin `a3m_acl_role`
---
-
-INSERT INTO `a3m_rel_account_role` (`account_id`, `role_id`) VALUES (1, 1);
-
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 ROW_FORMAT = DYNAMIC AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -44,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `a3m_account_details` (
   `citimezone` varchar(6) DEFAULT NULL,
   `picture` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`account_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 --
@@ -82,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `a3m_acl_permission` (
   `is_system` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `key` (`key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE = InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `a3m_acl_permission`
@@ -118,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `a3m_acl_role` (
   `is_system` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `role_name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `a3m_acl_role`
@@ -138,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `a3m_rel_account_permission` (
   `account_id` bigint(20) unsigned NOT NULL,
   `permission_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`account_id`,`permission_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -150,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `a3m_rel_account_role` (
   `account_id` bigint(20) unsigned NOT NULL,
   `role_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`account_id`,`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- --------------------------------------------------------
@@ -163,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `a3m_rel_role_permission` (
   `role_id` bigint(20) unsigned NOT NULL,
   `permission_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`role_id`,`permission_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Giving the Admin role (1) all permissions
@@ -187,7 +213,7 @@ CREATE TABLE IF NOT EXISTS  `ci_sessions` (
     `user_data` text NOT NULL,
     PRIMARY KEY (`session_id`, `ip_address`, `user_agent`),
     KEY `last_activity_idx` (`last_activity`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -202,7 +228,17 @@ CREATE TABLE IF NOT EXISTS `ref_country` (
   `country` varchar(80) NOT NULL,
   PRIMARY KEY (`alpha2`),
   UNIQUE KEY `alpha3` (`alpha3`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Adding default user as admin `a3m_acl_role`
+--
+
+INSERT INTO `a3m_rel_account_role` (`account_id`, `role_id`) VALUES (1, 1);
+
+-- --------------------------------------------------------
 
 --
 -- Dumping data for table `ref_country`
@@ -468,7 +504,7 @@ CREATE TABLE IF NOT EXISTS `ref_currency` (
   `currency` varchar(80) NOT NULL,
   PRIMARY KEY (`alpha`),
   KEY `numeric` (`numeric`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `ref_currency`
@@ -670,7 +706,7 @@ CREATE TABLE IF NOT EXISTS `ref_iptocountry` (
   KEY `country_code` (`country_code`),
   KEY `ip_to` (`ip_to`),
   KEY `ip_from` (`ip_from`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ref_iptocountry`
@@ -100503,7 +100539,7 @@ CREATE TABLE IF NOT EXISTS `ref_language` (
   `native` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`one`),
   KEY `two` (`two`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ref_language`
@@ -100710,7 +100746,7 @@ CREATE TABLE IF NOT EXISTS `ref_zoneinfo` (
   `cicodesummer` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`zoneinfo`),
   KEY `country` (`country`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `ref_zoneinfo`

@@ -1,0 +1,14 @@
+/* TEAM */
+	Web developer: Jan Dvorak
+	Contact: jxd3455 [at] rit.edu
+	Twitter: @storyteller_cz
+	From: Prague, Czech republic
+/* THANKS */
+		
+
+/* SITE */
+	Last update:2014/2/14
+	Language: English
+	Standards: HTML5, CSS3
+	Frameworks: CodeIgniter, Bootstrap
+	Software: FileZilla, Git, Komodo Edit

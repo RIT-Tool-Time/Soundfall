@@ -53,11 +53,11 @@ $config['third_party_auth'] = array(
 "providers" => array (
         // openid providers
         "OpenID" => array (
-                "enabled" => true
+                "enabled" => TRUE
         ),
 
         "Yahoo" => array (
-                "enabled" => FALSE,
+                "enabled" => TRUE,
                 "keys"    => array ( "key" => "", "secret" => "" ),
         ),
 
@@ -66,39 +66,49 @@ $config['third_party_auth'] = array(
         ),
 
         "Google" => array (
-                "enabled" => FALSE,
+                "enabled" => TRUE,
                 "keys"    => array ( "id" => "", "secret" => "" ),
         ),
 
         "Facebook" => array (
-                "enabled" => true,
-                "keys"    => array ( "id" => "464764366948522", "secret" => "cf8e6a9331fc0d947f0ab776e4290b5c" ),
+                "enabled" => TRUE,
+                "keys"    => array ( "id" => "", "secret" => "" ),
         ),
 
         "Twitter" => array (
-                "enabled" => true,
-                "keys"    => array ( "key" => "9QqvcR2WkK9Ki1Mi1vkSnw", "secret" => "FamNmwSV3FGJ4wMNEHuw6LN26PhlD2reOIctpvNqias" )
+                "enabled" => TRUE,
+                "keys"    => array ( "key" => "", "secret" => "" )
         ),
 
         // windows live
         "Live" => array (
-                "enabled" => FALSE,
+                "enabled" => TRUE,
                 "keys"    => array ( "id" => "", "secret" => "" )
-        ),
-
-        "MySpace" => array (
-                "enabled" => FALSE,
-                "keys"    => array ( "key" => "", "secret" => "" )
         ),
 
         "LinkedIn" => array (
                 "enabled" => TRUE,
-                "keys"    => array ( "key" => "77d2ggniatdzlf", "secret" => "TDoEdghviAleMmcZ" )
+                "keys"    => array ( "key" => "", "secret" => "" )
         ),
-
-        "Foursquare" => array (
-                "enabled" => FALSE,
-                "keys"    => array ( "id" => "", "secret" => "" )
+        
+        "LastFM" => array (
+            "enambled" => TRUE,
+            "keys" => array ( "key" => "", "secret" => "" )
+        ),
+        
+        "Vimeo" => array (
+            "enambled" => TRUE,
+            "keys" => array ( "key" => "", "secret" => "" )
+        ),
+        
+        "Tumblr" => array (
+            "enambled" => TRUE,
+            "keys" => array ( "key" => "", "secret" => "" )
+        ),
+        
+        "Instagram" => array (
+            "enambled" => TRUE,
+            "keys" => array ( "key" => "", "secret" => "" )
         ),
 ),
 

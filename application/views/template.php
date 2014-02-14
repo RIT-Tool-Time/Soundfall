@@ -4,13 +4,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     
     <title><?php echo isset($title) ? $title.' - '.lang('website_title') : lang('website_title'); ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Account Authentication and Authorization">
-    <meta name="author" content="A3M">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Waterfall sharing platform" />
+    <meta name="author" content="Jan Dvorak, Chris Blackman, Megan Kusher, Matthew Kinbaum, Tyler Stegall, Andrew Gucwa, Tyler Sposato, Katharine Read" />
     
     <base href="<?php echo base_url(); ?>"/>
     
     <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
+    <link rel="author" href="humans.txt" />
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/bootstrap/css/bootstrap.min.css">
@@ -20,6 +21,7 @@
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
 </head>
 <body>
