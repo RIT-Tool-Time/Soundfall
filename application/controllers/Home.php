@@ -21,8 +21,23 @@ class Home extends CI_Controller {
 			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 		}
 		
+		$data['page'] = "home";
 		$data['content'] = $this->load->view('home', isset($data) ? $data : NULL, TRUE);
-		$this->load->view('template', $data);
+		$this->load->view('preview_template', $data);
+	}
+	
+	function about()
+	{
+		maintain_ssl();
+		
+		if ($this->authentication->is_signed_in())
+		{
+			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
+		}
+		
+		$data['page'] = "about";
+		$data['content'] = $this->load->view('home', isset($data) ? $data : NULL, TRUE);
+		$this->load->view('preview_template', $data);
 	}
 
 }

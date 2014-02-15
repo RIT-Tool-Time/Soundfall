@@ -16,9 +16,6 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/bootstrap/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/css/cover.css"/>
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,21 +33,17 @@
 
           <div class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">LOGO</h3>
+              <h3 class="masthead-brand"><?php echo anchor('', lang('website_title'), 'class="navbar-brand"'); ?></h3>
               <ul class="nav masthead-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Login</a></li>
+                <li <?php if($page === "home"){ echo 'class="active"';} ?>><a href="<?php echo base_url() ?>">Home</a></li>
+                <li <?php if($page === "about"){ echo 'class="active"';} ?>><a href="<?php echo base_url('/about') ?>">About</a></li>
+                <li><a href="<?php echo base_url('/login') ?>">Login</a></li>
               </ul>
             </div>
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Learn more</a>
-            </p>
+            <?php echo $content; ?>
           </div>
 
           <div class="mastfoot">

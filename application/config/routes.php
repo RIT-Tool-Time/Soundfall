@@ -77,6 +77,7 @@
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 
+$route['about'] = "home/about";
 $route['sign_up'] = "account/sign_up";
 $route['sign_in'] = "account/sign_in";
 $route['sign_out'] = "account/sign_out";

@@ -1,4 +1,9 @@
-RewriteEngine on 
-RewriteRule ^$ /index.php [L] 
-RewriteCond $1 !^(index\.php|resource|system|user_guide_src|bootstrap|robots\.txt|favicon\.ico) 
-RewriteRule ^(.*)$ /index.php/$1 [L] 
+RewriteEngine on
+RewriteBase /
+RewriteRule ^(.*)$ /index.php/$1 [L]
+RewriteRule ^$ /index.php [L]
+RewriteCond $1 !^(index\.php|resource|system|robots\.txt|favicon\.ico)
+
+#infinite loop fix
+RewriteCond %{ENV:REDIRECT_STATUS} 200
+RewriteRule .* - [L]
