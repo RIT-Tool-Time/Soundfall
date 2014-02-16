@@ -32,12 +32,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-                <?php echo anchor('', lang('website_title'), 'class="navbar-brand"'); ?>
+                <?php echo anchor(base_url(), lang('website_title'), 'class="navbar-brand"'); ?>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="divider-vertical"></li>
-                    <li><?php echo anchor('', 'Nav Link 1'); ?></li>
-                    <li><?php echo anchor('', 'Nav Link 2'); ?></li>
+                    <li><?php echo anchor('http://cias.rit.edu/', 'Blog'); ?></li>
+                    <li><?php echo anchor('music/listing', 'Music listing'); ?></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 $lang['website_title'] = 'Waterfall';
-$lang['website_welcome_username'] = 'Welcome, %s.';
+$lang['website_welcome_username'] = 'Welcome, %s!';
 $lang['website_account'] = 'Account Settings';
 $lang['website_profile'] = 'Manage Profile';
 $lang['website_linked'] = 'Linked Accounts';

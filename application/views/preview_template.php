@@ -37,7 +37,7 @@
               <ul class="nav masthead-nav">
                 <li <?php if($page === "home"){ echo 'class="active"';} ?>><a href="<?php echo base_url() ?>">Home</a></li>
                 <li <?php if($page === "about"){ echo 'class="active"';} ?>><a href="<?php echo base_url('/about') ?>">About</a></li>
-                <li><a href="<?php echo base_url('/login') ?>">Login</a></li>
+                <li><a href="<?php echo base_url('account/landing') ?>">Account</a></li>
               </ul>
             </div>
           </div>

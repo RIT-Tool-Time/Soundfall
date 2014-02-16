@@ -12,15 +12,7 @@ class Authentication {
 		// Obtain a reference to the ci super object
 		$this->CI =& get_instance();
 		
-		//Load the session, if CI2 load it as library, if it is CI3 load as a driver
-		if (substr(CI_VERSION, 0, 1) == '2')
-		{
-			$this->CI->load->library('session');
-		}
-		else
-		{
-			$this->CI->load->driver('session');
-		}
+		$this->CI->load->driver('session');
 		
 		log_message('debug', 'Authentication Class Initalized');
 	}
@@ -61,7 +53,7 @@ class Authentication {
 		else
 		{
 			$validation = $this->check_user_validation_suspend($user);
-			if($validation != 'invalid' || $validation != 'suspended')
+			if($validation === TRUE)
 			{
 				// Check password
 				if ( ! $this->check_password($user->password, $password))
@@ -129,7 +121,7 @@ class Authentication {
 		}
 		
 		//change this URL for default redirect after sign in
-		redirect(base_url());
+		redirect(base_url('account/landing'));
 	}
 
 	// --------------------------------------------------------------------

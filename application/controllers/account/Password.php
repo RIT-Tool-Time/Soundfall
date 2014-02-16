@@ -2,7 +2,8 @@
 /*
  * Account_password Controller
  */
-class Password extends CI_Controller {
+class Password extends CI_Controller
+{
 
 	/**
 	 * Constructor

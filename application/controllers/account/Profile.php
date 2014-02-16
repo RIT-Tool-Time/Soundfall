@@ -2,7 +2,8 @@
 /*
  * Account_profile Controller
  */
-class Profile extends CI_Controller {
+class Profile extends CI_Controller
+{
 
 	/**
 	 * Constructor
@@ -30,7 +31,7 @@ class Profile extends CI_Controller {
 		// Redirect unauthenticated users to signin page
 		if ( ! $this->authentication->is_signed_in())
 		{
-			redirect('account/sign_in/?continue='.urlencode(base_url().'account/profile'));
+			redirect('account/sign_in/?continue='.urlencode(base_url('account/profile')));
 		}
 
 		// Retrieve sign in user

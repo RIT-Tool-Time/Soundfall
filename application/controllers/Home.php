@@ -18,7 +18,8 @@ class Home extends CI_Controller {
 		
 		if ($this->authentication->is_signed_in())
 		{
-			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
+			//redirect loged in users to their langing page
+			redirect('account/landing');
 		}
 		
 		$data['page'] = "home";
@@ -32,11 +33,12 @@ class Home extends CI_Controller {
 		
 		if ($this->authentication->is_signed_in())
 		{
+			//figure out where we want to redirect the user to
 			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 		}
 		
 		$data['page'] = "about";
-		$data['content'] = $this->load->view('home', isset($data) ? $data : NULL, TRUE);
+		$data['content'] = $this->load->view('about', isset($data) ? $data : NULL, TRUE);
 		$this->load->view('preview_template', $data);
 	}
 
