@@ -30,7 +30,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x5177488>
+			<function <lambda> at 0x3db62a8>
 			</div>
 		</div>
 
@@ -364,6 +364,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added method chaining support.</li>
 <li>Added configuration to generate days of other months instead of blank cells.</li>
 <li>Auto set <em>next_prev_url</em> if it is empty and <em>show_prev_next</em> is set to TRUE.</li>
+<li>The template now accepts an array in addition to the encoded string.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/cart.html"><em>Cart Library</em></a> changes include:<ul>
@@ -569,6 +570,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>UTF-8 Library changes include:<ul>
 <li><tt class="docutils literal"><span class="pre">UTF8_ENABLED</span></tt> now requires only one of <a class="reference external" href="http://php.net/mbstring">Multibyte String</a> or <a class="reference external" href="http://php.net/iconv">iconv</a> to be available instead of both.</li>
 <li>Changed method <tt class="docutils literal"><span class="pre">clean_string()</span></tt> to utilize <tt class="docutils literal"><span class="pre">mb_convert_encoding()</span></tt> if it is available but <tt class="docutils literal"><span class="pre">iconv()</span></tt> is not.</li>
+<li>Renamed method <tt class="docutils literal"><span class="pre">_is_ascii()</span></tt> to <tt class="docutils literal"><span class="pre">is_ascii()</span></tt> and made it public.</li>
 </ul>
 </li>
 <li>Added <cite>compatibility layers &lt;general/compatibility_functions&gt;</cite> for PHP&#8217;s <a class="reference external" href="http://php.net/mbstring">mbstring</a> (limited support) and <a class="reference external" href="http://php.net/password">password</a> extensions.</li>
