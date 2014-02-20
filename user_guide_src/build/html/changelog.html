@@ -30,7 +30,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x58d1500>
+			<function <lambda> at 0x4466410>
 			</div>
 		</div>
 
@@ -573,7 +573,13 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Renamed method <tt class="docutils literal"><span class="pre">_is_ascii()</span></tt> to <tt class="docutils literal"><span class="pre">is_ascii()</span></tt> and made it public.</li>
 </ul>
 </li>
-<li>Added <cite>compatibility layers &lt;general/compatibility_functions&gt;</cite> for PHP&#8217;s <a class="reference external" href="http://php.net/mbstring">mbstring</a> (limited support), <a class="reference external" href="http://php.net/hash">hash</a> and <a class="reference external" href="http://php.net/password">password</a> extensions.</li>
+<li>Added <cite>compatibility layers &lt;general/compatibility_functions&gt;</cite> for:<ul>
+<li><a class="reference external" href="http://php.net/mbstring">Multibyte String</a> (limited support).</li>
+<li><a class="reference external" href="http://php.net/hash">Hash</a> (just <tt class="docutils literal"><span class="pre">hash_pbkdf2()</span></tt>).</li>
+<li><a class="reference external" href="http://php.net/password">Password Hashing</a>.</li>
+<li><a class="reference external" href="http://php.net/book.array">Array Functions</a> (<tt class="docutils literal"><span class="pre">array_column()</span></tt>, <tt class="docutils literal"><span class="pre">array_replace()</span></tt>, <tt class="docutils literal"><span class="pre">array_replace_recursive()</span></tt>).</li>
+</ul>
+</li>
 <li>Removed <tt class="docutils literal"><span class="pre">CI_CORE</span></tt> boolean constant from <em>CodeIgniter.php</em> (no longer Reactor and Core versions).</li>
 <li>Log Library will now try to create the <strong>log_path</strong> directory if it doesn&#8217;t exist.</li>
 <li>Added support for HTTP-Only cookies with new config option <em>cookie_httponly</em> (default FALSE).</li>

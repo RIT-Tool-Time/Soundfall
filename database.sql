@@ -17,8 +17,6 @@ CREATE TABLE IF NOT EXISTS `music` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
--- --------------------------------------------------------
-
 -- -----------------------------------------------------
 -- Table `users_following`
 -- -----------------------------------------------------

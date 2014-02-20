@@ -36,7 +36,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="divider-vertical"></li>
-                    <li><?php echo anchor('http://cias.rit.edu/', 'Blog'); ?></li>
+                    <li><?php echo anchor('blog', 'Blog'); ?></li>
                     <li><?php echo anchor('music/listing', 'Music listing'); ?></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

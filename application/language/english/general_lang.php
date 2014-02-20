@@ -5,7 +5,7 @@
 | General
 |--------------------------------------------------------------------------
 */
-$lang['website_title'] = 'Waterfall';
+$lang['website_title'] = 'Soundfall';
 $lang['website_welcome_username'] = 'Welcome, %s!';
 $lang['website_account'] = 'Account Settings';
 $lang['website_profile'] = 'Manage Profile';
