@@ -30,7 +30,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x4466410>
+			<function <lambda> at 0x4805b18>
 			</div>
 		</div>
 
@@ -130,11 +130,12 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </li>
 <li>Helpers<ul>
 <li><a class="reference internal" href="helpers/date_helper.html"><em>Date Helper</em></a> changes include:<ul>
-<li><a class="reference internal" href="helpers/date_helper.html#now" title="now"><tt class="xref py py-func docutils literal"><span class="pre">now()</span></tt></a> now works with all timezone strings supported by PHP.</li>
 <li>Added an optional third parameter to <a class="reference internal" href="helpers/date_helper.html#timespan" title="timespan"><tt class="xref py py-func docutils literal"><span class="pre">timespan()</span></tt></a> that constrains the number of time units displayed.</li>
 <li>Added an optional parameter to <a class="reference internal" href="helpers/date_helper.html#timezone_menu" title="timezone_menu"><tt class="xref py py-func docutils literal"><span class="pre">timezone_menu()</span></tt></a> that allows more attributes to be added to the generated select tag.</li>
-<li>Deprecated <tt class="docutils literal"><span class="pre">standard_date()</span></tt>, which now just uses the native <tt class="docutils literal"><span class="pre">date()</span></tt> with <a class="reference external" href="http://www.php.net/manual/en/class.datetime.php#datetime.constants.types">DateTime constants</a>.</li>
 <li>Added function <a class="reference internal" href="helpers/date_helper.html#date_range" title="date_range"><tt class="xref py py-func docutils literal"><span class="pre">date_range()</span></tt></a> that generates a list of dates between a specified period.</li>
+<li>Deprecated <tt class="docutils literal"><span class="pre">standard_date()</span></tt>, which now just uses the native <tt class="docutils literal"><span class="pre">date()</span></tt> with <a class="reference external" href="http://www.php.net/manual/en/class.datetime.php#datetime.constants.types">DateTime constants</a>.</li>
+<li>Changed <a class="reference internal" href="helpers/date_helper.html#now" title="now"><tt class="xref py py-func docutils literal"><span class="pre">now()</span></tt></a> to work with all timezone strings supported by PHP.</li>
+<li>Changed <a class="reference internal" href="helpers/date_helper.html#days_in_month" title="days_in_month"><tt class="xref py py-func docutils literal"><span class="pre">days_in_month()</span></tt></a> to use the native <tt class="docutils literal"><span class="pre">cal_days_in_month()</span></tt> PHP function, if available.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="helpers/url_helper.html"><em>URL Helper</em></a> changes include:<ul>
@@ -365,6 +366,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added configuration to generate days of other months instead of blank cells.</li>
 <li>Added auto-configuration for <em>next_prev_url</em> if it is empty and <em>show_prev_next</em> is set to TRUE.</li>
 <li>Added support for templating via an array in addition to the encoded string.</li>
+<li>Changed method <tt class="docutils literal"><span class="pre">get_total_days()</span></tt> to be an alias for <a class="reference internal" href="helpers/date_helper.html"><em>Date Helper</em></a> <a class="reference internal" href="helpers/date_helper.html#days_in_month" title="days_in_month"><tt class="xref py py-func docutils literal"><span class="pre">days_in_month()</span></tt></a>.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/cart.html"><em>Cart Library</em></a> changes include:<ul>

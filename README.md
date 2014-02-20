@@ -1,7 +1,7 @@
-Waterfall
+Soundfall
 =========
 
-Sharing platform for FTIR Manager generated music.
+Sharing platform for Cascade generated music.
 
 Licensed under GPL v.3; CodeIgniter is licensed under OSL v.3.
 
