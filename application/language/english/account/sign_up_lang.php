@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 $lang['sign_up_page_name'] = 'Sign Up';
-$lang['sign_up_heading'] = 'Create your Soundfall Account';
+$lang['sign_up_heading'] = 'Create your %s Account';
 $lang['sign_up_third_party_heading'] = 'Sign up with your account from';
 $lang['sign_up_with'] = 'Sign Up with %s';
 
@@ -30,7 +30,6 @@ $lang['sign_up_forgot_your_password'] = 'Forgot your password?';
 $lang['sign_up_notice'] = 'NOTICE:';
 $lang['sign_up_registration_disabled'] = 'New account registrations are currently disabled.';
 
-$lang['sign_up_email_sender'] = 'Soundfall';
 $lang['sign_up_email_subject'] = 'Soundfall account validation';
 $lang['sign_up_email_confirmation'] = "Hello, %s <br /><br /> In order to activate your Soundfall account, please please click on the link below or copy and paste the URL into your browser: <br /> %s";
 

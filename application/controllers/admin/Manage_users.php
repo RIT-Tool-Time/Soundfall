@@ -202,7 +202,7 @@ class Manage_users extends CI_Controller {
           {
             //send e-mail with user information to the user's e-mail
             $this->load->library('email');
-            $this->email->from('no-reply@tooltime.cias.rit.edu', lang('website_title'));
+            $this->email->from($this->config->item('account_email_confirm_sender'), lang('website_title'));
             $this->email->to($this->input->post('users_email', TRUE));
             
             $this->email->subject(sprintf(lang('users_creation_email_subject'), lang('website_title')));
