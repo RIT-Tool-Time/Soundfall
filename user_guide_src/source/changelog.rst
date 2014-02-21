@@ -289,12 +289,15 @@ Release Date: Not Released
 
    -  :doc:`File Uploading Library <libraries/file_uploading>` changes include:
 
-      -  Added **max_filename_increment** config setting.
-      -  Added an **index** parameter to the ``data()`` method.
-      -  Added the **min_width** and **min_height** options for images.
+      -  Added method chaining support.
+      -  Added **max_filename_increment** and **file_ext_tolower** configuration settings.
+      -  Added **min_width** and **min_height** configuration settings for images.
+      -  Added **mod_mime_fix** configuration setting to disable suffixing multiple file extensions with an underscore.
+      -  Added the possibility pass **allowed_types** as an array.
+      -  Added an ``$index`` parameter to the method ``data()``.
+      -  Added a ``$reset`` parameter to method ``initialize()``.
       -  Removed method ``clean_file_name()`` and its usage in favor of :doc:`Security Library <libraries/security>`'s ``sanitize_filename()``.
-      -  Added **file_ext_tolower** config setting.
-      -  Added **mod_mime_fix** option to disable suffixing multiple file extensions with an underscore.
+      -  Removed method ``mimes_types()``.
 
    -  :doc:`Calendar Library <libraries/calendar>` changes include:
 
@@ -429,7 +432,7 @@ Release Date: Not Released
       -  Renamed internal method ``_detect_uri()`` to ``_parse_request_uri()``.
       -  Changed ``_parse_request_uri()`` to accept absolute URIs for compatibility with HTTP/1.1 as per `RFC2616 <http://www.ietf.org/rfc/rfc2616.txt>`.
       -  Added protected method ``_parse_query_string()`` to URI paths in the the **QUERY_STRING** value, like ``_parse_request_uri()`` does.
-      -  Changed ``_fetch_uri_string()`` to try the **PATH_INFO** variable first when auto-detecting.
+      -  Changed URI string detection logic to try the **PATH_INFO** variable first when auto-detecting.
       -  Removed methods ``_remove_url_suffix()``, ``_explode_segments()`` and moved their logic into ``_set_uri_string()``.
       -  Removed method ``_fetch_uri_string()`` and moved its logic into the class constructor.
       -  Removed method ``_reindex_segments()``.
@@ -507,7 +510,7 @@ Release Date: Not Released
    -  UTF-8 Library changes include:
 
       -  ``UTF8_ENABLED`` now requires only one of `Multibyte String <http://php.net/mbstring>`_ or `iconv <http://php.net/iconv>`_ to be available instead of both.
-      -  Changed method ``clean_string()`` to utilize ``mb_convert_encoding()`` if it is available but ``iconv()`` is not.
+      -  Changed method ``clean_string()`` to utilize ``mb_convert_encoding()`` if it is available.
       -  Renamed method ``_is_ascii()`` to ``is_ascii()`` and made it public.
 
    -  Added `compatibility layers <general/compatibility_functions>` for:
@@ -721,6 +724,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#43) :doc:`Image Manipulation Library <libraries/image_lib>` method ``text_watermark()`` didn't properly determine watermark placement.
 -  Fixed a bug where :doc:`HTML Table Library <libraries/table>` ignored its *auto_heading* setting if headings were not already set.
 -  Fixed a bug (#2364) - :doc:`Pagination Library <libraries/pagination>` appended the query string (if used) multiple times when there are successive calls to ``create_links()`` with no ``initialize()`` in between them.
+-  Partially fixed a bug (#261) - UTF-8 class method ``clean_string()`` generating log messages and/or not producing the desired result due to an upstream bug in iconv.
 
 Version 2.1.4
 =============
