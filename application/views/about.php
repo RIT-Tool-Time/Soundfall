@@ -1,5 +1,8 @@
-<h1 class="cover-heading">Waterfall is cool</h1>
-    <p class="lead">Because I said so, but it won't be cool till all these things are in language files.</p>
-    
-<h2 class="cover-heading">There is water coming down the surface!</h2>
-    <p>We have more awesome features!</p>
+<h1 class="cover-heading"><?php echo lang('about_title'); ?></h1>
+    <p class="lead"><?php echo lang('about_explain'); ?></p>
+    <br />
+<h2 class="cover-heading"><?php echo lang('about_cascade_title'); ?></h2>
+    <p class="lead"><?php echo lang('about_cascade_explain'); ?></p>
+    <br />
+<h2 class="cover-heading"><?php echo lang('about_soundfall_title'); ?></h2>
+    <p class="lead"><?php echo lang('about_sundfall_explain'); ?></p>

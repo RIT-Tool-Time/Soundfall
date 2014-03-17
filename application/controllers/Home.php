@@ -37,6 +37,8 @@ class Home extends CI_Controller {
 			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 		}
 		
+		$this->load->language('about');
+		
 		$data['page'] = "about";
 		$data['content'] = $this->load->view('about', isset($data) ? $data : NULL, TRUE);
 		$this->load->view('preview_template', $data);
