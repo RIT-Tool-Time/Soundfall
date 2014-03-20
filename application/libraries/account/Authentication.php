@@ -121,7 +121,7 @@ class Authentication {
 		}
 		
 		//change this URL for default redirect after sign in
-		redirect(base_url('account/landing'));
+		redirect(base_url());
 	}
 
 	// --------------------------------------------------------------------

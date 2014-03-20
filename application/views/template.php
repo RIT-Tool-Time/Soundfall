@@ -25,21 +25,21 @@
     <![endif]-->
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <a class="navbar-toggle collapsed" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
+    <div class="container">
+    <nav class="navbar navbar-soundfall" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <?php echo anchor(base_url(), lang('website_title'), 'class="navbar-brand"'); ?>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+            </div>
+            <div class="navbar-collapse collapse" id="navigation">
+                <ul class="nav navbar-nav navbar-right">
                     <li class="divider-vertical"></li>
                     <li><?php echo anchor('blog', 'Blog'); ?></li>
-                    <li><?php echo anchor('music/listing', 'Music listing'); ?></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <?php if ($this->authentication->is_signed_in()) : ?>
@@ -82,7 +82,7 @@
             <!--/.nav-collapse -->
         </div>
     </nav>
-    
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -91,21 +91,12 @@
         </div>
     </div>
     
-    <div class="clearfix"></div>
-    
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="well well-small">
-                    <strong>
-                        <small>Copyright &copy; <?php echo date('Y'); ?> <?php echo lang('website_title'); ?></small>
-                    </strong>
-                    <div class="pull-right">
-                        <small>
-                            <?php echo sprintf(lang('website_page_rendered_in_x_seconds'), $this->benchmark->elapsed_time()); ?>
-                        </small>
-                    </div>
-                </div>
+            <div class="col-lg-12 text-center">
+                <strong>
+                    <small>Copyright &copy; <?php echo date('Y'); ?> Rochester Institute of Technology</small>
+                </strong>
             </div>
         </div>
     </div>

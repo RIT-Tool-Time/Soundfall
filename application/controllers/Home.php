@@ -19,7 +19,7 @@ class Home extends CI_Controller {
 		if ($this->authentication->is_signed_in())
 		{
 			//redirect loged in users to their langing page
-			redirect('account/landing');
+			redirect('music/listing');
 		}
 		
 		$data['page'] = "home";
