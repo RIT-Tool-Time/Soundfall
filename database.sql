@@ -1,6 +1,7 @@
 -- -----------------------------------------------------
 -- Table `music`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `music` ;
 
 CREATE TABLE IF NOT EXISTS `music` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -11,20 +12,35 @@ CREATE TABLE IF NOT EXISTS `music` (
   `picture` VARCHAR(255) NULL,
   `date` DATETIME NOT NULL,
   `file` VARCHAR(255) NOT NULL,
+  `tags` VARCHAR(255) NULL DEFAULT NULL,
   `likes` INT NOT NULL DEFAULT 0,
   `downloads` INT NOT NULL DEFAULT 0,
   `private` TINYINT(2) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
+
 -- -----------------------------------------------------
 -- Table `users_following`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `users_following` ;
 
-CREATE TABLE IF NOT EXISTS `users_following` (
+CREATE TABLE IF NOT EXISTS `mydb`.`users_following` (
   `user_id` BIGINT(20) NOT NULL,
   `following` BIGINT(20) NOT NULL,
   PRIMARY KEY (`user_id`, `following`))
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `saved_music`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `saved_music` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`saved_music` (
+  `user_id` INT NOT NULL,
+  `music_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `music_id`))
 ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 -- --------------------------------------------------------
