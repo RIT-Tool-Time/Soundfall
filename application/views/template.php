@@ -30,15 +30,15 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 <?php echo anchor(base_url(), lang('website_title'), 'class="navbar-brand"'); ?>
             </div>
-            <div class="navbar-collapse collapse" id="navigation">
+            <div class="collapse navbar-collapse" id="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="divider-vertical"></li>
                     <li><?php echo anchor('blog', 'Blog'); ?></li>
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
