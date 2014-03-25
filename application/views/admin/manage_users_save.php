@@ -123,7 +123,7 @@
             ?>
             <div class="checkbox">
               <label>
-                <?php echo form_checkbox("account_role_{$role->id}", 'apply', $check_it, 'class="form-control"'); ?>
+                <?php echo form_checkbox("account_role_{$role->id}", 'apply', $check_it); ?>
                 <?php echo $role->name; ?>
               </label>
             </div>
