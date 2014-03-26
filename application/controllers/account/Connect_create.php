@@ -38,7 +38,8 @@ class Connect_create extends CI_Controller {
 		
 		$provider = array_keys($this->session->userdata('connect_create'));
 		$provider = $provider[0];
-		$data['connect_create'] = $this->session->userdata('connect_create')[$provider];
+		$data['connect_create'] = $this->session->userdata('connect_create');
+		$data['connect_create'] = $data['connect_create'][$provider];
 
 		// Setup form validation
 		$this->form_validation->set_error_delimiters('<span class="field_error">', '</span>');
