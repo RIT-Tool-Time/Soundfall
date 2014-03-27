@@ -80,6 +80,7 @@ $route['404_override'] = '';
 $route['about'] = "home/about";
 $route['artist/(:any)'] = "account/artist/index/$1";
 $route['music/overview/(:num)'] = "music/overview/index/$1";
+$route['music/listing/(:num)'] = "music/listing/index/$1";
 $route['music/statistics/(:num)'] = "music/statistics/index/$1";
 $route['sign_up'] = "account/sign_up";
 $route['sign_in'] = "account/sign_in";
@@ -89,6 +90,5 @@ $route['logout'] = "account/sign_out";
 $route['register'] = "account/sign_up";
 $route['account/connect/(.+)'] = "account/connect/index/$1";
 $route['account/connect_end(:any)'] = "account/connect/index$1";
-
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

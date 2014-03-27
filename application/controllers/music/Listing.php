@@ -11,14 +11,14 @@ class Listing extends CI_Controller
     {
         parent::__construct();
         
-        //$this->load->model(array('music_model', 'account/Account_details_model'));
+        $this->load->model(array('Music_model', 'account/Account_details_model'));
         
     }
     
     /**
      * Listing of the most popular and recently added music
      */
-    public function index()
+    public function index($page = 0)
     {
         // Enable SSL?
         maintain_ssl($this->config->item("ssl_enabled"));
@@ -28,6 +28,11 @@ class Listing extends CI_Controller
         {
             redirect('account/sign_in/?continue='.urlencode(base_url('music/listing')));
         }
+	
+	//prepare pagination
+	
+	
+	//get the 10 songs for this page
         
         // Retrieve sign in user
 	$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
@@ -35,6 +40,11 @@ class Listing extends CI_Controller
         //load the view
         $data['content'] = $this->load->view('music/listing', $data, TRUE);
         $this->load->view('template', $data);
+    }
+    
+    public function page($page = 0)
+    {
+	$this->index($page);
     }
 }
 /* End of file Listing.php */
