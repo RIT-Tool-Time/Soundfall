@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
- * Overview Controller
+ * Music Overview Controller
+ * Shows details about one specific piece of music
  */
 class Overview extends CI_Controller
 {

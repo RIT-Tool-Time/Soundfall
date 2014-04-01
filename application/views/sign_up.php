@@ -1,7 +1,7 @@
 <?php if (! ($this->config->item("sign_up_enabled"))): ?>
 	<div class="col-lg-12">
 		<div class="page-header">
-			<h1><?php echo sprintf(lang('sign_up_heading'), lang('website_title')); ?></h1>
+			<h2><?php echo sprintf(lang('sign_up_heading'), lang('website_title')); ?></h2>
 		</div>
 		<div class="alert alert-danger">
 			<strong><?php echo lang('notice');?> </strong> <?php echo lang('registration_disabled'); ?>
@@ -14,7 +14,9 @@
 		
 		<?php echo form_open(uri_string(), 'class="form-horizontal"'); ?>
 		<?php echo form_fieldset(); ?>
-		<h1><?php echo sprintf(lang('sign_up_heading'), lang('website_title')); ?></h1>
+		<div class="page-header">
+			<h3><?php echo sprintf(lang('sign_up_heading'), lang('website_title')); ?></h3>
+		</div>
 		
 		<div class="well">
 			
@@ -27,7 +29,7 @@
 						<span class="help-inline">
 						<?php echo form_error('sign_up_username'); ?>
 						<?php if (isset($sign_up_username_error)) : ?>
-							<span class="field_error"><?php echo $sign_up_username_error; ?></span>
+							<span class="alert alert-danger"><?php echo $sign_up_username_error; ?></span>
 						<?php endif; ?>
 						</span>
 					<?php endif; ?>
@@ -43,7 +45,7 @@
 						<span class="help-inline">
 						<?php echo form_error('sign_up_email'); ?>
 						<?php if (isset($sign_up_email_error)) : ?>
-							<span class="field_error"><?php echo $sign_up_email_error; ?></span>
+							<span class="alert alert-danger"><?php echo $sign_up_email_error; ?></span>
 						<?php endif; ?>
 						</span>
 					<?php endif; ?>
@@ -84,7 +86,7 @@
 					<span class="help-inline">
 					<?php echo form_error('sign_up_terms'); ?>
 					<?php if (isset($sign_up_terms_error)) : ?>
-						<span class="field_error"><?php echo $sign_up_terms_error; ?></span>
+						<span class="alert alert-danger"><?php echo $sign_up_terms_error; ?></span>
 					<?php endif; ?>
 					</span>
 				<?php endif; ?>
@@ -93,12 +95,12 @@
 			<?php if (isset($recaptcha)) :
 				echo $recaptcha;
 				if (isset($sign_up_recaptcha_error)) : ?>
-					<span class="field_error"><?php echo $sign_up_recaptcha_error; ?></span>
+					<span class="alert alert-danger"><?php echo $sign_up_recaptcha_error; ?></span>
 				<?php endif; ?>
 			<?php endif; ?>
 			
 			<div>
-				<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-primary btn-large pull-right', 'content' => '<i class="glyphicon glyphicon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
+				<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-submit btn-large btn-block', 'content' => '<i class="glyphicon glyphicon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
 			</div>
 			<br/>
 			
@@ -112,18 +114,20 @@
 
 	<div class="col-lg-6">
 		<?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
+		<div class="page-header">
 			<h3><?php echo lang('sign_up_third_party_heading'); ?></h3>
+		</div>
 			<ul>
 				<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>
 					<?php if($provider_values['enabled']) : ?>
-					<li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img id="'.strtolower($provider_name).'" src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name), strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
-					<script type="text/javascript">
+					<li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img id="'.strtolower($provider_name).'" src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
+				<script type="text/javascript">
 						$("#<?php echo strtolower($provider_name); ?>").hover(
 						function(){
 							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_active.png'); ?>');
 							},
 						function(){
-							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'.png'); ?>');
+							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png'); ?>');
 							});
 					</script>
 					<?php endif; ?>

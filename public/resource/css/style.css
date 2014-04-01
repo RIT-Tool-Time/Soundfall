@@ -78,3 +78,16 @@ input.openid {
 .accountPicSelect input[type="radio"] {
 	margin: 0 10px 0 0;
 }
+
+.dropdown-menu {
+	box-shadow: none;
+}
+
+.navbar-nav > li > a {
+	background-color: transparent;
+}
+
+.btn-submit{
+	background-color: #6796B6;
+	color: #FFF;
+}

@@ -10,5 +10,5 @@ Included libraries in this project
 
 * CodeIgniter 3-dev
 * A3M 2-dev
-* Twitter Bootstrap v 3.1
+* Twitter Bootstrap v 3.1.1 (Cosmo theme - http://bootswatch.com/cosmo/)
 * jQuery v 2.1.0

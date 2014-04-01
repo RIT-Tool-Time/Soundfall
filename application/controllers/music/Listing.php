@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
- * Listing Controller
+ * Music Listing Controller
+ * Lists multitudes of songs.
  */
 class Listing extends CI_Controller
 {
