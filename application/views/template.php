@@ -39,7 +39,10 @@
             </div>
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><?php echo anchor('blog', 'Blog'); ?></li>
+                    <?php if(!isset($account)): ?>
+                    <li><?php echo anchor('about', lang('website_about')); ?></li>
+                    <?php endif; ?>
+                    <li><?php echo anchor('blog', lang('website_blog')); ?></li>
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <?php if ($this->authentication->is_signed_in()) : ?>

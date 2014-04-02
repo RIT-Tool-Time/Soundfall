@@ -14,22 +14,18 @@ class Home extends CI_Controller {
 
 	function index()
 	{
-		maintain_ssl();
-		
-		if ($this->authentication->is_signed_in())
-		{
-			//redirect loged in users to their langing page
-			redirect('music/listing');
-		}
-		
+
+		redirect('music/listing');
+		/*
 		$data['page'] = "home";
 		$data['content'] = $this->load->view('home', isset($data) ? $data : NULL, TRUE);
-		$this->load->view('preview_template', $data);
+		$this->load->view('template', $data);
+		*/
 	}
 	
 	function about()
 	{
-		maintain_ssl();
+		maintain_ssl($this->config->item("ssl_enabled"));
 		
 		if ($this->authentication->is_signed_in())
 		{
@@ -41,7 +37,7 @@ class Home extends CI_Controller {
 		
 		$data['page'] = "about";
 		$data['content'] = $this->load->view('about', isset($data) ? $data : NULL, TRUE);
-		$this->load->view('preview_template', $data);
+		$this->load->view('template', $data);
 	}
 
 }

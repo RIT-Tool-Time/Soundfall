@@ -91,3 +91,40 @@ input.openid {
 	background-color: #6796B6;
 	color: #FFF;
 }
+
+/* Music listing */
+#waves{
+	background: repeat-x;
+	background-image: url('/resource/img/wave.png');
+	height: 209px;
+}
+
+.title-red{
+	color: #FF5F55;
+	text-emphasis: accent;
+}
+
+.stats-box{
+	text-align: center;
+}
+
+.stats-number{
+	color: #3B8A6F;
+}
+
+.stats-desc{
+	
+}
+
+.navbar-tiny{
+	
+}
+
+#song-listing{
+	
+}
+
+.song-list{
+	background-color: #E3F2F2;
+	margin-bottom: 0.5em;
+}

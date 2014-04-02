@@ -82,13 +82,15 @@ $route['artist/(:any)'] = "account/artist/index/$1";
 $route['music/overview/(:num)'] = "music/overview/index/$1";
 $route['music/listing/(:num)'] = "music/listing/index/$1";
 $route['music/statistics/(:num)'] = "music/statistics/index/$1";
-$route['sign_up'] = "account/sign_up";
-$route['sign_in'] = "account/sign_in";
-$route['sign_out'] = "account/sign_out";
+$route['sign-up'] = "account/sign_up";
+$route['sign-in'] = "account/sign_in";
+$route['sign-out'] = "account/sign_out";
 $route['login'] = "account/sign_in";
 $route['logout'] = "account/sign_out";
 $route['register'] = "account/sign_up";
 $route['account/connect/(.+)'] = "account/connect/index/$1";
 $route['account/connect_end(:any)'] = "account/connect/index$1";
+$route['artist/(:num)'] = "artist/index/$1";
+$route['artist/(:num)/page/(:num)'] = "artist/index/$1/$2";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

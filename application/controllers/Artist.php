@@ -1,9 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
- * Music Listing Controller
- * Lists multitudes of songs.
+ * Artist page
  */
-class Listing extends CI_Controller
+class Artist extends CI_Controller
 {
     /**
      * Constructor
@@ -20,20 +19,30 @@ class Listing extends CI_Controller
     /**
      * Listing of the most popular and recently added music
      */
-    public function index($page = 0)
+    public function index($artist, $page = 0)
     {
         // Enable SSL?
         maintain_ssl($this->config->item("ssl_enabled"));
         
-        // Redirect unauthenticated users to signin page
         if ($this->authentication->is_signed_in())
 	{
 	    // Retrieve sign in user
 	    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
-	    //get their details
-	    $this->load->model('Account_details_model');
-	    $data['account_details'] = $this->Account_details_model->get_by_account_id($this->session->userdata('account_id'));
 	}
+	
+	if($artist === NULL)
+	{
+	    show_404();
+	}
+	
+	//get artist details
+	$this->load->model('Account_details_model');
+	$data['artist'] = $this->Account_model->get_by_id($artist);
+	if($data['artist'] === NULL)
+	{
+	    show_404();
+	}
+	$data['artist_details'] = $this->Account_details_model->get_by_account_id($artist);
 	
 	//get site statistics if page is zero
 	if($page === 0)
@@ -42,7 +51,7 @@ class Listing extends CI_Controller
 	    $this->load->language('about_lang');
 	    
 	    //get the stats
-	    $data['stats']['music_total'] = $this->Music_model->count_all();
+	    $data['stats']['music_total'] = $this->Music_model->count_by_artist($artist);
 	}
 	
 	
@@ -53,14 +62,9 @@ class Listing extends CI_Controller
         
         
         //load the view
-        $data['content'] = $this->load->view('music/listing', $data, TRUE);
+        $data['content'] = $this->load->view('music/artist', $data, TRUE);
         $this->load->view('template', $data);
     }
-    
-    public function page($page = 0)
-    {
-	$this->index($page);
-    }
 }
-/* End of file Listing.php */
-/* Location: ./application/controllers/music/Listing.php */
+/* End of file Artist.php */
+/* Location: ./application/controllers/Artist.php */

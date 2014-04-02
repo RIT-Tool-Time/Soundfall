@@ -24,7 +24,8 @@ $lang['website_update'] = 'Update';
 $lang['website_cancel'] = 'Cancel';
 $lang['website_account_info'] = 'Account Info';
 $lang['website_admin_panel'] = 'Admin Panel';
-
+$lang['website_about'] = 'About';
+$lang['website_blog'] = 'Blog';
 
 /* End of file general_lang.php */
 /* Location: ./application/language/english/general_lang.php */
