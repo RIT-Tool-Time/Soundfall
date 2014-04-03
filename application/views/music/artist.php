@@ -1,6 +1,6 @@
 <div class="col-md-6">
-    <h3 class="title-red"><?php echo $artist->username ?></h3>
-    <p><!-- @TODO put in user description of themselves --></p>
+    <h3 class="title-red"><?php echo $artist->username; ?></h3>
+    <p>Some random text to fill up space, that is better than lorem ipsum. Some random text to fill up space, that is better than lorem ipsum. Some random text to fill up space, that is better than lorem ipsum. Some random text to fill up space, that is better than lorem ipsum. Some random text to fill up space, that is better than lorem ipsum. Some random text to fill up space, that is better than lorem ipsum. Some random text to fill up space, that is better than lorem ipsum.</p>
 </div>
 <div class="col-md-6">
     <div class="stats-box col-sm-6">
