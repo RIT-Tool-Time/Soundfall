@@ -3,6 +3,10 @@
 	Contact: jxd3455 [at] rit.edu
 	Twitter: @storyteller_cz
 	From: Prague, Czech republic
+	
+	Web designer: Tyler Sposato
+	Contact: tds7926 [at] rit.edu
+	From: NY, USA
 /* THANKS */
 		
 
