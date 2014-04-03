@@ -28,18 +28,27 @@
 </div>
 
 <!-- listing of songs -->
-<div id="songs-listing">
+<div id="song-listing">
     <div class="song-list">
         <div class="col-md-2">
             <!-- avatar -->
         </div>
         <div class="col-md-4">
             <!-- song name and creators -->
+            <h4 class="">Test name</h4> 
             <!-- tags -->
+            <div class="song-tags">
+                <span class="label label-success">test label</span>
+                <span class="label label-success">test label</span>
+                <span class="label label-success">test label</span>
+                <span class="label label-success">test label</span>
+            </div>
         </div>
         <div class="col-md-6">
             <!-- play -->
-            
+            <div class="play-song">
+                <i class="glyphicon glyphicon-play play-button"></i>
+            </div>
             <!-- download, like, share buttons -->
         </div>
     </div>

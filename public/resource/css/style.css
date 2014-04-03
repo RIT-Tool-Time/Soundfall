@@ -128,3 +128,17 @@ input.openid {
 	background-color: #E3F2F2;
 	margin-bottom: 0.5em;
 }
+
+.play-cong{
+	
+}
+
+.play-button{
+	color: white;
+	background-color: #71AA63;
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	text-align: center;
+	
+}
