@@ -7,6 +7,10 @@
 	Web designer: Tyler Sposato
 	Contact: tds7926 [at] rit.edu
 	From: NY, USA
+
+	Web designer: Megan Kushner
+	Contact: mmk4838 [at] rit.edu
+	From: NY, USA
 /* THANKS */
 		
 
