@@ -54,8 +54,8 @@
 	{
 		?>
         <span class="help-inline">
-					<?php echo form_error('settings_lastname'); ?>
-					</span>
+			<?php echo form_error('settings_lastname'); ?>
+			</span>
 		<?php } ?>
     </div>
 </div>
@@ -98,8 +98,8 @@
 	{
 		?>
         <span class="help-inline">
-					<?php echo $settings_dob_error; ?>
-					</span>
+			<?php echo $settings_dob_error; ?>
+			</span>
 		<?php } ?>
     </div>
 </div>
