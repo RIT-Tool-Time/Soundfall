@@ -50,7 +50,15 @@ class Listing extends CI_Controller
 	
 	
 	//get the 10 songs for this page
-        
+	if($page > 0)
+	{
+	    $offset = ($page-1) * 10;
+	}
+	else
+	{
+	    $offset = 0;
+	}
+        $data['songs'] = $this->Music_model->get_batch(10, $offset);
         
         //load the view
         $data['content'] = $this->load->view('music/listing', $data, TRUE);

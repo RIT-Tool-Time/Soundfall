@@ -12,6 +12,7 @@ $lang['music_likes'] = "Likes";
 $lang['music_shares'] = "Shares";
 $lang['music_yours'] = "Your songs";
 $lang['music_none'] = "Sorry there are no songs to be found.";
+$lang['music_download'] = "Download this song";
 
 /* End of file music_lang.php */
 /* Location: ./application/language/english/music_lang.php */

@@ -90,7 +90,8 @@ $route['logout'] = "account/sign_out";
 $route['register'] = "account/sign_up";
 $route['account/connect/(.+)'] = "account/connect/index/$1";
 $route['account/connect_end(:any)'] = "account/connect/index$1";
-$route['artist/(:num)'] = "artist/index/$1";
-$route['artist/(:num)/page/(:num)'] = "artist/index/$1/$2";
+$route['artist/(:any)'] = "artist/index/$1";
+$route['artist/(:any)/page/(:num)'] = "artist/index/$1/$2";
+$route['song/(:num)'] = "song/index/$1";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

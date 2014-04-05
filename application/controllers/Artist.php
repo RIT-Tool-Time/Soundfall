@@ -54,12 +54,20 @@ class Artist extends CI_Controller
 	    $data['stats']['music_total'] = $this->Music_model->count_by_artist($artist);
 	}
 	
-	
 	//prepare pagination
 	
 	
 	//get the 10 songs for this page
-        
+	if($page > 0)
+	{
+	    $offset = ($page-1) * 10;
+	}
+	else
+	{
+	    $offset = 0;
+	}
+        $data['songs'] = $this->Music_model->get_by_artist($artist, 10, $offset);
+	$data['songs_count'] = count($data['songs']);
         
         //load the view
         $data['content'] = $this->load->view('music/artist', $data, TRUE);
