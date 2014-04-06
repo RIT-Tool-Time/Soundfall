@@ -4,15 +4,57 @@ html {
 
 body {
 	color: #888888;
+	font-family: Neutra2Text-Light;
+	
+	
+}
+
+
+@font-face{
+	font-family: Neutra2Text-Bold;
+	src:url('../font/Neutra2Text-Bold.otf');
+	font-weight: bold;
+}
+@font-face{
+	font-family: Neutra2Text-BoldItalic;
+	src:url('../font/Neutra2Text-BoldItalic.otf');
+}
+@font-face{
+	font-family: Neutra2Text-Book;
+	src:url('../font/Neutra2Text-Book.otf');
+}
+@font-face{
+	font-family: Neutra2Text-BookItalic;
+	src:url('../font/Neutra2Text-BookItalic.otf');
+}
+@font-face{
+	font-family: Neutra2Text-Demi;
+	src:url('../font/Neutra2Text-Demi.otf');
+}
+@font-face{
+	font-family: Neutra2Text-DemiItalic;
+	src:url('../font/Neutra2Text-DemiItalic.otf');
+}
+@font-face{
+	font-family: Neutra2Text-Light;
+	src:url('../font/Neutra2Text-Light.otf');
+}
+
+@font-face{
+	font-family: Neutra2Text-Bold;
+	src:url('../font/Neutra2Text-LightItalic.otf');
 }
 
 a {
 	color: #888;
+	
 }
 
 a:active, a:hover {
 	color: #888;
+	font-family: Neutra2Text-Demi-Italic;
 	font-weight: bold;
+	
 }
 
 .navbar-soundfall .navbar-brand,
@@ -20,23 +62,25 @@ a:active, a:hover {
 .navbar-soundfall .navbar-brand a:hover,
 .navbar-soundfall .navbar-brand a:active {
 	color: #000;
+	font-size: 36px;
 	text-transform: capitalize;
-	font-weight: bold;
+	/*font-weight: bold;*/
+	font-family: Neutra2Text-Demi;
 }
 
 li.third_party {
     list-style: none;
-    margin: 5px;
     width: 76px;
     height: 76px;
     float: left;
-    padding: 0 10px 10px 0;
+    padding: 0 5px 5px 0;
 }
 li.third_party a {
     display: block;
     width: 76px;
     height: 76px;
     font-size: 10px;
+	/*font-family: Neutra2Text-Bold;*/
     text-align: center;
     text-decoration: none;
     color: #333;
@@ -85,6 +129,7 @@ input.openid {
 
 .navbar-nav > li > a {
 	background-color: transparent;
+	font-family: Neutra2Text-Light;
 }
 
 .btn-submit{
@@ -102,6 +147,7 @@ input.openid {
 .title-red{
 	color: #FF5F55;
 	text-emphasis: accent;
+	font-family:Neutra2Text-Demi;
 }
 
 .stats-box{
@@ -110,18 +156,23 @@ input.openid {
 
 .stats-number{
 	color: #3B8A6F;
+	font-family: Neutra2Text-BoldItalic;
 }
 
 .stats-desc{
-	
+	font-family: Neutra2Text-Light;
 }
 
 .navbar-tiny{
 	
 }
 
+#avatar{
+	background-image:url('/resource/img/yoursound_play.png');
+}
+
 #song-listing{
-	
+	background-color: #E3F2F2;
 }
 
 .song-list{
@@ -129,7 +180,18 @@ input.openid {
 	margin-bottom: 0.5em;
 }
 
+.song-list h4{
+	font-family: Neutra2Text-Demi;
+	color:#3D8A6E;
+}
+
 .play-cong{
+	
+}
+
+.song-tags{
+	background-repeat: repeat-x;
+	background-image: url(''/resource/img/tag_inactive.png');
 	
 }
 
@@ -141,4 +203,12 @@ input.openid {
 	border-radius: 15px;
 	text-align: center;
 	
+}
+
+#yoursound{
+	background-image: url('../img/yoursound_bg.png');
+}
+
+.labellabel-success{
+	font-family: Neutra2Text: Demi;
 }

@@ -1,12 +1,33 @@
+<div class="page-header text-center">
+	<h1><?php echo sprintf(lang('sign_in_heading'), lang('website_title')); ?></h1>
+</div>
+<p class="text-center"><?php echo lang('sign_in_dont_have_account') . " " . anchor('account/sign_up', lang('sign_in_sign_up_now')); ?></p>
+
+<div class="col-lg-6">
+	<?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
+		<ul>
+			<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>
+				<?php if($provider_values['enabled']) : ?>
+				<li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img id="'.strtolower($provider_name).'" src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
+				<script type="text/javascript">
+						$("#<?php echo strtolower($provider_name); ?>").hover(
+						function(){
+							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_active.png'); ?>');
+							},
+						function(){
+							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png'); ?>');
+							});
+					</script>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</ul>
+	<?php endif; ?>
+</div><!-- /span6 -->
+
 <div class="col-lg-6">
 	<?php echo form_open(uri_string().($this->input->get('continue') ? '/?continue='.urlencode($this->input->get('continue')) : ''), 'class="form-horizontal"'); ?>
 	<?php echo form_fieldset(); ?>
 	
-	<div class="page-header">
-		<h3><?php echo lang('sign_in_heading'); ?></h3>
-	</div>
-
-    <div class="well">
 		<?php if (isset($sign_in_error)) : ?>
 	<div class="alert alert-danger"><?php echo $sign_in_error; ?></div>
 		<?php endif; ?>
@@ -50,35 +71,8 @@
 		</label>
 	</div>
 	
-	<p><?php echo anchor('account/forgot_password', lang('sign_in_forgot_your_password')); ?><br/>
-		<?php echo lang('sign_in_dont_have_account') . " " . anchor('account/sign_up', lang('sign_in_sign_up_now')); ?></p>
-
-    </div>
+	<p><?php echo anchor('account/forgot_password', lang('sign_in_forgot_your_password')); ?></p>
 	<?php echo form_fieldset_close(); ?>
 	<?php echo form_close(); ?>
 </div>
 <!-- /span6 -->
-
-<div class="col-lg-6">
-	<?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
-	<div class="page-header">
-		<h3><?php echo lang('sign_in_third_party_heading'); ?></h3>
-	</div>
-		<ul>
-			<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>
-				<?php if($provider_values['enabled']) : ?>
-				<li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img id="'.strtolower($provider_name).'" src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
-				<script type="text/javascript">
-						$("#<?php echo strtolower($provider_name); ?>").hover(
-						function(){
-							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_active.png'); ?>');
-							},
-						function(){
-							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png'); ?>');
-							});
-					</script>
-				<?php endif; ?>
-			<?php endforeach; ?>
-		</ul>
-	<?php endif; ?>
-</div><!-- /span6 -->

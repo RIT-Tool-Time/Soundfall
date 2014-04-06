@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 $lang['sign_in_page_name'] = 'Login';
-$lang['sign_in_heading'] = 'Login with your Account';
+$lang['sign_in_heading'] = 'Sign in to %s';
 $lang['sign_in_third_party_heading'] = 'Login with your social network account';
 $lang['sign_in_with'] = 'Sign In with %s';
 
