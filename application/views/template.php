@@ -17,7 +17,6 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/bootstrap/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/css/style.css"/>
     <script src="<?php echo base_url().RES_DIR; ?>/bootstrap/js/bootstrap.min.js"></script>
-    
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -43,42 +42,11 @@
                     <li><?php echo anchor('about', lang('website_about')); ?></li>
                     <?php endif; ?>
                     <li><?php echo anchor('blog', lang('website_blog')); ?></li>
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <?php if ($this->authentication->is_signed_in()) : ?>
-                            <i class="glyphicon glyphicon-user"></i> <?php echo $account->username; ?> <b class="caret"></b></a>
-                        <?php else : ?>
-                            <i class="glyphicon glyphicon-user"></i> <b class="caret"></b></a>
-                        <?php endif; ?>
-                        <ul class="dropdown-menu">
-                                <?php if ($this->authentication->is_signed_in()) : ?>
-                            <li class="dropdown-header"><?php echo lang('website_account_info'); ?></li>
-                                <li><?php echo anchor('account/profile', lang('website_profile')); ?></li>
-                                <li><?php echo anchor('account/settings', lang('website_account')); ?></li>
-                                <?php if ($account->password) : ?>
-                                        <li><?php echo anchor('account/password', lang('website_password')); ?></li>
-                                <?php endif; ?>
-                                <li><?php echo anchor('account/linked_accounts', lang('website_linked')); ?></li>    
-                            <?php if ($this->authorization->is_permitted( array('retrieve_users', 'retrieve_roles', 'retrieve_permissions') )) : ?>
-                                <li class="divider"></li>
-                                <li class="dropdown-header"><?php echo lang('website_admin_panel'); ?></li>
-                                <?php if ($this->authorization->is_permitted('retrieve_users')) : ?>
-                                    <li><?php echo anchor('admin/manage_users', lang('website_manage_users')); ?></li>
-                                <?php endif; ?>
-                                <?php if ($this->authorization->is_permitted('retrieve_roles')) : ?>
-                                    <li><?php echo anchor('admin/manage_roles', lang('website_manage_roles')); ?></li>
-                                <?php endif; ?>
-                                <?php if ($this->authorization->is_permitted('retrieve_permissions')) : ?>
-                                    <li><?php echo anchor('admin/manage_permissions', lang('website_manage_permissions')); ?></li>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                                    <li class="divider"></li>
-                                    <li><?php echo anchor('account/sign_out', lang('website_sign_out')); ?></li>
-                            <?php else : ?>
-                                    <li><?php echo anchor('account/sign_in', lang('website_sign_in')); ?></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
+                    <?php if (!$this->authentication->is_signed_in()) : ?>
+                    <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal")); ?></li>
+                    <?php else: ?>
+                    <li></li>
+                    <?php endif; ?>
                 </ul>
 
             </div>
@@ -103,6 +71,97 @@
             </div>
         </div>
     </div>
+    
+    <!-- MODALS -->
+    <!-- sign in -->
+    <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="sign-in-modal" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="page-header text-center">
+            <h2><?php echo sprintf(lang('sign_in_heading'), lang('website_title')); ?></h2>
+        </div>
+        <p class="text-center"><?php echo lang('sign_in_dont_have_account') . " " . anchor('account/sign_up', lang('sign_in_sign_up_now')); ?></p>
+    </div>
+    <div class="modal-body">
+    <div class="col-lg-6">
+	<?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
+		<ul>
+			<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>
+				<?php if($provider_values['enabled']) : ?>
+				<li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img id="'.strtolower($provider_name).'" src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
+				<script type="text/javascript">
+						$("#<?php echo strtolower($provider_name); ?>").hover(
+						function(){
+							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_active.png'); ?>');
+							},
+						function(){
+							$("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png'); ?>');
+							});
+					</script>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</ul>
+	<?php endif; ?>
+    </div><!-- /span6 -->
+    <div class="col-lg-6">
+	<?php echo form_open(uri_string('account/sign_in').($this->input->get('continue') ? '/?continue='.urlencode($this->input->get('continue')) : ''), 'class="form-horizontal"'); ?>
+	<?php echo form_fieldset(); ?>
+	
+		<?php if (isset($sign_in_error)) : ?>
+	<div class="alert alert-danger"><?php echo $sign_in_error; ?></div>
+		<?php endif; ?>
+
+	<div class="input-group <?php echo (form_error('sign_in_username_email') || isset($sign_in_username_email_error)) ? 'error' : ''; ?>">
+		<span class="glyphicon glyphicon-user input-group-addon"></span>
+		<?php echo form_input(array('name' => 'sign_in_username_email', 'id' => 'sign_in_username_email', 'value' => set_value('sign_in_username_email'), 'maxlength' => '24', 'class' => 'form-control', 'placeholder' => lang('sign_in_username_email'))); ?>
+		<?php if (form_error('sign_in_username_email') || isset($sign_in_username_email_error)) :?>
+<span class="help-inline">
+		<?php echo form_error('sign_in_username_email'); ?>
+			<?php if (isset($sign_in_username_email_error)) : ?>
+				<span class="alert alert-danger"><?php echo $sign_in_username_email_error; ?></span>
+			<?php endif; ?>
+		</span>
+		<?php endif; ?>
+	</div>
+
+	<div class="input-group <?php echo form_error('sign_in_password') ? 'error' : ''; ?>">
+		<span class="glyphicon glyphicon-lock input-group-addon"></span>
+		<?php echo form_password(array('name' => 'sign_in_password', 'id' => 'sign_in_password', 'value' => set_value('sign_in_password'), 'class' => 'form-control', 'placeholder' => lang('sign_in_password'))); ?>
+		<?php if (form_error('sign_in_password')) : ?>
+			<span class="help-inline"><?php echo form_error('sign_in_password'); ?></span>
+		<?php endif; ?>
+
+		<?php if (isset($recaptcha)) : ?>
+			<?php echo $recaptcha; ?>
+			<?php if (isset($sign_in_recaptcha_error)) : ?>
+				<span class="alert alert-danger"><?php echo $sign_in_recaptcha_error; ?></span>
+			<?php endif; ?>
+		<?php endif; ?>
+	</div>
+
+	<div>
+		<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-submit btn-large btn-block', 'content' => lang('sign_in_sign_in'))); ?>
+	</div>
+	
+	<div>
+		<label class="checkbox">
+			<?php echo form_checkbox(array('name' => 'sign_in_remember', 'id' => 'sign_in_remember', 'value' => 'checked', 'checked' => $this->input->post('sign_in_remember'))); ?>
+			<?php echo lang('sign_in_remember_me'); ?>
+		</label>
+	</div>
+	
+	<p><?php echo anchor('account/forgot_password', lang('sign_in_forgot_your_password')); ?></p>
+	<?php echo form_fieldset_close(); ?>
+	<?php echo form_close(); ?> 
+    </div>
+    <div class="clearfix"></div>
+    </div>
+</div>
+</div>
+</div>
+    <!-- sign up -->
 
 </body>
 </html>

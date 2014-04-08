@@ -112,7 +112,7 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'language', 'account/ssl');
+$autoload['helper'] = array('url', 'language', 'account/ssl', 'form');
 
 
 /*
@@ -144,7 +144,7 @@ $autoload['config'] = array('account/account');
 |
 */
 
-$autoload['language'] = array('general');
+$autoload['language'] = array('general', 'account/sign_in', 'account/sign_up');
 
 
 /*
