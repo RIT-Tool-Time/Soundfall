@@ -43,8 +43,11 @@
                     <?php endif; ?>
                     <li><?php echo anchor('blog', lang('website_blog')); ?></li>
                     <?php if (!isset($account)) : ?>
-                    <li><?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal")); ?></li>
-                    <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal")); ?></li>
+                    
+                    <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal", 'style'=> "margin-right: -10px;")); ?> 
+                    <span>/</span> 
+                    <?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal", 'style'=> "margin-left: -10px;")); ?></li>
+                    
                     <?php else: ?>
                     <li>Profit!!!</li>
                     <?php endif; ?>
@@ -81,7 +84,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="page-header text-center">
-            <h2><?php echo sprintf(lang('sign_in_heading'), lang('website_title')); ?></h2>
+            <h1><?php echo sprintf(lang('sign_in_heading'), lang('website_title')); ?></h1>
         </div>
         <p class="text-center"><?php echo lang('sign_in_dont_have_account') . " " . anchor('#sign-up-modal', lang('sign_in_sign_up_now'), array("role"=>"button", "data-toggle"=>"modal", "data-dismiss"=>"modal")); ?></p>
     </div>
@@ -153,7 +156,7 @@
 		</label>
 	</div>
 	
-	<p><?php echo anchor('account/forgot_password', lang('sign_in_forgot_your_password')); ?></p>
+	<p class="forgot-msg"><?php echo anchor('account/forgot_password', lang('sign_in_forgot_your_password')); ?></p>
 	<?php echo form_fieldset_close(); ?>
 	<?php echo form_close(); ?> 
     </div>
@@ -169,7 +172,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="page-header text-center">
-            <h2><?php echo sprintf(lang('sign_up_heading'), lang('website_title')); ?></h2>
+            <h1><?php echo sprintf(lang('sign_up_heading'), lang('website_title')); ?></h1>
         </div>
         <p class="text-center"><?php echo lang('sign_up_already_have_account'); ?> <?php echo anchor('#sign-in-modal', lang('sign_up_sign_in_now'), array("role"=>"button", "data-toggle"=>"modal", "data-dismiss"=>"modal")); ?></p>
     </div>
