@@ -39,10 +39,8 @@
 		<?php echo form_open(uri_string(), 'class="form-horizontal"'); ?>
 		<?php echo form_fieldset(); ?>
 		<div id="username" class="form-group <?php echo (form_error('sign_up_username') || isset($sign_up_username_error)) ? 'error' : ''; ?>">
-			<label class="control-label col-lg-2" for="sign_up_username"><?php echo lang('sign_up_username'); ?></label>
-			
-			<div id="username_controls" class="col-lg-10">
-				<?php echo form_input(array('name' => 'sign_up_username', 'id' => 'sign_up_username', 'value' => set_value('sign_up_username'), 'maxlength' => '24', 'class' => 'form-control')); ?>
+			<div id="username_controls">
+				<?php echo form_input(array('name' => 'sign_up_username', 'id' => 'sign_up_username', 'value' => set_value('sign_up_username'), 'maxlength' => '24', 'class' => 'form-control', 'placeholder' => lang('sign_up_username'))); ?>
 				<?php if (form_error('sign_up_username') || isset($sign_up_username_error)) : ?>
 					<span class="help-inline">
 					<?php echo form_error('sign_up_username'); ?>
@@ -55,10 +53,8 @@
 		</div>
 	
 		<div id="email" class="form-group <?php echo (form_error('sign_up_email') || isset($sign_up_email_error)) ? 'error' : ''; ?>">
-			<label class="control-label col-lg-2" for="sign_up_email"><?php echo lang('sign_up_email'); ?></label>
-			
-			<div id="email_controls" class="col-lg-10">
-				<?php echo form_input(array('name' => 'sign_up_email', 'id' => 'sign_up_email', 'value' => set_value('sign_up_email'), 'maxlength' => '160', 'class' => 'form-control')); ?>
+			<div id="email_controls">
+				<?php echo form_input(array('name' => 'sign_up_email', 'id' => 'sign_up_email', 'value' => set_value('sign_up_email'), 'maxlength' => '160', 'class' => 'form-control', 'placeholder'=> lang('sign_up_email'))); ?>
 				<?php if (form_error('sign_up_email') || isset($sign_up_email_error)) : ?>
 					<span class="help-inline">
 					<?php echo form_error('sign_up_email'); ?>
@@ -71,10 +67,8 @@
 		</div>
 		
 		<div id="password" class="form-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
-			<label class="control-label col-lg-2" for="sign_up_password"><?php echo lang('sign_up_password'); ?></label>
-			
-			<div id="password_controls" class="col-lg-10">
-				<?php echo form_password(array('name' => 'sign_up_password', 'id' => 'sign_up_password', 'value' => set_value('sign_up_password'), 'class' => 'form-control')); ?>
+			<div id="password_controls">
+				<?php echo form_password(array('name' => 'sign_up_password', 'id' => 'sign_up_password', 'value' => set_value('sign_up_password'), 'class' => 'form-control', 'placeholder' => lang('sign_up_password'))); ?>
 				<?php if (form_error('sign_up_password')) : ?>
 					<span class="help-inline">
 					<?php echo form_error('sign_up_password'); ?>
@@ -84,19 +78,22 @@
 		</div>
 		
 		<div id="confirm_password" class="form-group <?php echo (form_error('sign_up_confirm_password')) ? 'error' : ''; ?>">
-			<label class="control-label col-lg-2" for="sign_up_confirm_password"><?php echo lang('sign_up_confirm_password'); ?></label>
-			
-			<div id="confirm_password_controls" class="col-lg-10">
-				<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password', 'value' => set_value('sign_up_confirm_password'), 'class' => 'form-control')); ?>
+			<div id="confirm_password_controls">
+				<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password', 'value' => set_value('sign_up_confirm_password'), 'class' => 'form-control', 'placeholder' => lang('sign_up_confirm_password'))); ?>
 				<?php if (form_error('sign_up_confirm_password')) : ?>
-					<span class="help-inline">
+					<span class="alert alert-danger">
 					<?php echo form_error('sign_up_confirm_password'); ?>
 					</span>
 				<?php endif; ?>
 			</div>
 		</div>
-		
-		<div class = "checkbox">
+		<?php if (isset($recaptcha)) :
+			echo $recaptcha;
+			if (isset($sign_up_recaptcha_error)) : ?>
+				<span class="alert alert-danger"><?php echo $sign_up_recaptcha_error; ?></span>
+			<?php endif; ?>
+		<?php endif; ?>
+		<div class="checkbox col-md-6">
 			<label>
 				<input type="checkbox" name="sign_up_terms" value="agree"><?php echo lang('sign_up_terms');?>
 			</label>
@@ -109,16 +106,8 @@
 				</span>
 			<?php endif; ?>
 		</div>
-		
-		<?php if (isset($recaptcha)) :
-			echo $recaptcha;
-			if (isset($sign_up_recaptcha_error)) : ?>
-				<span class="alert alert-danger"><?php echo $sign_up_recaptcha_error; ?></span>
-			<?php endif; ?>
-		<?php endif; ?>
-		
-		<div>
-			<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-submit btn-large btn-block', 'content' => '<i class="glyphicon glyphicon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
+		<div class="col-md-6">
+			<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-submit pull-right', 'content' => '<i class="glyphicon glyphicon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
 		</div>
 	</div>
 	
