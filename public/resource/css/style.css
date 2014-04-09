@@ -317,3 +317,12 @@ input.openid {
 .labellabel-success{
 	font-family: Neutra2Text: Demi;
 }
+
+.label-success {
+	background-color: #ccc;
+	padding: 5px 10px;
+	display: inline-block;
+	float: left;
+	margin-right: 3px;
+	margin-bottom: 3px;
+}
