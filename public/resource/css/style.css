@@ -33,10 +33,10 @@
 	src:url('../font/Neutra2Text-LightItalic.otf');
 }*/
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600,700);
 
 html {
-	overflow-y: scroll; /* always show scrollbar */
+	overflow-y: scroll;
 }
 
 body {
@@ -167,19 +167,6 @@ input.openid {
 
 #recaptcha_area { margin-bottom: 10px }
 
-::selection {
-    background-color: #E13300;
-    color: white;
-}
-::moz-selection {
-    background-color: #E13300;
-    color: white;
-}
-::webkit-selection {
-    background-color: #E13300;
-    color: white;
-}
-
 /* Modal */
 
 .modal-dialog {
@@ -286,7 +273,6 @@ input.openid {
 }
 
 .song-list h4{
-	/*font-family: Neutra2Text-Demi;*/
 	color:#3D8A6E;
 }
 
