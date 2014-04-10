@@ -41,7 +41,7 @@ html {
 
 body {
 	background: #fff;
-	color: #666;
+	color: #888;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 }
@@ -71,7 +71,7 @@ a:hover {
 	font-size: 36px;
 	text-transform: uppercase;
 	font-weight: 600;
-	/*background-image: url('resources/img/soundfall.png');*/
+	/*background-image: url('/resource/img/soundfall.png');*/
 }
 
 .navbar-right {
@@ -254,6 +254,7 @@ input.openid {
 .stats-number{
 	color: #3B8A6F;
 	font-weight: 600;
+	font-size:35px;
 }
 
 .stats-desc{
@@ -266,7 +267,7 @@ input.openid {
 }
 
 #avatar{
-	background-image:url('/resource/img/yoursound_play.png');
+	
 }
 
 #song-listing{
@@ -288,7 +289,7 @@ input.openid {
 
 .song-tags{
 	background-repeat: repeat-x;
-	background-image: url(''/resource/img/tag_inactive.png);
+	/*background-image: url('/resource/img/tag_inactive.png');*/
 	
 }
 
@@ -303,7 +304,7 @@ input.openid {
 }
 
 #yoursound{
-	background-image: url('../img/yoursound_bg.png');
+	/*background-image: url('../img/yoursound_bg.png');*/
 }
 
 .tags {
