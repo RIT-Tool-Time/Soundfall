@@ -45,14 +45,14 @@
             <h4 class=""><?php echo anchor('song/'.$song->id, $song->name); ?></h4> 
             <!-- tags -->
             <div class="song-tags">
-                <span class="label label-success">PLAYFUL</span>
-                <span class="label label-success">FUNNY</span>
-                <span class="label label-success">BRIGHT</span>
-                <span class="label label-success">CUTE</span>
-				<span class="label label-success">PLAYFUL</span>
-                <span class="label label-success">FUNNY</span>
-                <span class="label label-success">BRIGHT</span>
-                <span class="label label-success">CUTE</span>
+                <span class="label tags">PLAYFUL</span>
+                <span class="label tags">FUNNY</span>
+                <span class="label tags">BRIGHT</span>
+                <span class="label tags">CUTE</span>
+		<span class="label tags">AWESOME</span>
+                <span class="label tags">AMBIENT</span>
+                <span class="label tags">FANCY</span>
+                <span class="label tags">NEAT</span>
             </div>
         </div>
         <div class="col-md-6">
