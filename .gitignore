@@ -1,5 +1,7 @@
 /public_html/deploy-config.php
 /public_html/deploy.php
+/application/config/database.php
+/application/config/account/account.php
 */config/development
 */logs/log-*.php
 */logs/!index.html
