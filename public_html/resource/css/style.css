@@ -108,6 +108,7 @@ ul.social-links {
 		display: inline-block;
 	    list-style: none;
 	    float: left;
+	    margin-right: -5px;
 	    padding: 0 0 5px 5px;
 	}
 	
@@ -122,11 +123,50 @@ ul.social-links {
 		}
 
 			li.third_party a img {
+				background: #ddd;
 				width: 100%;
 				max-width: 128px;
 				height: auto;
 			}
+			
+			/* Hover over each icon */
 
+			.facebook:hover {
+				background: #3B5998;	
+			}
+			
+			.twitter:hover {
+				background: #4099FF;
+			}
+			
+			.google:hover {
+				background: #D34836;
+			}
+			
+			.openid:hover {
+				background: #f48f25;
+			}
+			
+			.yahoo:hover {
+				background: #7B0099;
+			}
+			
+			.aol:hover {
+				background: #00aeef;
+			}
+			
+			.live:hover {
+				background: #00bcf2;
+			}
+			
+			.lastfm:hover {
+				background: #c3000d;
+			}
+			
+			.tumblr:hover {
+				background: #34526f;
+			}
+			
 .page-header {
 	border: none;
 	margin: 0;
