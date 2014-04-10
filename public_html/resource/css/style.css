@@ -70,6 +70,8 @@ a:hover {
 	color: #666;
 	font-size: 36px;
 	text-transform: uppercase;
+	font-weight: 600;
+	/*background-image: url('resources/img/soundfall.png');*/
 }
 
 .navbar-right {
@@ -108,7 +110,6 @@ ul.social-links {
 		display: inline-block;
 	    list-style: none;
 	    float: left;
-	    margin-right: -5px;
 	    padding: 0 0 5px 5px;
 	}
 	
@@ -123,50 +124,11 @@ ul.social-links {
 		}
 
 			li.third_party a img {
-				background: #ddd;
 				width: 100%;
 				max-width: 128px;
 				height: auto;
 			}
-			
-			/* Hover over each icon */
 
-			.facebook:hover {
-				background: #3B5998;	
-			}
-			
-			.twitter:hover {
-				background: #4099FF;
-			}
-			
-			.google:hover {
-				background: #D34836;
-			}
-			
-			.openid:hover {
-				background: #f48f25;
-			}
-			
-			.yahoo:hover {
-				background: #7B0099;
-			}
-			
-			.aol:hover {
-				background: #00aeef;
-			}
-			
-			.live:hover {
-				background: #00bcf2;
-			}
-			
-			.lastfm:hover {
-				background: #c3000d;
-			}
-			
-			.tumblr:hover {
-				background: #34526f;
-			}
-			
 .page-header {
 	border: none;
 	margin: 0;
@@ -281,6 +243,8 @@ input.openid {
 	color: #FF5F55;
 	text-emphasis: accent;
 	margin-top: 0;
+	text-transform:uppercase;
+	font-weight:400;
 }
 
 .stats-box{
@@ -289,9 +253,11 @@ input.openid {
 
 .stats-number{
 	color: #3B8A6F;
+	font-weight: 600;
 }
 
 .stats-desc{
+	text-transform:lowercase;
 
 }
 
@@ -340,15 +306,23 @@ input.openid {
 	background-image: url('../img/yoursound_bg.png');
 }
 
-.labellabel-success{
-	font-family: Neutra2Text: Demi;
+.tags {
+color: #FF786F;
+background-color: white;
+box-shadow: 1px 2px 3px #d3d3d3;
+border-radius: 20px;
+padding-left: 20px;
+padding-right: 20px;
+line-height: 2.5;
+/*display: inline-block;
+float:left;*/
 }
 
-.label-success {
+/*.label-success {
 	background-color: #ccc;
 	padding: 5px 10px;
 	display: inline-block;
 	float: left;
 	margin-right: 3px;
 	margin-bottom: 3px;
-}
+}*/
