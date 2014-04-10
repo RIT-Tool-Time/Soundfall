@@ -45,7 +45,7 @@
                     <?php if (!isset($account)) : ?>
                     
                     <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal", 'style'=> "margin-right: -10px;")); ?> 
-                    <span>/</span> 
+                    <span></span> 
                     <?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal", 'style'=> "margin-left: -10px;")); ?></li>
                     
                     <?php else: ?>
