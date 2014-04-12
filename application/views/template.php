@@ -109,7 +109,6 @@
 		<?php endif; ?>
 
 	<div class="input-group <?php echo (form_error('sign_in_username_email') || isset($sign_in_username_email_error)) ? 'error' : ''; ?>">
-		<span class="glyphicon glyphicon-user input-group-addon"></span>
 		<?php echo form_input(array('name' => 'sign_in_username_email', 'id' => 'sign_in_username_email', 'value' => set_value('sign_in_username_email'), 'maxlength' => '24', 'class' => 'form-control', 'placeholder' => lang('sign_in_username_email'))); ?>
 		<?php if (form_error('sign_in_username_email') || isset($sign_in_username_email_error)) :?>
 <span class="help-inline">
@@ -122,7 +121,6 @@
 	</div>
 
 	<div class="input-group <?php echo form_error('sign_in_password') ? 'error' : ''; ?>">
-		<span class="glyphicon glyphicon-lock input-group-addon"></span>
 		<?php echo form_password(array('name' => 'sign_in_password', 'id' => 'sign_in_password', 'value' => set_value('sign_in_password'), 'class' => 'form-control', 'placeholder' => lang('sign_in_password'))); ?>
 		<?php if (form_error('sign_in_password')) : ?>
 			<span class="help-inline"><?php echo form_error('sign_in_password'); ?></span>
