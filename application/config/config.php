@@ -181,10 +181,10 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 | use segment based URLs.
 |
 */
-$config['allow_get_array']		= TRUE;
+$config['allow_get_array']	= TRUE;
 $config['enable_query_strings'] = FALSE;
 $config['controller_trigger']	= 'c';
-$config['function_trigger']		= 'm';
+$config['function_trigger']	= 'm';
 $config['directory_trigger']	= 'd'; // experimental not currently in use
 
 /*
@@ -219,7 +219,7 @@ $config['log_threshold'] = 1;
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| application/logs/ folder. Use a full server path with trailing slash.
+| application/logs/ directory. Use a full server path with trailing slash.
 |
 */
 $config['log_path'] = '';
@@ -251,14 +251,25 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 
 /*
 |--------------------------------------------------------------------------
+| Error Views Directory Path
+|--------------------------------------------------------------------------
+|
+| Leave this BLANK unless you would like to set something other than the default
+| application/views/errors/ directory. Use a full server path with trailing slash.
+|
+*/
+$config['error_views_path'] = '';
+
+/*
+|--------------------------------------------------------------------------
 | Cache Directory Path
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| application/cache/ folder.  Use a full server path with trailing slash.
+| application/cache/ directory.  Use a full server path with trailing slash.
 |
 */
-$config['cache_path'] = '';
+$config['cache_path'] = '../application/cache/';
 
 /*
 |--------------------------------------------------------------------------
