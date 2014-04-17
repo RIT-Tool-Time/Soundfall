@@ -27,11 +27,19 @@ class Music extends REST_Controller{
     /**
      * Summary
      * @param Numeric $page Description
-     * @param Numeric $offset Description
+     * @param Numeric $limit Description
      */
-    public function music_get($page, $offset)
+    public function music_get($page, $limit = 10)
     {
-        
+        if($page <= 1 || $page == NULL)
+        {
+            $offset = 0;
+        }
+        else
+        {
+            $offset = ($page-1)*$limit;
+        }
+        $this->response($this->Music_model->get_batch($limit, $offset));
     }
 }
 
