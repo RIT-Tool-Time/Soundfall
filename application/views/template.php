@@ -37,11 +37,9 @@
 	                </button>
 					<img src="resource/img/logo.png" alt="logo" />
 					<ul class="nav navbar-nav navbar-right">
-	                    <?php if(!isset($account)): ?>
 	                    <li><?php echo anchor('about', lang('website_about')); ?></li>
-	                    <?php endif; ?>
 	                    <li><?php echo anchor('blog', lang('website_blog')); ?></li>
-	                    <li><?php echo anchor('soundfall', lang('soundfall')); ?></li>
+	                    <li><?php echo anchor('music/listing', lang('website_soundfall')); ?></li>
 	                </ul>
                 </div>
                 <div class="col-xs-6">
