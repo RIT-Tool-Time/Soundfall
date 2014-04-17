@@ -36,6 +36,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600,700);
 
 html {
+	overflow-x: hidden;
 	overflow-y: scroll;
 }
 
@@ -105,7 +106,7 @@ a:hover {
 		.navbar-header a img {
 			width: 115px;
 			padding: 9px 10px 9px 0;
-			margin: 8px 15px;	
+			margin: 4px 15px;	
 		}
 
 	.navbar-nav {
