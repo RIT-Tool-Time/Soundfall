@@ -60,37 +60,85 @@ a {
 
 a:hover {
 	text-decoration: none;
-	color: #2bb6e5;
+	color: #5175a5;
 }
 
-.navbar-soundfall .navbar-brand,
-.navbar-soundfall .navbar-brand a,
-.navbar-soundfall .navbar-brand a:hover,
-.navbar-soundfall .navbar-brand a:active {
-	color: #666;
-	font-size: 36px;
-	text-transform: uppercase;
-	font-weight: 600;
-	/*background-image: url('/resource/img/soundfall.png');*/
+.active {
+	color: #fff;
+	background: #5175a5;
 }
 
-.navbar-right {
-	text-align: center;
+.container {
+	padding: 0;
 }
 
-	.navbar-right a {
+.navbar {
+	padding: 20px 0 10px 0;	
+	margin: 0 20px 10px 20px;
+	border-bottom: 1px solid #ececec;
+}
+
+	.navbar-soundfall .navbar-brand,
+	.navbar-soundfall .navbar-brand a,
+	.navbar-soundfall .navbar-brand a:hover,
+	.navbar-soundfall .navbar-brand a:active {
 		color: #666;
+		font-size: 36px;
+		text-transform: uppercase;
+		font-weight: 600;
+		/*background-image: url('/resource/img/soundfall.png');*/
+	}
+	
+	.nav>li>a {
+		padding: 10px 20px;
+	}
+	
+	.navbar-header {
+		float: none;
+	}
+	
+		.navbar-header img {
+			width: 184px;
+		}
+	
+	.navbar-nav>li {
+		border-right: 1px solid #ececec;	
+	}
+	
+		.navbar-nav>li:last-child {
+			border:none;	
+		}
+		
+		.navbar-nav>li>a:hover {
+			color: #fff;
+			background: #5175a5;	
+		}
+	
+	.navbar-right {
 		text-align: center;
 	}
+	
+		.navbar-right a {
+			color: #adadad;
+			text-align: center;
+		}
+	
+	.navbar-toggle {
+		margin-right: 0;
+	}
+	
+		.navbar-toggle .icon-bar {
+			border: 1px solid #666;
+			border-radius: 0;
+		}
 
-.navbar-toggle {
-	margin-right: 0;
+.container-fluid {
+	padding: 0;
 }
 
-	.navbar-toggle .icon-bar {
-		border: 1px solid #666;
-		border-radius: 0;
-	}
+.col-xs-6 {
+	padding: 0;
+}
 
 .form-control {
 	-webkit-appearance: none;
@@ -352,15 +400,12 @@ border-radius: 20px;
 padding-left: 20px;
 padding-right: 20px;
 line-height: 2.5;
-/*display: inline-block;
-float:left;*/
 }
 
-/*.label-success {
-	background-color: #ccc;
-	padding: 5px 10px;
-	display: inline-block;
-	float: left;
-	margin-right: 3px;
-	margin-bottom: 3px;
-}*/
+.footer {
+	position: fixed;
+	bottom: 0;
+	padding: 20px;
+	width: 100%;
+	font-weight: 400;
+}

@@ -28,32 +28,39 @@
     <nav class="navbar navbar-soundfall" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <?php echo anchor(base_url(), lang('website_title'), 'class="navbar-brand"'); ?>
+                <div class="col-xs-6">
+                	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+	                    <span class="sr-only">Toggle navigation</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+					<img src="resource/img/logo.png" alt="logo" />
+					<ul class="nav navbar-nav navbar-right">
+	                    <?php if(!isset($account)): ?>
+	                    <li><?php echo anchor('about', lang('website_about')); ?></li>
+	                    <?php endif; ?>
+	                    <li><?php echo anchor('blog', lang('website_blog')); ?></li>
+	                    <li><?php echo anchor('soundfall', lang('soundfall')); ?></li>
+	                </ul>
+                </div>
+                <div class="col-xs-6">
+             		<div class="collapse navbar-collapse" id="navigation">
+		                <ul class="nav navbar-nav navbar-right">
+		                    <?php if (!isset($account)) : ?>
+		                    
+		                    <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal")); ?></li>
+		                    <li><?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal")); ?></li>
+		                    
+		                    <?php else: ?>
+		                    <li>Profit!!!</li>
+		                    <?php endif; ?>
+		                </ul>
+		
+		            </div>
+		            <!--/.nav-collapse -->
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="navigation">
-                <ul class="nav navbar-nav navbar-right">
-                    <?php if(!isset($account)): ?>
-                    <li><?php echo anchor('about', lang('website_about')); ?></li>
-                    <?php endif; ?>
-                    <li><?php echo anchor('blog', lang('website_blog')); ?></li>
-                    <?php if (!isset($account)) : ?>
-                    
-                    <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal")); ?></li>
-                    <li><?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal")); ?></li>
-                    
-                    <?php else: ?>
-                    <li>Profit!!!</li>
-                    <?php endif; ?>
-                </ul>
-
-            </div>
-            <!--/.nav-collapse -->
         </div>
     </nav>
     </div>
@@ -65,12 +72,10 @@
         </div>
     </div>
     
-    <div class="container">
+    <div class="container footer">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <strong>
-                    <small>Copyright &copy; <?php echo date('Y'); ?> Rochester Institute of Technology</small>
-                </strong>
+            	<small>Copyright &copy; <?php echo date('Y'); ?> Rochester Institute of Technology</small>
             </div>
         </div>
     </div>
