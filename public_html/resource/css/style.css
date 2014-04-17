@@ -45,7 +45,7 @@ body {
 	color: #888;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-	padding-top: 95px;
+	padding-top: 88px;
 }
 
 header {
@@ -106,7 +106,7 @@ a:hover {
 		.navbar-header a img {
 			width: 115px;
 			padding: 9px 10px 9px 0;
-			margin: 4px 15px;	
+			margin: 4px 15px 4px 0;	
 		}
 
 	.navbar-nav {
