@@ -24,43 +24,35 @@
     <![endif]-->
 </head>
 <body>
-    <div class="container">
-    <nav class="navbar navbar-soundfall" role="navigation">
-        <div class="container-fluid">
+    <div class="navbar navbar-default navbar-soundfall navbar-fixed-top" role="navigation">
+		<div class="container">
             <div class="navbar-header">
-                <div class="col-xs-6">
-                	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
-	                    <span class="sr-only">Toggle navigation</span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
-	                    <span class="icon-bar"></span>
-	                </button>
-					<img src="resource/img/logo.png" alt="logo" />
-					<ul class="nav navbar-nav navbar-right">
-	                    <li><?php echo anchor('about', lang('website_about')); ?></li>
-	                    <li><?php echo anchor('blog', lang('website_blog')); ?></li>
-	                    <li><?php echo anchor('music/listing', lang('website_soundfall')); ?></li>
-	                </ul>
-                </div>
-                <div class="col-xs-6">
-             		<div class="collapse navbar-collapse" id="navigation">
-		                <ul class="nav navbar-nav navbar-right">
-		                    <?php if (!isset($account)) : ?>
-		                    
-		                    <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal")); ?></li>
-		                    <li><?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal")); ?></li>
-		                    
-		                    <?php else: ?>
-		                    <li>Profit!!!</li>
-		                    <?php endif; ?>
-		                </ul>
-		
-		            </div>
-		            <!--/.nav-collapse -->
-                </div>
+            	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+				<a href="http://tooltime.cias.rit.edu/music/listing"><img src="resource/img/logo.png" alt="logo" /></a>
             </div>
-        </div>
-    </nav>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+		        	<li><?php echo anchor('about', lang('website_about')); ?></li>
+					<li><?php echo anchor('blog', lang('website_blog')); ?></li>
+					<li><?php echo anchor('music/listing', lang('website_soundfall')); ?></li>
+				</ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <?php if (!isset($account)) : ?>
+                    
+                    <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal")); ?></li>
+                    <li><?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal")); ?></li>
+                    
+                    <?php else: ?>
+                    <li><?php echo anchor('account/sign_out', lang('website_sign_out')); ?></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+		</div>
     </div>
     <div class="container">
         <div class="row">
@@ -69,15 +61,7 @@
             </div>
         </div>
     </div>
-    
-    <div class="container footer">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-            	<small>Copyright &copy; <?php echo date('Y'); ?> Rochester Institute of Technology</small>
-            </div>
-        </div>
-    </div>
-    
+        
     <!-- MODALS -->
     <!-- sign in -->
     <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="sign-in-modal" aria-hidden="true">
