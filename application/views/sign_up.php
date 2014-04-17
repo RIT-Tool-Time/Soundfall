@@ -29,52 +29,44 @@
 	<div class="col-lg-6">
 		<?php echo form_open(uri_string(), 'class="form-horizontal"'); ?>
 		<?php echo form_fieldset(); ?>
-		<div id="username" class="form-group <?php echo (form_error('sign_up_username') || isset($sign_up_username_error)) ? 'error' : ''; ?>">
+		<div id="username" class="form-group <?php echo (form_error('sign_up_username') || isset($sign_up_username_error)) ? 'alert alert-danger' : ''; ?>">
 			<div id="username_controls">
 				<?php echo form_input(array('name' => 'sign_up_username', 'id' => 'sign_up_username', 'value' => set_value('sign_up_username'), 'maxlength' => '24', 'class' => 'form-control', 'placeholder' => lang('sign_up_username'))); ?>
 				<?php if (form_error('sign_up_username') || isset($sign_up_username_error)) : ?>
-					<span class="help-inline">
 					<?php echo form_error('sign_up_username'); ?>
 					<?php if (isset($sign_up_username_error)) : ?>
-						<span class="alert alert-danger"><?php echo $sign_up_username_error; ?></span>
+						<?php echo $sign_up_username_error; ?>
 					<?php endif; ?>
-					</span>
 				<?php endif; ?>
 			</div>
 		</div>
 	
-		<div id="email" class="form-group <?php echo (form_error('sign_up_email') || isset($sign_up_email_error)) ? 'error' : ''; ?>">
+		<div id="email" class="form-group <?php echo (form_error('sign_up_email') || isset($sign_up_email_error)) ? 'alert alert-danger' : ''; ?>">
 			<div id="email_controls">
 				<?php echo form_input(array('name' => 'sign_up_email', 'id' => 'sign_up_email', 'value' => set_value('sign_up_email'), 'maxlength' => '160', 'class' => 'form-control', 'placeholder'=> lang('sign_up_email'))); ?>
 				<?php if (form_error('sign_up_email') || isset($sign_up_email_error)) : ?>
-					<span class="help-inline">
 					<?php echo form_error('sign_up_email'); ?>
 					<?php if (isset($sign_up_email_error)) : ?>
-						<span class="alert alert-danger"><?php echo $sign_up_email_error; ?></span>
+						<?php echo $sign_up_email_error; ?>
 					<?php endif; ?>
-					</span>
 				<?php endif; ?>
 			</div>
 		</div>
 		
-		<div id="password" class="form-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
+		<div id="password" class="form-group <?php echo (form_error('sign_up_password')) ? 'alert alert-danger' : ''; ?>">
 			<div id="password_controls">
 				<?php echo form_password(array('name' => 'sign_up_password', 'id' => 'sign_up_password', 'value' => set_value('sign_up_password'), 'class' => 'form-control', 'placeholder' => lang('sign_up_password'))); ?>
 				<?php if (form_error('sign_up_password')) : ?>
-					<span class="help-inline">
 					<?php echo form_error('sign_up_password'); ?>
-					</span>
 				<?php endif; ?>
 			</div>
 		</div>
 		
-		<div id="confirm_password" class="form-group <?php echo (form_error('sign_up_confirm_password')) ? 'error' : ''; ?>">
+		<div id="confirm_password" class="form-group <?php echo (form_error('sign_up_confirm_password')) ? 'alert alert-danger' : ''; ?>">
 			<div id="confirm_password_controls">
 				<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password', 'value' => set_value('sign_up_confirm_password'), 'class' => 'form-control', 'placeholder' => lang('sign_up_confirm_password'))); ?>
 				<?php if (form_error('sign_up_confirm_password')) : ?>
-					<span class="alert alert-danger">
 					<?php echo form_error('sign_up_confirm_password'); ?>
-					</span>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -89,10 +81,10 @@
 				<input type="checkbox" name="sign_up_terms" value="agree"><?php echo lang('sign_up_terms');?>
 			</label>
 			<?php if (form_error('sign_up_terms') || isset($sign_up_terms_error)) : ?>
-				<span class="help-inline">
+				<span class="alert alert-danger">
 				<?php echo form_error('sign_up_terms'); ?>
 				<?php if (isset($sign_up_terms_error)) : ?>
-					<span class="alert alert-danger"><?php echo $sign_up_terms_error; ?></span>
+					<?php echo $sign_up_terms_error; ?>
 				<?php endif; ?>
 				</span>
 			<?php endif; ?>
