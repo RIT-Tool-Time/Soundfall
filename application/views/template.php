@@ -130,7 +130,6 @@
 		</label>
 	</div>
 	
-	<p class="forgot-msg"><?php echo anchor('account/forgot_password', lang('sign_in_forgot_your_password')); ?></p>
 	<?php echo form_fieldset_close(); ?>
 	<?php echo form_close(); ?> 
     </div>

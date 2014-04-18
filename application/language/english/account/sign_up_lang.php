@@ -20,7 +20,7 @@ $lang['sign_up_sign_in_now'] = 'Sign in now';
 $lang['sign_up_terms'] = 'I have read and agree to the <a href="/terms">Terms of Service</a>.';
 $lang['sign_up_terms_confirm'] = 'You need to read and accept the <a href="/terms">Terms of Service</a> before you can open an account with us.';
 
-$lang['sign_up_already_have_account'] = 'Registering is easy. Use your favorite social network, or start fresh with an email address.<br/>Already have an account?';
+$lang['sign_up_already_have_account'] = 'Use your favorite social network, or start fresh with an email address.<br/>Already have an account?';
 $lang['sign_up_recaptcha_required'] = 'The captcha test is required';
 $lang['sign_up_recaptcha_incorrect'] = 'The captcha test is incorrect.';
 $lang['sign_up_username_taken'] = 'This Username is already taken.';

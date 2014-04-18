@@ -110,9 +110,10 @@ a:hover {
 }
 
 ul.social-links {
+	width: 100%;
 	display: inline-block;
 	text-align: center;
-	margin: 0;
+	margin: 0 0 0 8.5px;
 	padding: 0;
 }
 
@@ -121,7 +122,8 @@ ul.social-links {
 		display: inline-block;
 	    list-style: none;
 	    float: left;
-	    padding: 0 0 5px 5px;
+	    padding: 0 0 5px 0;
+	    margin-right: -5px;
 	}
 	
 		li.third_party a {
@@ -176,18 +178,25 @@ ul.social-links {
 			.tumblr:hover {
 				background: #34526f;
 			}
+
+.col-md-6 {
+	display: inline-block;
+}
+
 .page-header {
 	border: none;
 	margin: 0;
 	padding: 0;
 }
 
-.input-group {
+.input-group, .form-group {
 	margin-bottom: 5px;
 	width: 100%;	
 }
 
 .checkbox {
+	display: inline-block;
+	text-align: left;
 	font-size: 15px;
 	font-weight: 300;
 	margin-top: 0;
@@ -203,6 +212,7 @@ ul.social-links {
 	}
 
 .forgot-msg {
+	text-align: left;
 	font-size: 15px;
 	font-weight: 300;
 	margin-top: -5px;	
@@ -378,14 +388,38 @@ line-height: 2.5;
 /* Media queries */
 
 @media (min-width:768px) and (max-width:1199px){
+	
+	.modal-content .col-md-6 {
+		float: right;
+		padding: 0;
+	}
+	
+	.modal-content .checkbox {
+		float: left;
+	}
+
+	ul.social-links {
+		margin: 0;
+	}
+	
 	li.third_party {
 		width: 11.1%;
+		margin: 0;
+		padding-left: 5px;
+	}
+	
+	.forgot-msg {
+		margin-top: -25px;	
+		float: left;
+		width: 100%;
 	}
 }
 
 @media (max-width:768px){
-	.col-md-6, .col-lg-6 {
+	.modal-content .col-md-6, .col-lg-6 {
 		text-align: center;
+		width: 100%;
+		float: none;
 		padding: 0;
 	}
 	
@@ -393,33 +427,42 @@ line-height: 2.5;
 		width: 98%;
 	}
 	
-	.modal-header h1 {
+	.modal-content h1 {
 		font-size: 200%;	
 	}
 	
-	.modal-header p {
+	.modal-content p {
 		font-size: 15px;	
 	}
-	
-	.social-links li.third_party:nth-child(n+4){
-		display: none;
-	}
-	
-		li.third_party {
-			width: 33%;
-		}
-	
-	.btn-submit {
+			
+	.modal-content .btn-submit {
 		width: 100%;
 		margin-bottom: 1px;
 		float: none;
 	}
 	
-	.checkbox input {
-		margin-top: 3px;	
+	.modal-content .checkbox {
+		width: 100%;
+		text-align: left;
 	}
 	
-	.forgot-msg {
-		margin-top: 0;
+		.modal-content .checkbox input {
+			margin-top: 2px;	
+		}
+}
+
+@media (max-width:640px) {
+	ul.social-links {
+		margin: 0;
+	}
+	
+	li.third_party {
+		width: 33%;
+		margin: 0;
+		padding-left: 5px;
+	}
+	
+	li.third_party:nth-child(n+4){
+		display: none;
 	}
 }
