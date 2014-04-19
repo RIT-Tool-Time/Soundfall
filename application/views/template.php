@@ -74,7 +74,7 @@
         <p class="text-center"><?php echo lang('sign_in_dont_have_account') . " " . anchor('#sign-up-modal', lang('sign_in_sign_up_now'), array("role"=>"button", "data-toggle"=>"modal", "data-dismiss"=>"modal")); ?></p>
     </div>
     <div class="modal-body">
-    <div class="col-lg-6">
+    <div class="col-lg-6" style="padding:0;">
 	<?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
 		<ul class="social-links">
 			<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>
@@ -152,7 +152,7 @@
         <p class="text-center"><?php echo lang('sign_up_already_have_account'); ?> <?php echo anchor('#sign-in-modal', lang('sign_up_sign_in_now'), array("role"=>"button", "data-toggle"=>"modal", "data-dismiss"=>"modal")); ?></p>
     </div>
     <div class="modal-body">
-        <div class="col-lg-6">
+        <div class="col-lg-6" style="padding:0;">
 		<?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
 			<ul class="social-links">
 				<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>

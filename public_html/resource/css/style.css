@@ -114,8 +114,8 @@ ul.social-links {
 	width: 100%;
 	display: inline-block;
 	text-align: center;
-	margin: 0 0 0 8.5px;
-	padding: 0;
+	margin: 0;
+	padding: 0 10px;
 }
 
 	li.third_party {
@@ -123,8 +123,8 @@ ul.social-links {
 		display: inline-block;
 	    list-style: none;
 	    float: left;
-	    padding: 0 0 5px 0;
-	    margin-right: -5px;
+	    padding: 0 0 5px 5px;
+	    margin: 0;
 	}
 	
 		li.third_party a {
@@ -139,7 +139,6 @@ ul.social-links {
 
 			li.third_party a img {
 				width: 100%;
-				max-width: 128px;
 				height: auto;
 				background: #ddd;
 			}
@@ -180,10 +179,6 @@ ul.social-links {
 				background: #34526f;
 			}
 
-.col-md-6 {
-	display: inline-block;
-}
-
 .page-header {
 	border: none;
 	margin: 0;
@@ -195,28 +190,12 @@ ul.social-links {
 	width: 100%;	
 }
 
-.checkbox {
-	display: inline-block;
-	text-align: left;
-	font-size: 15px;
-	font-weight: 300;
-	margin-top: 0;
-	margin-bottom: 0;
-	padding: 0;
-}
-
-	.checkbox label {
-		font-size: 15px;
-		font-weight: 300;
-		margin: 5px 5px 5px 0;
-		display: inline-block;
-	}
-
 .forgot-msg {
-	text-align: left;
+	float: left;
+	width: 100%;
 	font-size: 15px;
-	font-weight: 300;
-	margin: 5px 5px 5px 0;	
+	margin-top: 15px;
+	text-align: center;
 }
 
 input.openid {
@@ -227,8 +206,6 @@ input.openid {
 }
 
 #recaptcha_area { margin-bottom: 10px }
-
-/* Modal */
 
 .modal-dialog {
 	width: 85%;
@@ -246,7 +223,54 @@ input.openid {
 	max-width: 934px;	
 	margin: auto;
 }
+	
+	.modal-content .col-lg-6 {
+		text-align: center;
+		width: 50%;
+		float: left;	
+	}
+	
+	.modal-content .col-md-6 {
+		display: inline-block;
+		text-align: center;
+		float: none;
+		width: 100%;
+		padding: 0;
+	}
+	
+	.modal-content .checkbox {
+		display: inline-block;
+		text-align: left;
+		width: 100%;
+		float: none;
+		font-size: 15px;
+		font-weight: 300;
+		margin-top: 0;
+		margin-bottom: 0;
+		padding: 0;
+	}
 
+		.modal-content .checkbox label {
+			font-size: 15px;
+			font-weight: 300;
+			margin: 5px 5px 5px 0;
+			display: inline-block;
+		}	
+	
+	.modal-content .btn-submit{
+		width: 100%;
+		margin-bottom: 1px;
+		float: none;
+		background: #2bb6e5;
+		color: #FFF;
+		padding: 10px 30px;
+		}
+		
+		.modal-content .btn-submit i {
+			padding-right: 5px;
+			top: 2.5px;	
+		}
+	
 .modal-header {
 	border: none;
 	padding-bottom: 0;
@@ -280,17 +304,6 @@ input.openid {
 	background-color: transparent;
 	display: inline-block;
 }
-
-.btn-submit{
-	background: #2bb6e5;
-	color: #FFF;
-	padding: 10px 30px;
-}
-
-	.btn-submit i {
-		padding-right: 5px;
-		top: 2.5px;	
-	}
 	
 /* Music listing */
 #waves{
@@ -322,14 +335,6 @@ input.openid {
 
 }
 
-.navbar-tiny{
-	
-}
-
-#avatar{
-	
-}
-
 #song-listing{
 	background-color: #E3F2F2;
 }
@@ -343,10 +348,6 @@ input.openid {
 
 .song-list h4{
 	color:#3D8A6E;
-}
-
-.play-cong{
-	
 }
 
 .song-tags{
@@ -388,90 +389,6 @@ line-height: 2.5;
 
 /* Media queries */
 
-@media (min-width:768px) and (max-width:1199px){
-	
-	.modal-content .col-lg-6 {
-		width: 50%;
-		float: left;	
-	}
-	
-	.modal-content .col-md-6 {
-		float: none;
-		width: 100%;
-		padding: 0;
-	}
-	
-	.modal-content .checkbox {
-		float: none;
-		width: 100%;	
-	}
-	
-	.modal-content .btn-submit {
-		width: 100%;
-		margin-bottom: 1px;
-		float: none;
-	}
-	
-	ul.social-links {
-		margin: 0;
-	}
-	
-	li.third_party {
-		margin: 0;
-		padding-left: 5px;
-	}
-	
-	.forgot-msg {
-		float: left;
-		width: 100%;
-		margin-top: 15px;
-		text-align: center;
-	}
-}
-
-@media (max-width:768px){
-	.modal-content .col-md-6, .col-lg-6 {
-		text-align: center;
-		width: 100%;
-		float: none;
-		padding: 0;
-	}
-	
-	.modal-dialog {
-		width: 98%;
-	}
-	
-	.modal-content h1 {
-		font-size: 30px;	
-	}
-	
-	.modal-content p {
-		font-size: 15px;	
-	}
-			
-	.modal-content .btn-submit {
-		width: 100%;
-		margin-bottom: 1px;
-		float: none;
-	}
-	
-	.modal-content .checkbox {
-		width: 100%;
-		text-align: left;
-	}
-	
-		.modal-content .checkbox input {
-			margin-top: 2px;	
-		}
-		
-	.forgot-msg {
-		float: left;
-		width: 100%;
-		margin-top: 15px;
-		text-align: center;
-	}
-}
-
 @media (max-width:640px) {
 	.modal-dialog {
 		width: 100%;
@@ -484,7 +401,12 @@ line-height: 2.5;
 		height: 100%;
 		margin: 0;	
 	}
-
+	
+		.modal-content .col-lg-6 {
+			width: 100%;
+			float: none;	
+		}
+		
 		.modal-content h1 {
 			font-size: 30px;
 		}	
