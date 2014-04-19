@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><?php echo isset($title) ? $title.' - '.lang('website_title') : lang('website_title'); ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" /> 
     <meta name="description" content="Waterfall sharing platform" />
     <meta name="author" content="Jan Dvorak, Chris Blackman, Megan Kusher, Matthew Kinbaum, Tyler Stegall, Andrew Gucwa, Tyler Sposato, Katharine Read" />
     
@@ -107,6 +107,7 @@
 
 	<div class="input-group <?php echo form_error('sign_in_password') ? 'error' : ''; ?>">
 		<?php echo form_password(array('name' => 'sign_in_password', 'id' => 'sign_in_password', 'value' => set_value('sign_in_password'), 'class' => 'form-control', 'placeholder' => lang('sign_in_password'))); ?>
+		  
 		<?php if (form_error('sign_in_password')) : ?>
 			<span class="help-inline"><?php echo form_error('sign_in_password'); ?></span>
 		<?php endif; ?>
@@ -124,10 +125,11 @@
 	</div>
 	
 	<div>
-		<label class="checkbox">
+		<!--label class="checkbox">
 			<?php echo form_checkbox(array('name' => 'sign_in_remember', 'id' => 'sign_in_remember', 'value' => 'checked', 'checked' => $this->input->post('sign_in_remember'))); ?>
 			<?php echo lang('sign_in_remember_me'); ?>
-		</label>
+		</label-->
+		<p class="forgot-msg"><?php echo anchor('account/forgot_password', lang('sign_in_forgot_your_password')); ?></p>
 	</div>
 	
 	<?php echo form_fieldset_close(); ?>
