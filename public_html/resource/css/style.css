@@ -199,6 +199,10 @@ ul.social-links {
 	text-align: center;
 }
 
+.text-center {
+	margin-bottom: 0;
+}
+
 input.openid {
     background: #fff url(../img/auth_icons/openid-icon.png) no-repeat left center;
     border: 1px solid #999;
@@ -379,23 +383,9 @@ input.openid {
 	font-weight: 400;
 }
 
-.show-on-mobile {
-	display: none;	
-}
-
 /* Media queries */
 
 @media (max-width:640px) {
-	.hide-on-mobile {
-		display: none;
-	}
-	
-	.show-on-mobile {
-		display: block;	
-		text-align: left;
-		margin: 0;
-	}
-	
 	.get-started {
 		float: left;
 		width: 100%;
@@ -435,18 +425,17 @@ input.openid {
 		}	
 
 	ul.social-links {
-		display: none;
 		padding: 0;
 		margin: 0;
 	}
 	
 	li.third_party {
-		width: 33%;
+		width: 11.1%;
 		margin: 0;
 		padding-left: 5px;
 	}
 	
-	li.third_party:nth-child(n+4){
+	/*li.third_party:nth-child(n+4){
 		display: none;
-	}
+	}*/
 }
