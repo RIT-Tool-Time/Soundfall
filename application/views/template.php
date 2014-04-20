@@ -121,7 +121,7 @@
 	</div>
 
 	<div>
-		<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-submit pull-right', 'content' => lang('sign_in_sign_in'))); ?>
+		<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-submit', 'content' => lang('sign_in_sign_in'))); ?>
 	</div>
 	
 	<div>
@@ -236,7 +236,7 @@
 			<?php endif; ?>
 		</div>
 		<div class="col-md-6">
-			<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-submit pull-right', 'content' => '<i class="glyphicon glyphicon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
+			<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-submit', 'content' => '<i class="glyphicon glyphicon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
 		</div>
 	</div>
 	

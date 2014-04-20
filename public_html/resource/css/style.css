@@ -139,6 +139,7 @@ ul.social-links {
 
 			li.third_party a img {
 				width: 100%;
+				max-width: 137px;
 				height: auto;
 				background: #ddd;
 			}
@@ -335,12 +336,7 @@ input.openid {
 
 }
 
-#song-listing{
-	background-color: #E3F2F2;
-}
-
 .song-list{
-	background-color: #E3F2F2;
 	margin-bottom: 0.5em;
 	display: inline-block;
 	width: 100%;
@@ -371,13 +367,10 @@ input.openid {
 }
 
 .tags {
-color: #FF786F;
-background-color: white;
-box-shadow: 1px 2px 3px #d3d3d3;
-border-radius: 20px;
-padding-left: 20px;
-padding-right: 20px;
-line-height: 2.5;
+	color: #fff;
+	background-color: #FF786F;
+	border-radius: 5px;
+	padding: 2px 10px;
 }
 
 .footer {
@@ -386,10 +379,39 @@ line-height: 2.5;
 	font-weight: 400;
 }
 
+.show-on-mobile {
+	display: none;	
+}
 
 /* Media queries */
 
 @media (max-width:640px) {
+	.hide-on-mobile {
+		display: none;
+	}
+	
+	.show-on-mobile {
+		display: block;	
+		text-align: left;
+		margin: 0;
+	}
+	
+	.get-started {
+		float: left;
+		width: 100%;
+		padding-top: 15px;
+		border-top: 1px solid #ececec;
+	}
+	
+		.get-started button {
+			width: 100%;
+			margin-bottom: 1px;
+			float: none;
+			background: #ddd;
+			color: #FFF;
+			padding: 10px 30px;
+		}
+		
 	.modal-dialog {
 		width: 100%;
 		height: 100%;
@@ -405,6 +427,7 @@ line-height: 2.5;
 		.modal-content .col-lg-6 {
 			width: 100%;
 			float: none;	
+			padding: 0;
 		}
 		
 		.modal-content h1 {
@@ -412,6 +435,8 @@ line-height: 2.5;
 		}	
 
 	ul.social-links {
+		display: none;
+		padding: 0;
 		margin: 0;
 	}
 	
