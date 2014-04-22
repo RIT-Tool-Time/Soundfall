@@ -39,7 +39,59 @@ class Music extends REST_Controller{
         {
             $offset = ($page-1)*$limit;
         }
-        $this->response($this->Music_model->get_batch($limit, $offset));
+        $this->response($this->Music_model->get_batch($limit, $offset), 201);
+    }
+    
+    /**
+     * API call to add uploaded music file into the DB
+     * @param String $name
+     * @param String $file
+     * @param String $email
+     * @param String $picture
+     */
+    public function song_post()
+    {
+        $name = $this->post('name');
+        $file = $this->post('file');
+        $email = $this->post('email');
+        $picture = $this->post('picture');
+        
+        $response = $this->Music_model->add($name, $file, $email, FALSE, $picture);
+        if($response != NULL)
+        {
+            $this->response(array('song_id' => $response),201);
+        }
+        else
+        {
+            $this->response(array('error' => 'There was an error adding the song to the DB.'), 500);
+        }
+    }
+    
+    public function search_post()
+    {
+        $page = $this->post('post');
+        $limit = $this->post('limit');
+        $title = $this->post('title');
+        $tags = $this->post('tags');
+        
+        if($page === NULL)
+        {
+            $page = 0;
+        }
+        if($limit === NULL)
+        {
+            $limit = 10;
+        }
+        
+        if($page <= 1 || $page == NULL)
+        {
+            $offset = 0;
+        }
+        else
+        {
+            $offset = ($page-1)*$limit;
+        }
+        $this->response($this->Music_model->find($title, $tags, $limit, $offset), 201);
     }
 }
 
