@@ -11,6 +11,8 @@
  * @subpackage asevo
  *
  * @version $Id: index.main.php 4275 2013-07-17 10:52:24Z yura $
+ *
+ * Edits made by Tooltime
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
@@ -48,7 +50,21 @@ skin_include( '_html_header.inc.php' );
 			) );
 	?>
 	&nbsp; -->
-	<h1>Cascade</h1>
+	<!--<h1>Cascade</h1>-->
+	<img src="http://tooltime.cias.rit.edu/resource/img/logo.png" alt="logo" id="logo"/>
+	<div class="evo_title_area">
+	
+	<?php
+		// Display container and contents:
+		skin_container( NT_('Header'), array(
+				// The following params will be used as defaults for widgets included in this container:
+				'block_start' => '<div class="$wi_class$">',
+				'block_end' => '</div>',
+				'block_title_start' => '<h2>',
+				'block_title_end' => '</h2>',
+			) );
+	?>
+</div>
 </div>
 </div>
 </div>
@@ -84,19 +100,7 @@ skin_include( '_html_header.inc.php' );
 <div class="main_zone">
 <div class="inner_wrapper">
 
-<div class="evo_title_area">
-	
-	<?php
-		// Display container and contents:
-		skin_container( NT_('Header'), array(
-				// The following params will be used as defaults for widgets included in this container:
-				'block_start' => '<div class="$wi_class$">',
-				'block_end' => '</div>',
-				'block_title_start' => '<h2>',
-				'block_title_end' => '</h2>',
-			) );
-	?>
-</div>
+<!--original spot for dev log title-->
 
 
 <div class="evo_main_area">
