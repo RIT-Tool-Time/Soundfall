@@ -1,24 +1,38 @@
 /* Designed by Asevo - http://asevo.com */
-
+/*Edits made by tooltime*/
 /*
  * Main page construct:
  */
+ 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600,700);
+
 body {
 	background-color: #fff;
-	color: #000;
+	color: #888;
 }
 textarea, input, select, option, optgroup, ul.ui-autocomplete, li.token-input-token-facebook, div.token-input-dropdown-facebook {
-	font: 13.43px Verdana, Arial, Helvetica, sans-serif;
+	font: 13.43px;
+	font-family: 'Open Sans';
 }
 
 div.head_zone {
-	background-color: #393939;
+	/*background-color: #393939;*/
+	color:#888;
 	padding: 0 1em;
 	margin-bottom: 3px;
+	text-align: center;
+	text-transform:uppercase;
 	}
+	
+#logo{
+	width: 290px;
+	margin-top: 20px;
+}
+
 div.nav_zone {
-	background-color: #ccc;
+	font-size: 19px;
 	padding: 0 1em;
+	color: #888;
 }
 div.main_zone
 {
@@ -32,7 +46,7 @@ div.foot_zone
 
 div.inner_wrapper
 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: 'Open Sans' sans-serif;
 	font-size: 84%;
 	width: 85%;
 	margin: 0 auto;
@@ -71,7 +85,7 @@ div.clear {
 }
 
 a {
-	color: #666;
+	color: #888;
 	text-decoration:none;
 }
 a:hover {
@@ -79,7 +93,7 @@ a:hover {
 	text-decoration:underline;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/*h1, h2, h3, h4, h5, h6 {
 	margin: 2ex 0 1ex 0;
 	color: #e00000;
 	font-size: 100%;
@@ -101,37 +115,45 @@ h6 a:hover,
 h6 a:hover {
 	color: #aaa;
 	text-decoration:none;
-}
+}*/
 
 
 /*
  * Header / bloglist on top:
  */
-div.PageTop,
-div.top_menu {
+div.PageTop, {
 	margin: 3px 0;
+	
+}
+
+div.top_menu{
+	text-align:center;
+	margin:3px 0;
+	
 }
 div.PageTop ul,
 div.top_menu ul {
 	margin: 0;
 	list-style-type:none;
 	padding: 0;
-	float: left;
+	/*float: left;*/
+	text-align:center;
 }
 div.PageTop li,
 div.top_menu li {
 	display: inline;
-	padding-right: 1em;
+	padding-right: 12px;
+	padding-left: 12px;
 }
 div.PageTop a {
-	color: #aaa;
+	
 }
 div.PageTop a.selected {
 	color: #fff;
 	font-weight:bold;
 }
 div.top_menu a {
-	color: #333;
+	color: #888;
 }
 div.top_menu a.selected {
 	font-weight:bold;
@@ -142,13 +164,19 @@ div.top_menu a.selected {
  * Title area styles:
  */
 div.evo_title_area {
-	margin: 1em 0;
+	/*margin: 1em 0;*/
+	border-bottom: 1px solid #ECECEC;
+	letter-spacing: 3px;
 	padding: 0;
 }
 div.evo_title_area h2 {
 	font-size: 180%;
-	margin: 2em 0 0 0;
+	/*margin: 2em 0 0 0;*/
 	padding: 0;
+	font-weight: 100;
+	/*text-align:center;*/
+	margin-left: auto;
+    margin-right: auto;
 }
 div.evo_title_area div.widget_core_coll_tagline {
 	letter-spacing: 4px;
@@ -186,22 +214,32 @@ table.prevnext_post td a:hover {
 	padding: 0;
 }
 .evo_post_title {
-	font-size: 100%;
-	color: #e00000;
+	
 	margin: 1ex 0 .5ex 0;
 	border-bottom: 1px solid #aaa;
+	
 }
+
+.evo_post_title a{
+	font-size: 20px;
+	color:#fb5e4f;
+	text-transform:uppercase;
+}
+
 .evo_post_head {
 	font-size: 76%;
-	color: #999;
+	color: #666;
 }
 .evo_post_text {
-	font-size: 84%;
+	
 	margin-top: 0px;
 	margin-bottom: 0px;
+	
 }
 .evo_post_text p {
 	margin: 1em 0;
+	color: #888;
+	
 }
 .evo_post_foot
 {
@@ -213,10 +251,15 @@ table.prevnext_post td a:hover {
 
 .evo_post_text a {
 	text-decoration: underline;
+	
 }
 
 
-.evo_post_head a,
+.evo_post_head a{
+	color:#589069;
+	
+}
+
 .evo_post_foot a {
 	color: #999;
 }
