@@ -10,8 +10,8 @@
 </div>
 <div class="col-md-6">
     <div class="stats-box col-sm-6">
-        <h3 class="stats-number"><?php echo $song->likes; ?></h3>
-        <h4 class="stats-desc"><?php echo lang('music_likes'); ?></h4>
+        <h3 class="stats-number"><?php echo $song->plays; ?></h3>
+        <h4 class="stats-desc"><?php echo lang('music_plays'); ?></h4>
     </div>
     <div class="stats-box col-sm-6">
         <h3 class="stats-number"><?php echo $song->downloads; ?></h3>

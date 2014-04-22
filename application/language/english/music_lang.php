@@ -9,6 +9,7 @@ $lang['music_song'] = "Song";
 $lang['music_songs'] = "Songs";
 $lang['music_downloads'] = "Downloads";
 $lang['music_likes'] = "Likes";
+$lang['music_plays'] = "Played";
 $lang['music_shares'] = "Shares";
 $lang['music_yours'] = "Your songs";
 $lang['music_none'] = "Sorry there are no songs to be found.";
