@@ -255,25 +255,24 @@
 		    echo '<script src="'.base_url('/resource/js/sign_up_validation.js').'"></script>';
 		    echo '<script>
 		    <!-- START : Instant Verification Check -->
-		    var _u_noUsername = "'.lang('_u_noUsername').'";
-		    var _u_tooShort = "'.lang('_u_tooShort').'";
-		    var _u_tooLong = "'.lang('_u_tooLong').'";
-		    var _u_inVaildChars = "'.lang('_u_inVaildChars').'";
-		    var _u_alreadyExists = "'.lang('_u_alreadyExists').'";
-		    var _u_avail = "'.lang('_u_avail').'";
+		    var _u_noUsername = "'.lang('sign_up_js_validation_no_username').'";
+		    var _u_tooShort = "'.lang('sign_up_js_validation_short').'";
+		    var _u_inVaildChars = "'.lang('sign_up_js_validation_invalid_chars').'";
+		    var _u_alreadyExists = "'.lang('sign_up_username_taken').'";
+		    var _u_avail = "'.lang('sign_up_js_validation_username_available').'";
 		    
-		    var _e_invaild = "'.lang('_e_invaild').'";
-		    var _e_vaild = "'.lang('_e_vaild').'";
+		    var _e_invaild = "'.lang('sign_up_js_validation_email_invaild').'";
+		    var _e_vaild = "'.lang('sign_up_js_validation_email_vaild').'";
 		    
-		    var _p_no = "'.lang('_p_no').'";
-		    var _p_tooShort = "'.lang('_p_tooShort').'";
-		    var _p_tooLong = "'.lang('_p_tooLong').'";
-		    var _p_good = "'.lang('_p_good').'";
+		    var _p_no = "'.lang('sign_up_js_validation_password_no').'";
+		    var _p_tooShort = "'.lang('sign_up_js_validation_password_short').'";
+		    var _p_good = "'.lang('sign_up_js_validation_password_good').'";
 		    
-		    var _cp_dot = "'.lang('_cp_dot').'";
-		    var _cp_noMatch = "'.lang('_cp_noMatch').'";
-		    var _cp_match = "'.lang('_cp_match').'";
+		    var _cp_dot = "'.lang('sign_up_js_validation_password_confirm_dot').'";
+		    var _cp_noMatch = "'.lang('sign_up_js_validation_password_cofirm_nomatch').'";
+		    var _cp_match = "'.lang('sign_up_js_validation_password_cofirm_match').'";
 		    
+		    var _s_checking = "'.lang('sign_up_js_validation_checking').'";
 		    
 		    $(document).ready(function(){
 			    setUpMessages("_modal");

@@ -144,7 +144,7 @@ $autoload['config'] = array('account/account');
 |
 */
 
-$autoload['language'] = array('general', 'account/sign_in', 'account/sign_up');
+$autoload['language'] = array('general', 'account/sign_in', 'account/sign_up', 'account/connect_third_party_lang');
 
 
 /*

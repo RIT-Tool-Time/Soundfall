@@ -59,6 +59,19 @@ class Music extends REST_Controller{
         $response = $this->Music_model->add($name, $file, $email, FALSE, $picture);
         if($response != NULL)
         {
+            //@todo e-mail the user with their song info
+            $this->load->library('email');
+            
+            //email setup
+            $this->email->from('cascade@rit.edu', 'Cascade');
+            $this->email->to($email);
+            
+            $this->email->subject('Email Test');
+            $this->email->message('Testing the email class. Here will be the link to download and claim.');
+            
+            $this->email->send();
+            
+            //API response
             $this->response(array('song_id' => $response),201);
         }
         else

@@ -125,14 +125,12 @@ class Song extends CI_Controller
             show_404();
         }
         
+	//record the download instance
+        $this->Music_model->download($id);
+	
         //get the file
         $this->load->helper('download');
         $data = file_get_contents('music/'.$song->file);
         force_download($song->name . '.mp3', $data);
-        
-        //record the download instance
-        $this->Music_model->download($id);
-        
-        $this->Index($id);
     }
 }
