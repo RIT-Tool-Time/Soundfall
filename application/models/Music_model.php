@@ -147,7 +147,7 @@ class Music_model extends CI_Model
     /**
      * Will look up songs by name
      * @param String $name Search for the song name
-     * @param String $tags Search by tags
+     * @param Array $tags Search by tags
      */
     public function find($name = NULL, $tags = NULL, $number = 10, $offset = 0)
     {
@@ -166,7 +166,10 @@ class Music_model extends CI_Model
         
         if($tags != NULL)
         {
-            $this->db->like('tags', $tags);
+            foreach($tags as $tag)
+            {
+                $this->db->like('tags', $tag);
+            }
         }
         
         $results = $this->db->get('music')->result;
@@ -186,6 +189,23 @@ class Music_model extends CI_Model
             return NULL;
         }
         
+    }
+    
+    /**
+     * Add one play to the given song
+     * @param Numeric $id The song id
+     */
+    public function add_play($id)
+    {
+        $music = $this->db->get_where('music', array('id' => $id))->row();
+        if($music == NULL)
+        {
+            return FALSE;
+        }
+        $music->plays = $music->plays + 1;
+        $this->db->where('id', $id);
+        $this->db->update('music', array('plays' => $music->plays));
+        return $this->db->affected_rows();
     }
 }
 

@@ -67,6 +67,14 @@ class Music extends REST_Controller{
         }
     }
     
+    /**
+     * Search
+     * @param Numeric $page
+     * @param Numeric $limit
+     * @param String $title
+     * @param Array $tags
+     * @return object
+     */
     public function search_post()
     {
         $page = $this->post('post');
@@ -91,7 +99,25 @@ class Music extends REST_Controller{
         {
             $offset = ($page-1)*$limit;
         }
+        
         $this->response($this->Music_model->find($title, $tags, $limit, $offset), 201);
+    }
+    
+    /**
+     * Add one play to the given song
+     * @param Numeric $song_id
+     */
+    public function add_play_post()
+    {
+        $return = $this->Music_model->add_play($this->post('song_id'));
+        if($return === 1)
+        {
+            $this->response(array(), 200);
+        }
+        else
+        {
+            $this->response(array(), 404);
+        }
     }
 }
 
