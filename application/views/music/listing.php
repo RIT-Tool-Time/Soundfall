@@ -1,4 +1,7 @@
 <!-- searching and filtering -->
+<div class="search show-mobile">
+	<input type="text" name="search" placeholder="search" />
+</div>
 <div id="filters" class="col-lg-2 hide-mobile">
 	<div class="sidebar">
 	    <h2 style="font-weight: 500;">Explore</h2>
@@ -76,7 +79,7 @@
 		    <?php if($song->picture != NULL): ?>
             	<img class="hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
             <?php endif; ?>
-			<img class="hide-mobile" src="http://placehold.it/130x130">
+			<?php echo '<img class="hide-mobile" src="http://placehold.it/130x130" />'; ?>
         </div>
         <div class="col-md-10">
         
@@ -85,10 +88,11 @@
 				<?php if($song->picture != NULL): ?>
 		        	<img class="show-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
 		        <?php endif; ?>
-				<img class="show-mobile song-image" src="http://placehold.it/64x64">
-				
+		        <div class="song-image">
+					<?php echo '<img class="show-mobile" src="http://placehold.it/130x130" />'; ?>
+		        </div>
 				<!-- time stamp -->
-				<p class="creators">Tyler and Andrew<span style="float: right;">1h</span></p>
+				<p class="creators"><?php echo 'Tyler and Andrew<span style="float: right;">1h</span>'; ?></p>
 				<h4 class="song-name"><?php echo anchor('song/'.$song->id, $song->name); ?></h4>
 			</div>
 		
@@ -154,7 +158,7 @@
                         clearTimeout(timer);
                     } else {
                         evt.type = 'scrollstart';
-                        jQuery.event.dispatch.apply(_self, _args );
+                        jQuery.event.dispatch.apply(_self, _args);
                     }
                     
                     timer = setTimeout( function(){
@@ -167,7 +171,7 @@
             
         },
         teardown: function(){
-            jQuery(this).unbind( 'scroll', jQuery(this).data(uid1) );
+            jQuery(this).unbind('scroll', jQuery(this).data(uid1));
         }
     };
     
@@ -189,7 +193,7 @@
                         
                         timer = null;
                         evt.type = 'scrollstop';
-                        jQuery.event.dispatch.apply(_self, _args );
+                        jQuery.event.dispatch.apply(_self, _args);
                         
                     }, special.scrollstop.latency);
                     
@@ -209,7 +213,8 @@
 	var isLoading = false;
 	
 	$('#accordion').accordion({
-		collapsible: true
+		collapsible: true,
+		active: false
 	});
 	
 	$(window).bind('scrollstop', function(){

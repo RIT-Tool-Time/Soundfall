@@ -346,6 +346,8 @@ input.openid {
 
 .sidebar {
 	position: fixed;	
+	width: 16.66666667%;
+	max-width: 219px;
 }
 
 	.sidebar h2 {
@@ -361,10 +363,12 @@ input.openid {
 		border-radius: 15px;
 		border: 1px solid #eaeaea;
 		padding: 4px 0 4px 8px;
-		width: 150px;
+		width: 100%;
+		-webkit-appearance: none;
 	}
 
 #accordion h3 {
+	outline: none;
 	cursor: pointer;
 }
 
@@ -377,17 +381,28 @@ input.openid {
 
 #song-listing{
 	margin-top:67px;	
+	padding-right: 0;
 }
 
 .song-list{
 	color: #c9c9c9;
-	margin-bottom: 3em;
+	margin-bottom: 3.5em;
 	display: inline-block;
+	padding-left: 30px;
 	width: 100%;
 }
+
+	.song-list:last-child {
+		margin-bottom: 15px;
+	}
+	
+	.song-list .col-md-10 {
+		padding-left: 0;	
+	}
 	
 	.song-list .col-md-2 {
 		margin-bottom: 50px;
+		max-width: 145px;
 	}
 	
 	.song-list p {
@@ -438,6 +453,10 @@ input.openid {
 	margin-right: 2.5px;
 }
 
+.song-image, img.hide-mobile {
+	width:100%;
+}
+
 .song-stats{
 	width: 50%;
 	text-align: right;
@@ -457,8 +476,6 @@ input.openid {
 	padding-bottom:5px;
 }
 
-
-
 .footer {
 	padding: 20px;
 	width: 100%;
@@ -471,7 +488,45 @@ input.openid {
 
 /* Media queries */
 
-@media (max-width:640px) {
+@media (min-width:769px) and (max-width:1200px) {
+	#filters {
+		width: 16.66666667%;
+		float: left;
+	}
+	
+	#song-listing {
+		width: 83.33333333%;
+		float: left;
+	}
+	
+		#song-listing .col-md-10 {
+			width: 100%;
+			float: left;
+		}
+		
+		#song-listing .col-md-2 {
+			display: none;
+		}
+	
+	.song-name, .creators {
+		float: left;
+		padding-left: 10px;
+		width: 83.33333333%;
+	}
+	
+	.song-image {
+		display: inline-block;
+		float: left;
+		width: 16.66666667%;
+	}
+	
+		.song-image img {
+			display: block;
+			width: 100%;
+		}
+}
+
+@media (max-width:768px) {
 	.navbar-collapse ul {
 		margin-top: 10px;
 	}
@@ -536,18 +591,26 @@ input.openid {
 	
 	/* Music listing */
 	
+	#filters {
+		display: none;
+	}
+	
 	#song-listing {
 		padding: 0;
 		margin: 0;
 	}
 	
-	.song-list .col-md-10 {
-		padding: 0;
+	.song-list {
+		padding-left: 0;
 	}
 	
-	.song-list .col-md-6, .song-list .col-md-8 {
-		display: inline-block;	
-	}
+		.song-list .col-md-10 {
+			padding: 0;
+		}
+		
+		.song-list .col-md-6, .song-list .col-md-8 {
+			display: inline-block;	
+		}
 	
 	.song-name, .creators {
 		font-size: 15px;
@@ -557,13 +620,25 @@ input.openid {
 	}
 	
 	.song-image {
+		width:20.9%;
 		float: left;
-		width: 20.9%;
 	}
+		.song-image img {
+			width: 100%;
+			max-width: 130px;
+		}
 	
 	audio {
 		position: relative;
 		top: 3.5px;
+	}
+	
+	.search input[type="text"]{
+		border-radius: 15px;
+		border: 1px solid #eaeaea;
+		padding: 4px 0 4px 8px;
+		margin-bottom: 15px;
+		width: 100%;
 	}
 	
 	.show-mobile {
