@@ -90,7 +90,7 @@ class Music extends REST_Controller{
      */
     public function search_post()
     {
-        $page = $this->post('post');
+        $page = $this->post('page');
         $limit = $this->post('limit');
         $title = $this->post('title');
         $tags = $this->post('tags');
