@@ -54,9 +54,13 @@ class Music extends REST_Controller{
         $name = $this->post('name');
         $file = $this->post('file');
         $email = $this->post('email');
+        $email2 = $this->post('email2');
         $picture = $this->post('picture');
         
-        $response = $this->Music_model->add($name, $file, $email, FALSE, $picture);
+        //@TODO generate the control code
+        $control_code = '12345';
+        
+        $response = $this->Music_model->add($name, $file, $control_code, $email, $email2, FALSE, $picture);
         if($response != NULL)
         {
             //@todo e-mail the user with their song info
@@ -64,10 +68,11 @@ class Music extends REST_Controller{
             
             //email setup
             $this->email->from('cascade@rit.edu', 'Cascade');
-            $this->email->to($email);
+            $this->email->bcc($email);
+            $this->email->bcc($email2);
             
-            $this->email->subject('Email Test');
-            $this->email->message('Testing the email class. Here will be the link to download and claim.');
+            $this->email->subject('Cascade Email Test');
+            $this->email->message('Claim your song here: ' . base_url('song/'.$response.'/'.$file) . "<br /> Your control code is: " . $control_code);
             
             $this->email->send();
             

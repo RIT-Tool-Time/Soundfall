@@ -20,8 +20,9 @@ class Song extends CI_Controller
     /**
      * Display song info
      * @param Number $id song id
+     * @param String $claim
      */
-    public function Index($id)
+    public function Index($id, $claim = NULL)
     {
         // Enable SSL?
         maintain_ssl($this->config->item("ssl_enabled"));
@@ -30,6 +31,10 @@ class Song extends CI_Controller
 	{
 	    // Retrieve sign in user
 	    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
+	}
+	else
+	{
+	    $data['account'] = NULL;
 	}
         
         if($id === NULL || !is_numeric($id))
@@ -53,6 +58,31 @@ class Song extends CI_Controller
 	    {
 		$data['owner2'] = $this->Account_model->get_by_id($data['song']->owner2);
 	    }
+	}
+	
+	//check if song is being claimed
+	if($claim !=  NULL)
+	{
+	    //check if this song can still be claimed
+	    if($data['song']->owner === NULL || $data['song']->owner2 === NULL && $data['song']->owner != $data['account']->id)
+	    {
+		$data['claim'] = TRUE;
+		
+		//check if we are recieving claiming request
+		if($this->input->post('submit', TRUE) != NULL)
+		{
+		    //requirements
+		    
+		    if($this->form_validation->run())
+		    {
+			
+		    }
+		}
+	    }
+	}
+	else
+	{
+	    $data['claim'] = FALSE;
 	}
         
         //load the view

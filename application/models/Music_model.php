@@ -97,18 +97,20 @@ class Music_model extends CI_Model
     
     /**
      * Add a new song to the library
-     * @param String $name Description
-     * @param String $file Description
-     * @param String $email Description
-     * @param Boolean $private Description
-     * @param String $picture Description
-     * @param Array $tags Description
-     * @param Numeric $owner Description
-     * @param Numeric $owner2 Description
-     * @param String $description Description
-     * @return object  Description
+     * @param String $name Song name
+     * @param String $file File name
+     * @param String $control_code 5 letter control code for claiming the song
+     * @param String $email E-mail of the first player
+     * @param String $email2 E-mail of the second player
+     * @param Boolean $private Is the song private?
+     * @param String $picture Picture for the song
+     * @param Array $tags Array of tags assigned to this song
+     * @param Numeric $owner ID of the first player
+     * @param Numeric $owner2 ID of the second player
+     * @param String $description Description for the song
+     * @return Numeric Returns insert id
      */
-    public function add($name, $file, $email, $private = FALSE, $picture = NULL, $tags = NULL, $owner = NULL, $owner2 = NULL, $description = NULL)
+    public function add($name, $file, $control_code, $email, $email2 = NULL, $private = FALSE, $picture = NULL, $tags = NULL, $owner = NULL, $owner2 = NULL, $description = NULL)
     {
         if($tags != NULL)
         {
@@ -117,7 +119,7 @@ class Music_model extends CI_Model
         }
         
         $this->load->helper('date');
-        $this->db->insert('music', array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'name' => $name, 'description' => $description, 'picture' => $picture, 'date' => now(), 'file' => $file, 'tags' => $tags, 'private' => $private));
+        $this->db->insert('music', array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'picture' => $picture, 'date' => now(), 'file' => $file, 'tags' => $tags, 'private' => $private, 'control_code' => $control_code));
         return $this->db->insert_id();
     }
     
@@ -130,10 +132,13 @@ class Music_model extends CI_Model
      * @param Numeric $owner
      * @param Numeric $owner2
      * @param String $email
+     * @param String $email2
      * @param Boolean $private
+     * @return Numeric Number of affected rows (should be 1)
      */
-    public function update($id, $name = NULL, $tags = NULL, $description = NULL, $owner = NULL, $owner2 = NULL, $email = NULL, $private = NULL)
+    public function update($id, $name = NULL, $tags = NULL, $description = NULL, $owner = NULL, $owner2 = NULL, $email = NULL, $email2 = NULL, $private = NULL)
     {
+        $update = array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'tags' => $tags, 'private' => $private);
         if($tags != NULL)
         {
             //change the tags array to string
@@ -142,6 +147,7 @@ class Music_model extends CI_Model
         
         $this->db->where('id', $id);
         $this->db->update('music', $update);
+        return $this->db->affected_rows();
     }
     
     /**

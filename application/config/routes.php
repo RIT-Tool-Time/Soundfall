@@ -93,5 +93,6 @@ $route['account/connect_end(:any)'] = "account/connect/index$1";
 $route['artist/(:any)'] = "artist/index/$1";
 $route['artist/(:any)/page/(:num)'] = "artist/index/$1/$2";
 $route['song/(:num)'] = "song/index/$1";
+$route['song/(:num)/(:any)'] = "song/index/$1/$2";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
