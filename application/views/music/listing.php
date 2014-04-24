@@ -1,36 +1,139 @@
+<!-- searching and filtering -->
+<div class="search show-mobile">
+	<input type="text" name="search" placeholder="search" />
+</div>
+<div id="filters" class="col-lg-2 hide-mobile">
+	<div class="sidebar">
+	    <h2 style="font-weight: 500;">Explore</h2>
+	    <div class="search"> 
+	    	<form action="search">
+				<input type="text" name="Search" placeholder="Search"><br>
+			</form>
+		</div>
+		<div id="accordion">
+	    	<h3>Tags</h3>
+			<div>
+	    		<form name="explore" action="form">
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+		    		<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+				</form>
+			</div>
+	    	<h3>Color</h3>
+			<div>
+				<form name="explore" action="form">
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+		    		<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+				</form>
+			</div>
+	    	<h3>Patterns</h3>
+			<div>
+				<form name="explore" action="form">
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+		    		<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+				</form>
+			</div>
+	    	<h3>Popular</h3>
+			<div>
+				<form name="explore" action="form">
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+		    		<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Average<br>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- listing of songs -->
-<div id="song-listing">
+<div id="song-listing" class="col-lg-10">
     <?php
     if($stats['music_total'] > 0):
     foreach($songs as $song):
     ?>
     <div class="song-list">
-        <div class="col-md-2">
+        <div class="col-md-2 hide-mobile">
             <!-- song image -->
 		    <?php if($song->picture != NULL): ?>
-            	<img src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+            	<img class="hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
             <?php endif; ?>
+			<?php echo '<img class="hide-mobile" src="http://placehold.it/130x130" />'; ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-10">
+        
             <!-- song name and creators -->
-            <h4><?php echo anchor('song/'.$song->id, $song->name); ?></h4>
-            <h4><?php echo anchor('song/download/'.$song->id, 'download'); ?></h4>
+			<div class="col-md-6">
+				<?php if($song->picture != NULL): ?>
+		        	<img class="show-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+		        <?php endif; ?>
+		        <div class="song-image">
+					<?php echo '<img class="show-mobile" src="http://placehold.it/130x130" />'; ?>
+		        </div>
+				<!-- time stamp -->
+				<p class="creators"><?php echo 'Tyler and Andrew<span style="float: right;">1h</span>'; ?></p>
+				<h4 class="song-name"><?php echo anchor('song/'.$song->id, $song->name); ?></h4>
+			</div>
+		
             <!-- tags -->
-            <div class="song-tags">
-            	<?php if($song->tags != NULL): ?>
-	            	<span class="tags"><?php echo $song->tags; ?></span>
-				<?php endif; ?>
-            </div>
+            <!--div class="col-md-6 hide-mobile">
+	            <div class="song-tags">
+	            	<!--?php if($song->tags != NULL): ?-->
+		            	<!--span class="tags"><?php echo $song->tags; ?></span-->
+					<!--?php endif; ?-->
+	            <!--/div>
+            </div-->
         </div>
-        <div class="col-md-6">
-            <!-- play -->
-            <div class="play-song">
+        <div class="col-md-10">
+        	
+        	<!-- play song -->
+        	<div class="play-song">
                 <audio src="music/<?php echo $song->file; ?>" controls preload="metadata">
                     
                 </audio>
+                <script type="text/javascript">
+                
+                </script>
             </div>
-            <!-- download, like, share buttons -->
         </div>
+        
+        <div class="col-md-10">
+			
+			<!-- downloading and sharing -->
+			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='http://tooltime.cias.rit.edu/song/download/' + '<?php echo$song->id ?>'">
+				<span class="glyphicon glyphicon-save"></span> <span class="hide-mobile">Download</span>
+			</button>
+			<button type="button" class="btn btn-default btn-lg action-btn">
+				<span class="glyphicon glyphicon-share-alt"></span> <span class="hide-mobile">Share</span>
+			</button>
+			<!-- plays, downloads, and shares -->
+			<div class="song-stats">
+				<span class="glyphicon glyphicon-play-circle"></span><span><?php echo $song->plays; ?></span>
+				<span class="glyphicon glyphicon-save"></span><span><?php echo $song->downloads; ?></span>
+				<span class="glyphicon glyphicon-share-alt"></span><span>17</span>
+			</div>
+		</div>
     </div>
     <?php
     endforeach;
@@ -55,7 +158,7 @@
                         clearTimeout(timer);
                     } else {
                         evt.type = 'scrollstart';
-                        jQuery.event.dispatch.apply(_self, _args );
+                        jQuery.event.dispatch.apply(_self, _args);
                     }
                     
                     timer = setTimeout( function(){
@@ -68,7 +171,7 @@
             
         },
         teardown: function(){
-            jQuery(this).unbind( 'scroll', jQuery(this).data(uid1) );
+            jQuery(this).unbind('scroll', jQuery(this).data(uid1));
         }
     };
     
@@ -90,7 +193,7 @@
                         
                         timer = null;
                         evt.type = 'scrollstop';
-                        jQuery.event.dispatch.apply(_self, _args );
+                        jQuery.event.dispatch.apply(_self, _args);
                         
                     }, special.scrollstop.latency);
                     
@@ -105,10 +208,15 @@
     };
 </script>
 <script type="text/javascript">
-
+	
 	var pageNumber = 1;
 	var isLoading = false;
-
+	
+	$('#accordion').accordion({
+		collapsible: true,
+		active: false
+	});
+	
 	$(window).bind('scrollstop', function(){
     	if (document.documentElement.clientHeight + $(document).scrollTop() >= document.body.offsetHeight) { 
 			
@@ -120,14 +228,15 @@
 		     	$.getJSON("http://tooltime.cias.rit.edu/api/music/music/" + pageNumber, function(data) {
 					
 					if (data.length	> 0) {
-						$.each(data, function(key, val) {
+						/*$.each(data, function(key, val) {
 							var id = val.id;
 							var name = val.name;
 							var picture = val.picture;
-							var file = val.file;	
+							var file = val.file;
+							var tags = val.tags;
 							
-							$('#song-listing').append('<div class="song-list"><div class="col-md-2"><!--img src="'+ picture +'" alt="'+ name +'" /--></div><div class="col-md-4"><h4 class=""><a href="song/'+ id +'">'+ name +'</a></h4><h4><a href="http://tooltime.cias.rit.edu/song/download/'+ id +'">download</a></h4><div class="song-tags"></div></div><div class="col-md-6"><div class="play-song"><audio src="music/'+ file +'" controls preload="metadata"></audio></div></div>');					
-						});
+							$('#song-listing').append('<div class="song-list"><div class="col-md-2"><!--img src="'+ picture +'" alt="'+ name +'" /--></div><div class="col-md-4"><h4 class=""><a href="song/'+ id +'">'+ name +'</a></h4><h4><a href="http://tooltime.cias.rit.edu/song/download/'+ id +'">download</a></h4><div class="song-tags"><span class="tags">'+ tags +'</span></div></div><div class="col-md-6"><div class="play-song"><audio src="music/'+ file +'" controls preload="metadata"></audio></div></div>');					
+						});*/
 					}
 					else {
 						isLoading = false;

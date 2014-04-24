@@ -8,11 +8,13 @@
 
 body {
 	background-color: #fff;
-	color: #888;
+	/*color: #888;
+	font-family: 'Open Sans' sans serif;*/
+	
 }
 textarea, input, select, option, optgroup, ul.ui-autocomplete, li.token-input-token-facebook, div.token-input-dropdown-facebook {
 	font: 13.43px;
-	font-family: 'Open Sans';
+	/*font-family: 'Open Sans' sans serif;*/
 }
 
 div.head_zone {
@@ -25,8 +27,10 @@ div.head_zone {
 	}
 	
 #logo{
-	width: 290px;
-	margin-top: 20px;
+	width: 260px;
+	margin-top: 25px;
+	margin-left:20px;
+	margin-right:20px;
 }
 
 div.nav_zone {
@@ -37,11 +41,21 @@ div.nav_zone {
 div.main_zone
 {
 	padding: 0 1em;
+	
 }
 div.foot_zone
 {
-	background-color: #e0e0e0;
+	/*background-color: #e0e0e0;*/
 	padding: 0 1em;
+}
+
+div.foot_zone p{
+	text-align:right;
+}
+
+div.foot_zone .baseline{
+	color:#888;
+	border-top: 2px solid #ECECEC;
 }
 
 div.inner_wrapper
@@ -55,9 +69,14 @@ div.inner_wrapper
 
 .evo_main_area /* Left column */
 {
-	width: 80%;
+	width: 75%;
 	float: left;
 	overflow: hidden;
+}
+
+.evo_main_area p{
+	/*color: #888;
+	font-family: 'Open Sans';*/
 }
 
 .evo_sidebar /* Right column */
@@ -74,7 +93,7 @@ p.baseline2 {
 }
 p.baseline2,
 p.baseline2 a {
-	color: #666;
+	color: #888;
 }
 
 /*
@@ -142,8 +161,9 @@ div.top_menu ul {
 div.PageTop li,
 div.top_menu li {
 	display: inline;
-	padding-right: 12px;
-	padding-left: 12px;
+	padding-right: 20px;
+	padding-left: 20px;
+	
 }
 div.PageTop a {
 	
@@ -165,28 +185,29 @@ div.top_menu a.selected {
  */
 div.evo_title_area {
 	/*margin: 1em 0;*/
+	margin-left:22px;
+	margin-right:20px;
 	border-bottom: 1px solid #ECECEC;
 	letter-spacing: 3px;
 	padding: 0;
 }
 div.evo_title_area h2 {
-	font-size: 180%;
+	font-size: 22px;
 	/*margin: 2em 0 0 0;*/
 	padding: 0;
 	font-weight: 100;
-	/*text-align:center;*/
-	margin-left: auto;
-    margin-right: auto;
 }
+
 div.evo_title_area div.widget_core_coll_tagline {
 	letter-spacing: 4px;
-	margin: 1ex 0;
+	/*margin: 1ex 0;*/
 }
 
 
 /*
  * Styles for content
  */
+ 
 table.prevnext_post {
 	width: 100%;
 }
@@ -205,18 +226,23 @@ table.prevnext_post td a:hover {
 .evo_req_title {
 	margin: 0 0 2ex 0;
 	padding: 1px 0;
-	border-bottom: 2px solid #aaa;
+	
 }
+
 .evo_post
 {
 	clear: both;
 	margin: 0 0 5ex 0;
 	padding: 0;
+/*color:#888;*/
 }
+
+
+
 .evo_post_title {
 	
 	margin: 1ex 0 .5ex 0;
-	border-bottom: 1px solid #aaa;
+	border-bottom: 1px solid #ECECEC;
 	
 }
 
@@ -226,6 +252,7 @@ table.prevnext_post td a:hover {
 	text-transform:uppercase;
 }
 
+/*date, category*/
 .evo_post_head {
 	font-size: 76%;
 	color: #666;
@@ -238,12 +265,15 @@ table.prevnext_post td a:hover {
 }
 .evo_post_text p {
 	margin: 1em 0;
-	color: #888;
+	/*color: #888;*/
 	
 }
+
+
+
 .evo_post_foot
 {
-	color: #999;
+	color: #ECECEC;
 	font-size: 76%;
 	clear: both;
 	margin: 1ex 0 2ex 0;
@@ -289,6 +319,8 @@ select.bComment		/* Used by the profile form */
  */
 .evo_side_item {
 	font-size: 84%;
+	font-family:'Open Sans'
+	color:#888;
 	margin: 2ex;
 	padding: 0 0 2ex 0;
 	border-bottom: 2px solid #e0e0e0;
