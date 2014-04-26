@@ -401,7 +401,7 @@ input.openid {
 	}
 	
 	.song-list .col-md-2 {
-		margin-bottom: 50px;
+		margin-bottom: 190px;
 		max-width: 145px;
 	}
 	
@@ -412,7 +412,8 @@ input.openid {
 	.song-list h4 {
 		color:#5174a5;
 		display: inline-block;
-		margin: 5px 0;
+		margin: 6px 0;
+		width: 100%;
 	}
 	
 	.song-list a {
@@ -420,7 +421,8 @@ input.openid {
 	}
 
 .song-tags {
-	text-align: right;	
+	float: right;
+	display: inline;
 }
 
 .play-button {
@@ -438,6 +440,11 @@ input.openid {
 	border-radius: 5px;
 	padding: 2px 10px;
 	margin-left: 2.5px;
+	font-size: 15px;
+}
+
+.album-art {
+	border-radius: 7.5px;	
 }
 
 .play-song {
@@ -488,7 +495,7 @@ input.openid {
 
 /* Media queries */
 
-@media (min-width:769px) and (max-width:1200px) {
+@media (min-width:641px) and (max-width:1200px) {
 	#filters {
 		width: 16.66666667%;
 		float: left;
@@ -524,9 +531,22 @@ input.openid {
 			display: block;
 			width: 100%;
 		}
+		
+	.song-list h4 {
+		float: left;
+		padding-left: 10px;
+		width: 83.33333333%;
+	}
+		
+	.song-tags {
+		display: block;
+		float: none;
+		margin-top: 12px;
+	}
+	
 }
 
-@media (max-width:768px) {
+@media (max-width:640px) {
 	.navbar-collapse ul {
 		margin-top: 10px;
 	}
@@ -625,8 +645,18 @@ input.openid {
 	}
 		.song-image img {
 			width: 100%;
-			max-width: 130px;
 		}
+		
+	.song-list h4 {
+		width: 79.1%;
+	}
+		
+	.song-tags {
+		display: block;
+		float: none;
+		margin-top: 12px;
+	}
+	
 	
 	audio {
 		position: relative;
@@ -636,10 +666,18 @@ input.openid {
 	.search input[type="text"]{
 		border-radius: 15px;
 		border: 1px solid #eaeaea;
-		padding: 4px 0 4px 8px;
+		padding: 4px 0 4px 14px;
 		margin-bottom: 15px;
 		width: 100%;
 	}
+	
+	.action-btn {
+		padding: 7.5px 12.5px;
+	}
+	
+		.action-btn .glyphicon {
+			left: 2px;
+		}
 	
 	.show-mobile {
 		display: block;	

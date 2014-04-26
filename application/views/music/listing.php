@@ -1,3 +1,9 @@
+<!-- Wavesurfer -->
+<script type="text/javascript" src="/resource/js/wavesurfer.js"></script>
+<script type="text/javascript" src="/resource/js/webaudio.js"></script>
+<script type="text/javascript" src="/resource/js/drawer.js"></script>
+<script type="text/javascript" src="/resource/js/drawer.canvas.js"></script>
+
 <!-- searching and filtering -->
 <div class="search show-mobile">
 	<input type="text" name="search" placeholder="search" />
@@ -77,51 +83,54 @@
         <div class="col-md-2 hide-mobile">
             <!-- song image -->
 		    <?php if($song->picture != NULL): ?>
-            	<img class="hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+            	<img class="album-art hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
             <?php endif; ?>
-			<?php echo '<img class="hide-mobile" src="http://placehold.it/130x130" />'; ?>
+			<?php echo '<img class="album-art hide-mobile" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
         </div>
         <div class="col-md-10">
-        
-            <!-- song name and creators -->
-			<div class="col-md-6">
+      		<div class="col-md-6">
+				
+				<!-- album art -->
 				<?php if($song->picture != NULL): ?>
 		        	<img class="show-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
 		        <?php endif; ?>
 		        <div class="song-image">
-					<?php echo '<img class="show-mobile" src="http://placehold.it/130x130" />'; ?>
+					<?php echo '<img class="album-art show-mobile" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
 		        </div>
-				<!-- time stamp -->
+
+				<!-- creators -->
 				<p class="creators"><?php echo 'Tyler and Andrew<span style="float: right;">1h</span>'; ?></p>
-				<h4 class="song-name"><?php echo anchor('song/'.$song->id, $song->name); ?></h4>
+				
+				<!-- song name -->
+				<h4 class="song-name"><?php echo anchor('song/'.$song->id, $song->name); ?>
+					<!-- tags -->
+		            <div class="song-tags">
+		            	<?php if($song->tags != NULL): ?>
+			            	<span class="tags"><?php echo $song->tags; ?></span>
+						<?php endif; ?>
+						<span class="tags">Funky</span>
+						<span class="tags">Dance</span>
+						<span class="tags">Music</span>
+		            </div>
+				</h4>
 			</div>
-		
-            <!-- tags -->
-            <!--div class="col-md-6 hide-mobile">
-	            <div class="song-tags">
-	            	<!--?php if($song->tags != NULL): ?-->
-		            	<!--span class="tags"><?php echo $song->tags; ?></span-->
-					<!--?php endif; ?-->
-	            <!--/div>
-            </div-->
         </div>
         <div class="col-md-10">
         	
-        	<!-- play song -->
+        	<!-- play song and update counter -->
         	<div class="play-song">
-                <audio src="music/<?php echo $song->file; ?>" controls preload="metadata">
-                    
-                </audio>
-                <script type="text/javascript">
-                
-                </script>
-            </div>
+        		<div id="wave_<?php echo $song->id; ?>"></div>
+       		</div>
         </div>
         
         <div class="col-md-10">
 			
-			<!-- downloading and sharing -->
-			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='http://tooltime.cias.rit.edu/song/download/' + '<?php echo$song->id ?>'">
+			<!-- play, download and share -->
+			<button id="music-controls-<?php echo $song->id; ?>" type="button" class="btn btn-default btn-lg action-btn upload-counter">
+				<span class="glyphicon glyphicon-play"></span> <span class="hide-mobile">Play</span>
+			</button>
+			
+			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='/song/download/' + '<?php echo $song->id; ?>'">
 				<span class="glyphicon glyphicon-save"></span> <span class="hide-mobile">Download</span>
 			</button>
 			<button type="button" class="btn btn-default btn-lg action-btn">
@@ -129,11 +138,73 @@
 			</button>
 			<!-- plays, downloads, and shares -->
 			<div class="song-stats">
-				<span class="glyphicon glyphicon-play-circle"></span><span><?php echo $song->plays; ?></span>
+				<span class="glyphicon glyphicon-play-circle"></span><span class="play-count-<?php echo $song->id; ?>"><?php echo $song->plays; ?></span>
 				<span class="glyphicon glyphicon-save"></span><span><?php echo $song->downloads; ?></span>
 				<span class="glyphicon glyphicon-share-alt"></span><span>17</span>
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+                
+        	// Generate waveforms for each of the mp3's
+			
+			var wavesurfer_<?php echo $song->id; ?> = Object.create(WaveSurfer);
+			
+			wavesurfer_<?php echo $song->id; ?>.init({
+				container: document.getElementById('wave_<?php echo $song->id; ?>'),
+				fillParent: true,
+				waveColor: '#5174a5'
+			});
+			
+			// Music events
+			
+			wavesurfer_<?php echo $song->id; ?>.on('play', function () {
+		
+				// If we can update the number of plays do so only once
+				
+				if($('#music-controls-<?php echo $song->id ?>').hasClass('upload-counter')) {
+					// Counter for the number of plays
+				
+					var playCount = parseInt($('.play-count-<?php echo $song->id; ?>').text());
+				  	playCount++;
+				  	
+				  	// Update the counter text with the new value
+				  	
+				  	$('.play-count-<?php echo $song->id; ?>').text(playCount);
+				  	
+				  	// Post the number of plays to the database
+				  	
+					$.post('/api/music/add_play/', { song_id: <?php echo $song->id; ?> });
+				}
+			});
+								
+			$('#music-controls-<?php echo $song->id ?>').on('click', function() {
+			
+				// Toggle the audio between play and pause
+				
+				wavesurfer_<?php echo $song->id; ?>.playPause();
+				
+				// Update the button to reflect the current play state
+				
+				if($(this).children('span.glyphicon').hasClass('glyphicon-play')) {
+					$(this).removeClass('upload-counter');
+					$(this).children('span.glyphicon').removeClass('glyphicon-play');
+					$(this).children('span.glyphicon').addClass('glyphicon-pause');
+					$(this).children('span.glyphicon').next().text('Pause');
+				}
+				else
+				{
+					$(this).children('span.glyphicon').removeClass('glyphicon-pause');
+					$(this).children('span.glyphicon').addClass('glyphicon-play');
+					$(this).children('span.glyphicon').next().text('Play');
+				}				
+			});
+													
+			// Loading the audio file 
+			
+			wavesurfer_<?php echo $song->id; ?>.load('music/<?php echo $song->file; ?>');
+
+        </script>
     </div>
     <?php
     endforeach;
@@ -141,6 +212,9 @@
     ?>
 </div>
 <script type="text/javascript">
+
+	// Scrolling functions - detect when a user stops scrolling
+	
     var special = jQuery.event.special,
         uid1 = 'D' + (+new Date()),
         uid2 = 'D' + (+new Date() + 1);
@@ -206,16 +280,19 @@
             jQuery(this).unbind( 'scroll', jQuery(this).data(uid2) );
         }
     };
-</script>
-<script type="text/javascript">
 	
 	var pageNumber = 1;
 	var isLoading = false;
+	
+	// Collapsible menu for the tags
 	
 	$('#accordion').accordion({
 		collapsible: true,
 		active: false
 	});
+	     
+	// When a user reaches the bottom of the page, and ajax call is made
+	// to load more songs
 	
 	$(window).bind('scrollstop', function(){
     	if (document.documentElement.clientHeight + $(document).scrollTop() >= document.body.offsetHeight) { 
@@ -225,7 +302,7 @@
 			if(isLoading == true) {
 				pageNumber++;
 			
-		     	$.getJSON("http://tooltime.cias.rit.edu/api/music/music/" + pageNumber, function(data) {
+		     	$.getJSON("/api/music/music/" + pageNumber, function(data) {
 					
 					if (data.length	> 0) {
 						/*$.each(data, function(key, val) {
