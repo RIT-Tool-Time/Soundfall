@@ -5,6 +5,7 @@
 | Everything related to music
 |--------------------------------------------------------------------------
 */
+$lang['music_none'] = "No music was found.";
 $lang['music_song'] = "Song";
 $lang['music_songs'] = "Songs";
 $lang['music_downloads'] = "Downloads";

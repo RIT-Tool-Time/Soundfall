@@ -131,8 +131,8 @@ class Song extends CI_Controller
         }
 	
 	$this->load->library('form_validation');
-	    
-	$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+	
+	$this->form_validation->set_error_delimiters('<div class="alert alert-warning">', '</div>');
 	
 	//requirements
 	$this->form_validation->set_rules(array(

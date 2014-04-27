@@ -206,7 +206,7 @@ class Music_model extends CI_Model
         $this->db->order_by('date', 'DESC');
         $this->db->limit($number, $offset);
         
-        if($title != NULL)
+        if($name != NULL)
         {
             $this->db->like('name', $name);
         }
@@ -219,7 +219,7 @@ class Music_model extends CI_Model
             }
         }
         
-        $results = $this->db->get('music')->result;
+        $results = $this->db->get('music')->result();
         if($results != NULL)
         {
             foreach($results AS $song)

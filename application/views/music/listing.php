@@ -12,9 +12,9 @@
 	<div class="sidebar">
 	    <h2 style="font-weight: 500;">Explore</h2>
 		<div class="search"> 
-			<form action="search">
-				<input type="text" name="Search" placeholder="Search"><br>
-			</form>
+			<?php echo form_open('search', array('role' => 'form')); ?>
+				<input type="text" id="search" name="search" placeholder="Search"><br>
+			<?php echo form_close(); ?>
 		</div>
 		<div id="accordion">
 			<h3>Tags</h3>
@@ -78,12 +78,12 @@
         <div class="col-md-10">
       		<div class="col-md-6">
 				
-				<!-- album art -->
-				<?php if($song->picture != NULL): ?>
-		        	<img class="visible-xs" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+			<!-- album art -->
+			<?php if($song->picture != NULL): ?>
+				<img class="visible-xs" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
 		        <?php endif; ?>
 		        <div class="song-image">
-					<?php echo '<img class="album-art visible-xs" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
+				<?php echo '<img class="album-art visible-xs" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
 		        </div>
 
 				<!-- creators -->
@@ -205,6 +205,8 @@
     </div>
     <?php
     endforeach;
+    else:
+	echo '<div class="alert alert-warning">'.lang('music_none')."</div>";
     endif;
     ?>
 </div>
