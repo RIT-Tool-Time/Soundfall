@@ -213,6 +213,26 @@ class Music_model extends CI_Model
         $this->db->update('music', array('plays' => $music->plays));
         return $this->db->affected_rows();
     }
+    
+    /**
+     * Checks if the control code is correct for the given song
+     * @param Numeric $id Song id
+     * @param Numeric $user_id The user id
+     * @param String $code Control Code
+     * @return Boolean
+     */
+    public function control_code_confirm($id, $user_id, $code)
+    {
+        $result = $this->db->get_where('music', array ('id' => $id))->row();
+        if($result->control_code == $code)
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
 }
 
 /* End of file Music_model.php */

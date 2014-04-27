@@ -72,10 +72,20 @@ class Song extends CI_Controller
 		if($this->input->post('submit', TRUE) != NULL)
 		{
 		    //requirements
+		    $this->form_validation->set_rules('control_code', 'Control Code', 'required|alpha_numeric|max_length[5]|xss_clean');
 		    
 		    if($this->form_validation->run())
 		    {
-			
+			if($this->Music_model->control_code_confirm($id, $this->session->userdata('account_id'), $this->input->post('control_code', TRUE)))
+			{
+			   //display confirmation message
+			   $data['message'] = 'success';
+			}
+			else
+			{
+			    //display error message
+			    $data['message'] = 'failure';
+			}
 		    }
 		}
 	    }

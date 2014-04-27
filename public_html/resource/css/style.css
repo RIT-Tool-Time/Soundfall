@@ -495,7 +495,7 @@ input.openid {
 
 /* Media queries */
 
-@media (min-width:641px) and (max-width:1200px) {
+@media (min-width:769px) and (max-width:1200px) {
 	#filters {
 		width: 16.66666667%;
 		float: left;
@@ -546,7 +546,7 @@ input.openid {
 	
 }
 
-@media (max-width:640px) {
+@media (max-width:768px) {
 	.navbar-collapse ul {
 		margin-top: 10px;
 	}

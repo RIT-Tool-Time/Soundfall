@@ -1,3 +1,16 @@
+<?php
+if(isset($message))
+{
+    if($message === 'success')
+    {
+        echo '<div class="alert alert-success alert-dismissable">'.lang('music_msg_added').'</div>';
+    }
+    elseif($message === 'failure')
+    {
+        echo '<div class="alert alert-danger alert-dismissable">'.lang('music_msg_added_fail').'</div>';
+    }
+}
+?>
 <div class="col-md-6">
     <h3 class="title-red"><?php echo $song->name; ?></h3>
     <?php if($song->owner != NULL): ?>
@@ -37,7 +50,7 @@ if($claim)
 {
     echo form_open('', array('class' => 'form-inline', 'role' => 'form'));
     echo '<div class="form-group">';
-    echo form_label('Control Code', 'control-code', array('class' => 'sr-only'));
+    echo form_label(lang('music_control_code'), 'control-code', array('class' => 'sr-only'));
     echo form_input(array('class' => 'form-control', 'placeholder' => 'Control Code', 'name' => 'control_code', 'id' => 'control-code'));
     echo '</div>';
     echo form_submit(array('class' => 'btn btn-primary', 'type' => 'Claim this song!'));

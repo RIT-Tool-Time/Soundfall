@@ -5,21 +5,21 @@
 <script type="text/javascript" src="/resource/js/drawer.canvas.js"></script>
 
 <!-- searching and filtering -->
-<div class="search show-mobile">
+<div class="search visible-xs">
 	<input type="text" name="search" placeholder="search" />
 </div>
 <div id="filters" class="col-lg-2 hide-mobile">
 	<div class="sidebar">
 	    <h2 style="font-weight: 500;">Explore</h2>
-	    <div class="search"> 
-	    	<form action="search">
+		<div class="search"> 
+			<form action="search">
 				<input type="text" name="Search" placeholder="Search"><br>
 			</form>
 		</div>
 		<div id="accordion">
-	    	<h3>Tags</h3>
+			<h3>Tags</h3>
 			<div>
-	    		<form name="explore" action="form">
+	    		<form name="explore" role="form">
 	    			<input name="box" value="Average" type="checkbox">Average<br>
 		    		<input name="box" value="Average" type="checkbox">Average<br>
 	    			<input name="box" value="Average" type="checkbox">Average<br>
@@ -30,9 +30,9 @@
 	    			<input name="box" value="Average" type="checkbox">Average<br>
 				</form>
 			</div>
-	    	<h3>Color</h3>
+			<h3>Color</h3>
 			<div>
-				<form name="explore" action="form">
+				<form name="explore" role="form">
 	    			<input name="box" value="Average" type="checkbox">Average<br>
 		    		<input name="box" value="Average" type="checkbox">Average<br>
 	    			<input name="box" value="Average" type="checkbox">Average<br>
@@ -43,22 +43,9 @@
 	    			<input name="box" value="Average" type="checkbox">Average<br>
 				</form>
 			</div>
-	    	<h3>Patterns</h3>
+			<h3>Patterns</h3>
 			<div>
-				<form name="explore" action="form">
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-		    		<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-				</form>
-			</div>
-	    	<h3>Popular</h3>
-			<div>
-				<form name="explore" action="form">
+				<form name="explore" role="form">
 	    			<input name="box" value="Average" type="checkbox">Average<br>
 		    		<input name="box" value="Average" type="checkbox">Average<br>
 	    			<input name="box" value="Average" type="checkbox">Average<br>
@@ -82,24 +69,35 @@
     <div class="song-list">
         <div class="col-md-2 hide-mobile">
             <!-- song image -->
-		    <?php if($song->picture != NULL): ?>
-            	<img class="album-art hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
-            <?php endif; ?>
+		<?php if($song->picture != NULL): ?>
+			<img class="album-art hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+		<?php else: ?>
 			<?php echo '<img class="album-art hide-mobile" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
+		<?php endif; ?>
         </div>
         <div class="col-md-10">
       		<div class="col-md-6">
 				
 				<!-- album art -->
 				<?php if($song->picture != NULL): ?>
-		        	<img class="show-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+		        	<img class="visible-xs" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
 		        <?php endif; ?>
 		        <div class="song-image">
-					<?php echo '<img class="album-art show-mobile" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
+					<?php echo '<img class="album-art visible-xs" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
 		        </div>
 
 				<!-- creators -->
-				<p class="creators"><?php echo 'Tyler and Andrew<span style="float: right;">1h</span>'; ?></p>
+				<div class="creators">
+				<?php if($song->owner != NULL): ?>
+					<?php echo anchor('artist/'.$song->owner, get_username($song->owner)); ?>
+					<?php if($song->owner2 != NULL){ echo ' and ' . anchor('artist/'.$song->owner2, get_username($song->owner2)); } ?>
+				<?php endif; ?>
+				
+				<!-- upload date -->
+				<span class="pull-right">
+					<?php echo $song->date; ?>
+				</span>
+				</div>
 				
 				<!-- song name -->
 				<h4 class="song-name"><?php echo anchor('song/'.$song->id, $song->name); ?>
@@ -199,9 +197,8 @@
 					$(this).children('span.glyphicon').next().text('Play');
 				}				
 			});
-													
-			// Loading the audio file 
-			
+				
+			// Loading the audio file
 			wavesurfer_<?php echo $song->id; ?>.load('music/<?php echo $song->file; ?>');
 
         </script>

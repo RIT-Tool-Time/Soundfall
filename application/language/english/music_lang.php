@@ -14,6 +14,11 @@ $lang['music_shares'] = "Shares";
 $lang['music_yours'] = "Your songs";
 $lang['music_none'] = "Sorry there are no songs to be found.";
 $lang['music_download'] = "Download this song";
+$lang['music_control_code'] = "Control Code";
+
+//messages
+$lang['music_msg_added'] = "Congratulations! The song is now listed as your creation!";
+$lang['music_msg_added_fail'] = "The control code doesn't matches the code we have on our records.";
 
 /* End of file music_lang.php */
 /* Location: ./application/language/english/music_lang.php */
