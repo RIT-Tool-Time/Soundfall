@@ -15,6 +15,10 @@ $lang['music_yours'] = "Your songs";
 $lang['music_none'] = "Sorry there are no songs to be found.";
 $lang['music_download'] = "Download this song";
 $lang['music_control_code'] = "Control Code";
+$lang['music_song_edit'] = "Edit Song Information";
+$lang['song_private'] = "Private song";
+$lang['song_name'] = "Name";
+$lang['song_description'] = "Description";
 
 //messages
 $lang['music_msg_added'] = "Congratulations! The song is now listed as your creation!";

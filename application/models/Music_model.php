@@ -138,11 +138,52 @@ class Music_model extends CI_Model
      */
     public function update($id, $name = NULL, $tags = NULL, $description = NULL, $owner = NULL, $owner2 = NULL, $email = NULL, $email2 = NULL, $private = NULL)
     {
+        $song = $this->db->get_where('music', array('id' => $id))->row();
+        
+        if($name == NULL)
+        {
+            $name = $song->name;
+        }
+        
+        if($description == NULL)
+        {
+            $description = $song->description;
+        }
+        
+        if($owner == NULL)
+        {
+            $owner = $song->owner;
+        }
+        
+        if($owner2 == NULL)
+        {
+            $owner2 = $song->owner2;
+        }
+        
+        if($email == NULL)
+        {
+            $email = $song->email;
+        }
+        
+        if($email2 == NULL)
+        {
+            $email2 = $song->email2;
+        }
+        
+        if($private == NULL)
+        {
+            $private = $song->private;
+        }
+        
         $update = array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'tags' => $tags, 'private' => $private);
         if($tags != NULL)
         {
             //change the tags array to string
             $update['tags'] = serialize($tags);
+        }
+        else
+        {
+            $tags = $song->tags;
         }
         
         $this->db->where('id', $id);

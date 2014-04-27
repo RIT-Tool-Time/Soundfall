@@ -71,8 +71,10 @@ class Song extends CI_Controller
 		//check if we are recieving claiming request
 		if($this->input->post('submit', TRUE) != NULL)
 		{
+		    $this->load->library('form_validation');
+		    
 		    //requirements
-		    $this->form_validation->set_rules('control_code', 'Control Code', 'required|alpha_numeric|max_length[5]|xss_clean');
+		    $this->form_validation->set_rules('control_code', 'Control Code', 'required|trim|alpha_numeric|max_length[5]|xss_clean');
 		    
 		    if($this->form_validation->run())
 		    {
@@ -127,9 +129,37 @@ class Song extends CI_Controller
         {
             $this->Index($id);
         }
-        
+	
+	$this->load->library('form_validation');
+	    
+	$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+	
+	//requirements
+	$this->form_validation->set_rules(array(
+	    array('field' => 'song_name',
+		  'label' => 'lang:song_name',
+		  'rules' => 'trim|alpha_numeric_spaces|max_length[55]|xss_clean'),
+	    array('field' => 'song_description',
+		  'label' => 'lang:song_description',
+		  'rules' => 'trim|xss_clean'),
+	    array('field' => 'song_private',
+		  'label' => 'lang:song_private',
+		  'rules' => 'trim|xss_clean')
+	));
         //check if we have a form submit
-        
+	if($this->form_validation->run())
+	{
+	    //get the data
+	    $name = $this->input->post('song_name', TRUE);
+	    $desc = $this->input->post('song_description', TRUE);
+	    $private = $this->input->post('song_private', TRUE);
+	    $tags = NULL;
+	    
+	    //update the DB
+	    $this->Music_model->update($id, $name, $tags, $desc, NULL, NULL, NULL, NULL, $private);
+	    
+	    redirect('song/'.$id);    
+	}
         
         //load the view
         $data['content'] = $this->load->view('music/song_edit', $data, TRUE);
