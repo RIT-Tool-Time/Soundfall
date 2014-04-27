@@ -6,9 +6,10 @@
 
 <!-- searching and filtering -->
 <div class="search visible-xs">
-	<input type="text" name="search" placeholder="search" />
-</div>
-<div id="filters" class="col-lg-2 hide-mobile">
+	<?php echo form_open('search', array('role' => 'form')); ?>
+		<input type="text" id="search" name="search" placeholder="Search"><br>
+	<?php echo form_close(); ?></div>
+<div id="filters" class="col-lg-2">
 	<div class="sidebar">
 	    <h2 style="font-weight: 500;">Explore</h2>
 		<div class="search"> 
@@ -20,40 +21,40 @@
 			<h3>Tags</h3>
 			<div>
 	    		<form name="explore" role="form">
-	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Fast<br>
 		    		<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Slow<br>
+	    			<input name="box" value="Average" type="checkbox">Ethereal<br>
+	    			<input name="box" value="Average" type="checkbox">Space<br>
+	    			<input name="box" value="Average" type="checkbox">Water<br>
+	    			<input name="box" value="Average" type="checkbox">Snappy<br>
+	    			<input name="box" value="Average" type="checkbox">Funky<br>
 				</form>
 			</div>
 			<h3>Color</h3>
 			<div>
 				<form name="explore" role="form">
-	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Fast<br>
 		    		<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Slow<br>
+	    			<input name="box" value="Average" type="checkbox">Ethereal<br>
+	    			<input name="box" value="Average" type="checkbox">Space<br>
+	    			<input name="box" value="Average" type="checkbox">Water<br>
+	    			<input name="box" value="Average" type="checkbox">Snappy<br>
+	    			<input name="box" value="Average" type="checkbox">Funky<br>
 				</form>
 			</div>
 			<h3>Patterns</h3>
 			<div>
 				<form name="explore" role="form">
-	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Fast<br>
 		    		<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Average<br>
+	    			<input name="box" value="Average" type="checkbox">Slow<br>
+	    			<input name="box" value="Average" type="checkbox">Ethereal<br>
+	    			<input name="box" value="Average" type="checkbox">Space<br>
+	    			<input name="box" value="Average" type="checkbox">Water<br>
+	    			<input name="box" value="Average" type="checkbox">Snappy<br>
+	    			<input name="box" value="Average" type="checkbox">Funky<br>
 				</form>
 			</div>
 		</div>
@@ -67,12 +68,12 @@
     foreach($songs as $song):
     ?>
     <div class="song-list">
-        <div class="col-md-2 hide-mobile">
+        <div class="col-md-2 visible-lg">
             <!-- song image -->
 		<?php if($song->picture != NULL): ?>
 			<img class="album-art hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
 		<?php else: ?>
-			<?php echo '<img class="album-art hide-mobile" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
+			<?php echo '<img class="album-art" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
 		<?php endif; ?>
         </div>
         <div class="col-md-10">
@@ -83,7 +84,7 @@
 				<img class="visible-xs" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
 		        <?php endif; ?>
 		        <div class="song-image">
-				<?php echo '<img class="album-art visible-xs" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
+				<?php echo '<img class="album-art visible-md visible-sm visible-xs" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
 		        </div>
 
 				<!-- creators -->
@@ -106,9 +107,9 @@
 		            	<?php if($song->tags != NULL): ?>
 			            	<span class="tags"><?php echo $song->tags; ?></span>
 						<?php endif; ?>
+						<span class="tags">Space</span>
 						<span class="tags">Funky</span>
-						<span class="tags">Dance</span>
-						<span class="tags">Music</span>
+						<span class="tags">Fast</span>
 		            </div>
 				</h4>
 			</div>
@@ -151,6 +152,7 @@
 			wavesurfer_<?php echo $song->id; ?>.init({
 				container: document.getElementById('wave_<?php echo $song->id; ?>'),
 				fillParent: true,
+				height: 60,
 				waveColor: '#5174a5'
 			});
 			

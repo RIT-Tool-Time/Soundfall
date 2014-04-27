@@ -250,9 +250,9 @@
     </div>
     </div>
     </div>
-    <footer class="text-center">
+    <!--footer class="text-center">
 	<small>Copyright &copy; <?php echo date('Y'); ?> Rochester Institute of Technology</small>
-    </footer>
+    </footer-->
 <?php
 	    if(!isset($account))
 	    {
