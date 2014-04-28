@@ -44,11 +44,20 @@
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (!isset($account)) : ?>
                     
-                    <li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal")); ?></li>
-                    <li><?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal")); ?></li>
+                    	<li><?php echo anchor('#sign-in-modal', lang('website_sign_in'), array('data-toggle' =>"modal", 'data-target'=> "#sign-in-modal")); ?></li>
+						<li><?php echo anchor('#sign-up-modal', lang('website_sign_up'), array('data-toggle' =>"modal", 'data-target'=> "#sign-up-modal")); ?></li>
                     
                     <?php else: ?>
-                    <li><?php echo anchor('account/sign_out', lang('website_sign_out')); ?></li>
+                    	<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">My Profile</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Settings</a></li>
+								<li class="divider"></li>
+								 <li><?php echo anchor('account/sign_out', lang('website_sign_out')); ?></li>
+							</ul>
+						</li>
                     <?php endif; ?>
                 </ul>
             </div>

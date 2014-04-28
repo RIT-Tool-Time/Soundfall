@@ -61,7 +61,7 @@ input {
 }
 
 .navbar {
-	padding: 10px 20px;	
+	padding: 10px 15px;	
 	border-bottom: 1px solid #eaeaea;
 	background: #fff;
 	box-shadow: 1px -1px 10px #ddd;
@@ -110,8 +110,36 @@ input {
 					background-color: #5174a5;	
 				}				
 	
+	.navbar-toggle {
+		border: none;
+		margin-top: 10px;
+		padding: 9px 0;
+	}
+	
+	.navbar-default .navbar-toggle .icon-bar {
+		background-color: #c9c9c9;
+	}
+		
+	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+		background-color: transparent;
+	}
+	
+	.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+		color: #a9a9a9;
+		font-weight: 300;
+	}
+
+	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+		background-color: #5174a5;
+		color: #fff;
+	}
+	
 	.navbar-collapse {
 		padding: 0;
+	}
+	
+	.caret {
+		margin-top: -3px;
 	}
 
 .form-control {
@@ -335,6 +363,8 @@ input.openid {
 
 .dropdown-menu {
 	box-shadow: none;
+	margin: 0;
+	padding: 9.5px 0;
 }
 
 .navbar-nav>li> a {
@@ -676,6 +706,10 @@ input.openid {
 		margin-top: 12px;
 	}
 	
+	.song-stats {
+		margin-left: 0;
+		width: 60%;
+	}	
 	
 	audio {
 		position: relative;
@@ -709,10 +743,13 @@ input.openid {
 
 /*team page css*/
 .team{
+	/*-webkit-column-count:2;*/
 	border-bottom:1px solid #ececec;
 }
 
 .teamtitle{
 	font-weight: 300;
+	/*-webkit-column-count:2;*/
 }
+
 

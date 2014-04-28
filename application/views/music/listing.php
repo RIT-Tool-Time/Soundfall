@@ -7,14 +7,14 @@
 <!-- searching and filtering -->
 <div class="search visible-xs">
 	<?php echo form_open('search', array('role' => 'form')); ?>
-		<input type="text" id="search" name="search" placeholder="Search"><br>
+		<input type="text" id="search" name="search" placeholder="Search">
 	<?php echo form_close(); ?></div>
 <div id="filters" class="col-lg-2">
 	<div class="sidebar">
 	    <h2 style="font-weight: 500;">Explore</h2>
 		<div class="search"> 
 			<?php echo form_open('search', array('role' => 'form')); ?>
-				<input type="text" id="search" name="search" placeholder="Search"><br>
+				<input type="text" id="search" name="search" placeholder="Search">
 			<?php echo form_close(); ?>
 		</div>
 		<div id="accordion">
@@ -64,8 +64,8 @@
 <!-- listing of songs -->
 <div id="song-listing" class="col-lg-10">
     <?php
-    if($stats['music_total'] > 0):
-    foreach($songs as $song):
+    	if($stats['music_total'] > 0):
+		foreach($songs as $song):
     ?>
     <div class="song-list">
         <div class="col-md-2 visible-lg">
