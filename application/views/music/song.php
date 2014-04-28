@@ -1,16 +1,3 @@
-<?php
-if(isset($message))
-{
-    if($message === 'success')
-    {
-        echo '<div class="alert alert-success alert-dismissable">'.lang('music_msg_added').'</div>';
-    }
-    elseif($message === 'failure')
-    {
-        echo '<div class="alert alert-danger alert-dismissable">'.lang('music_msg_added_fail').'</div>';
-    }
-}
-?>
 <div class="col-md-6">
     <h3 class="title-red"><?php echo $song->name; ?></h3>
     <?php if($song->owner != NULL): ?>
@@ -52,12 +39,28 @@ if(isset($message))
 <?php
 if($claim)
 {
-    echo form_open('', array('class' => 'form-inline', 'role' => 'form'));
-    echo '<div class="form-group">';
-    echo form_label(lang('music_control_code'), 'control-code', array('class' => 'sr-only'));
-    echo form_input(array('class' => 'form-control', 'placeholder' => 'Control Code', 'name' => 'control_code', 'id' => 'control-code'));
-    echo '</div>';
-    echo form_submit(array('class' => 'btn btn-primary', 'type' => 'Claim this song!'));
+    echo form_open('', array('role' => 'form'));
+    echo '<h2>'.lang('music_claim').'</h2>';
+    echo validation_errors();
+    if(isset($message))
+    {
+        if($message === 'success')
+        {
+            echo '<div class="alert alert-success alert-dismissable">'.lang('music_msg_added').'</div>';
+        }
+        elseif($message === 'failure')
+        {
+            echo '<div class="alert alert-warning alert-dismissable">'.lang('music_msg_added_fail').'</div>';
+        }
+    }
+    if(!(isset($message) && $message === 'success'))
+    {
+        echo '<div class="form-group">';
+        echo form_label(lang('music_control_code'), 'control-code', array('class' => 'sr-only'));
+        echo form_input(array('class' => 'form-control', 'placeholder' => lang('music_control_code'), 'name' => 'control_code', 'id' => 'control-code'));
+        echo '</div>';
+        echo form_submit(array('class' => 'btn btn-primary', 'type' => 'submit', 'value' => lang('music_claim')));
+    }
     echo form_close();
 }
     ?>

@@ -58,7 +58,8 @@ class Music extends REST_Controller{
         $picture = $this->post('picture');
         
         //@TODO generate the control code
-        $control_code = '12345';
+        $control_code = substr(md5($name),0,5);
+        $control_code = strtoupper($control_code);
         
         $response = $this->Music_model->add($name, $file, $control_code, $email, $email2, FALSE, $picture);
         if($response != NULL)

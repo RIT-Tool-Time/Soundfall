@@ -264,9 +264,26 @@ class Music_model extends CI_Model
      */
     public function control_code_confirm($id, $user_id, $code)
     {
+        $code = strtoupper($code);
         $result = $this->db->get_where('music', array ('id' => $id))->row();
         if($result->control_code == $code)
         {
+            //assign the song to the user
+            $this->db->where('id', $id);
+            if($result->owner == NULL)
+            {
+                $this->db->update('music', array('owner' => $user_id));
+            }
+            elseif($result->owner != NULL && $result->owner2 == NULL)
+            {
+                $this->db->update('music', array('owner2' => $user_id));
+            }
+            else
+            {
+                //this should not happen
+                return FALSE;
+            }
+            
             return TRUE;
         }
         else

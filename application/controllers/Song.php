@@ -61,6 +61,7 @@ class Song extends CI_Controller
 	}
 	
 	//check if song is being claimed
+	$data['claim'] = FALSE;
 	if($claim !=  NULL)
 	{
 	    //check if this song can still be claimed
@@ -68,33 +69,26 @@ class Song extends CI_Controller
 	    {
 		$data['claim'] = TRUE;
 		
-		//check if we are recieving claiming request
-		if($this->input->post('submit', TRUE) != NULL)
+		$this->load->library('form_validation');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-warning alert-dismissable">', '</div>');
+		
+		//requirements
+		$this->form_validation->set_rules('control_code', 'lang:control_code', 'required|trim|alpha_numeric|max_length[5]|xss_clean');
+		
+		if($this->form_validation->run())
 		{
-		    $this->load->library('form_validation');
-		    
-		    //requirements
-		    $this->form_validation->set_rules('control_code', 'Control Code', 'required|trim|alpha_numeric|max_length[5]|xss_clean');
-		    
-		    if($this->form_validation->run())
+		    if($this->Music_model->control_code_confirm($id, $this->session->userdata('account_id'), $this->input->post('control_code', TRUE)))
 		    {
-			if($this->Music_model->control_code_confirm($id, $this->session->userdata('account_id'), $this->input->post('control_code', TRUE)))
-			{
-			   //display confirmation message
-			   $data['message'] = 'success';
-			}
-			else
-			{
-			    //display error message
-			    $data['message'] = 'failure';
-			}
+		       //display confirmation message
+		       $data['message'] = 'success';
+		    }
+		    else
+		    {
+			//display error message
+			$data['message'] = 'failure';
 		    }
 		}
 	    }
-	}
-	else
-	{
-	    $data['claim'] = FALSE;
 	}
         
         //load the view
