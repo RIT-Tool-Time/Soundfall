@@ -3,7 +3,7 @@
     <?php if($song->owner != NULL): ?>
     <div class="authors">
         <?php echo anchor('artist/'.$song->owner, $owner->username); ?><br />
-        <?php if($song->owner2 != NULL){ echo anchor('artist/'.$song->owner2), $owner2->username; }
+        <?php if($song->owner2 != NULL){ echo anchor('artist/'.$song->owner2, $owner2->username); }
         if($song->owner == $this->session->userdata('account_id') || $song->owner2 == $this->session->userdata('account_id'))
         {
             echo '<div class="pull-right">' . anchor('song/edit/'.$song->id, '<span class="glyphicon glyphicon-pencil"></span> ' . lang('music_song_edit'), array('class' => 'btn btn-warning')) . '</div>';
