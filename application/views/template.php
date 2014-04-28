@@ -169,40 +169,36 @@
 		<?php echo form_open("account/sign_up"); ?>
 		<?php echo form_fieldset(); ?>
 		<div id="username" class="form-group <?php echo (form_error('sign_up_username') || isset($sign_up_username_error)) ? 'error' : ''; ?>">
-			<div id="username_controls">
-				<?php echo form_input(array('name' => 'sign_up_username', 'id' => 'sign_up_username_modal', 'value' => set_value('sign_up_username'), 'maxlength' => '24', 'class' => 'form-control', 'placeholder' => lang('sign_up_username'))); ?>
-				<?php if (form_error('sign_up_username') || isset($sign_up_username_error)) : ?>
-					<span class="help-inline">
-					<?php echo form_error('sign_up_username'); ?>
-					<?php if (isset($sign_up_username_error)) : ?>
-						<span class="alert alert-danger"><?php echo $sign_up_username_error; ?></span>
-					<?php endif; ?>
-					</span>
-				<?php endif; ?>
-			</div>
+		    <div id="username_controls">
+			<?php echo form_input(array('name' => 'sign_up_username', 'id' => 'sign_up_username_modal', 'value' => set_value('sign_up_username'), 'maxlength' => '24', 'class' => 'form-control', 'placeholder' => lang('sign_up_username'))); ?>
+			<?php if (form_error('sign_up_username') || isset($sign_up_username_error)) : ?>
+			    <?php echo form_error('sign_up_username'); ?>
+			    <?php if (isset($sign_up_username_error)) : ?>
+				<span class="alert alert-danger"><?php echo $sign_up_username_error; ?></span>
+			    <?php endif; ?>
+			<?php endif; ?>
+		    </div>
 		</div>
 	
 		<div id="email" class="form-group <?php echo (form_error('sign_up_email') || isset($sign_up_email_error)) ? 'error' : ''; ?>">
-			<div id="email_controls">
-				<?php echo form_input(array('name' => 'sign_up_email', 'id' => 'sign_up_email_modal', 'value' => set_value('sign_up_email'), 'maxlength' => '160', 'class' => 'form-control', 'placeholder'=> lang('sign_up_email'))); ?>
-				<?php if (form_error('sign_up_email') || isset($sign_up_email_error)) : ?>
-					<span class="help-inline">
-					<?php echo form_error('sign_up_email'); ?>
-					<?php if (isset($sign_up_email_error)) : ?>
-						<span class="alert alert-danger"><?php echo $sign_up_email_error; ?></span>
-					<?php endif; ?>
-					</span>
-				<?php endif; ?>
-			</div>
+		    <div id="email_controls">
+			<?php echo form_input(array('name' => 'sign_up_email', 'id' => 'sign_up_email_modal', 'value' => set_value('sign_up_email'), 'maxlength' => '160', 'class' => 'form-control', 'placeholder'=> lang('sign_up_email'))); ?>
+			<?php if (form_error('sign_up_email') || isset($sign_up_email_error)) : ?>
+			    <?php echo form_error('sign_up_email'); ?>
+			    <?php if (isset($sign_up_email_error)) : ?>
+				<span class="alert alert-danger"><?php echo $sign_up_email_error; ?></span>
+			    <?php endif; ?>
+			<?php endif; ?>
+		    </div>
 		</div>
 		
 		<div id="password" class="form-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
 			<div id="password_controls">
 				<?php echo form_password(array('name' => 'sign_up_password', 'id' => 'sign_up_password_modal', 'value' => set_value('sign_up_password'), 'class' => 'form-control', 'placeholder' => lang('sign_up_password'))); ?>
 				<?php if (form_error('sign_up_password')) : ?>
-					<span class="help-inline">
+				    <span class="help-inline">
 					<?php echo form_error('sign_up_password'); ?>
-					</span>
+				    </span>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -211,9 +207,9 @@
 			<div id="confirm_password_controls">
 				<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password_modal', 'value' => set_value('sign_up_confirm_password'), 'class' => 'form-control', 'placeholder' => lang('sign_up_confirm_password'))); ?>
 				<?php if (form_error('sign_up_confirm_password')) : ?>
-					<span class="alert alert-danger">
+				    <span class="alert alert-danger">
 					<?php echo form_error('sign_up_confirm_password'); ?>
-					</span>
+				    </span>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -228,12 +224,10 @@
 				<input type="checkbox" name="sign_up_terms" value="agree"><?php echo lang('sign_up_terms');?>
 			</label>
 			<?php if (form_error('sign_up_terms') || isset($sign_up_terms_error)) : ?>
-				<span class="help-inline">
-				<?php echo form_error('sign_up_terms'); ?>
-				<?php if (isset($sign_up_terms_error)) : ?>
-					<span class="alert alert-danger"><?php echo $sign_up_terms_error; ?></span>
-				<?php endif; ?>
-				</span>
+			    <?php echo form_error('sign_up_terms'); ?>
+			    <?php if (isset($sign_up_terms_error)) : ?>
+				<span class="alert alert-danger"><?php echo $sign_up_terms_error; ?></span>
+			    <?php endif; ?>
 			<?php endif; ?>
 		</div>
 		<div class="col-md-6">
@@ -250,9 +244,9 @@
     </div>
     </div>
     </div>
-    <!--footer class="text-center">
-	<small>Copyright &copy; <?php echo date('Y'); ?> Rochester Institute of Technology</small>
-    </footer-->
+    <footer class="text-center">
+	<small><?php echo date('Y'); ?> &copy; Rochester Institute of Technology</small>
+    </footer>
 <?php
 	    if(!isset($account))
 	    {
