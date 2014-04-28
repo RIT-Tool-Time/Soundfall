@@ -7,6 +7,8 @@ html {
 }
 
 body {
+	overflow-x: hidden;
+	overflow-y: scroll;
 	background: #f6f6f6;
 	color: #888;
 	font-family: 'Open Sans', sans-serif;
@@ -708,7 +710,7 @@ input.openid {
 	
 	.song-stats {
 		margin-left: 0;
-		width: 60%;
+		width: 56%;
 	}	
 	
 	audio {
@@ -725,7 +727,7 @@ input.openid {
 	}
 	
 	.action-btn {
-		padding: 7.5px 12.5px;
+		padding: 7.5px 11.5px;
 	}
 	
 		.action-btn .glyphicon {
