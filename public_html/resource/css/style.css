@@ -706,3 +706,13 @@ input.openid {
 		display: none;
 	}
 }
+
+/*team page css*/
+.team{
+	border-bottom:1px solid #ececec;
+}
+
+.teamtitle{
+	font-weight: 300;
+}
+
