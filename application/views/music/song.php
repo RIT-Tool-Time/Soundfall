@@ -37,7 +37,7 @@
 
 <!-- claiming the song -->
 <?php
-if($claim)
+if($claim && $this->authentication->is_signed_in())
 {
     echo form_open('', array('role' => 'form'));
     echo '<h2>'.lang('music_claim').'</h2>';
@@ -63,4 +63,8 @@ if($claim)
     }
     echo form_close();
 }
-    ?>
+elseif($claim && !$this->authentication->is_signed_in())
+{
+    echo '<div class="alert alert-warning alert-dismissable">'.lang('music_claim_account_needed').'</div>';
+}   
+?>

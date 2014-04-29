@@ -27,7 +27,7 @@ class Song extends CI_Controller
         // Enable SSL?
         maintain_ssl($this->config->item("ssl_enabled"));
         
-        if ($this->authentication->is_signed_in())
+        if($this->authentication->is_signed_in())
 	{
 	    // Retrieve sign in user
 	    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
