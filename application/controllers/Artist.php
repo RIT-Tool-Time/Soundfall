@@ -13,6 +13,7 @@ class Artist extends CI_Controller
         
         $this->load->model(array('Music_model', 'account/Account_details_model'));
 	$this->load->language('music');
+	$this->load->helper('account/account');
         
     }
     

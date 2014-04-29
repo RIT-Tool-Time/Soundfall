@@ -51,24 +51,12 @@
     <?php endforeach; ?>
 <?php endif; ?>
 
-<br />
-
-<h3 class="clearfix"><?php echo lang('linked_link_with_your_account_from'); ?></h3>
 <?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
     <h3><?php echo sprintf(lang('sign_up_third_party_heading')); ?></h3>
     <ul>
 	<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>
 	    <?php if($provider_values['enabled']) : ?>
-	    <li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img id="'.strtolower($provider_name).'" src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
-    <script type="text/javascript">
-		    $("#<?php echo strtolower($provider_name); ?>").hover(
-		    function(){
-			    $("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_active.png'); ?>');
-			    },
-		    function(){
-			    $("#<?php echo strtolower($provider_name); ?>").attr('src', '<?php echo base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'_inactive.png'); ?>');
-			    });
-	    </script>
+		<li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img id="'.strtolower($provider_name).'" class="'.strtolower($provider_name).'" src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
 	    <?php endif; ?>
 	<?php endforeach; ?>
     </ul>

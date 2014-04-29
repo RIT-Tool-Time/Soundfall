@@ -8,7 +8,7 @@
 $lang['website_title'] = 'Soundfall';
 $lang['website_welcome_username'] = 'Welcome, %s!';
 $lang['website_account'] = 'Settings';
-$lang['website_profile'] = 'Profile';
+$lang['website_profile'] = 'Profile Settings';
 $lang['website_linked'] = 'Linked Accounts';
 $lang['website_password'] = 'Password';
 $lang['website_manage_users'] = 'Manage Users';
