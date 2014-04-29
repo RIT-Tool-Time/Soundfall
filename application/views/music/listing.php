@@ -61,6 +61,18 @@
 	</div>
 </div>
 
+<?php
+
+	function isMobile() {   
+	    if(preg_match('/(alcatel|amoi|android|avantgo|blackberry|benq|cell|cricket|docomo|elaine|htc|iemobile|iphone|ipad|ipaq|ipod|j2me|java|midp|mini|mmp|mobi|motorola|nec-|nokia|palm|panasonic|philips|phone|sagem|sharp|sie-|smartphone|sony|symbian|t-mobile|telus|up\.browser|up\.link|vodafone|wap|webos|wireless|xda|xoom|zte)/i', $_SERVER['HTTP_USER_AGENT']))
+	    return true;
+	else
+	    return false;
+	}
+?>
+
+
+
 <!-- listing of songs -->
 <div id="song-listing" class="col-lg-10">
     <?php
@@ -105,7 +117,7 @@
 					<!-- tags -->
 		            <div class="song-tags">
 		            	<?php if($song->tags != NULL): ?>
-			            	<span class="tags"><?php echo $song->tags; ?></span>
+			            	<span class="tags">&amp;<?php echo $song->tags; ?></span>
 						<?php endif; ?>
 						<span class="tags">Space</span>
 						<span class="tags">Funky</span>
@@ -116,19 +128,58 @@
         </div>
         <div class="col-md-10">
         	
-        	<!-- play song and update counter -->
-        	<div class="play-song">
-        		<div id="wave_<?php echo $song->id; ?>"></div>
-       		</div>
+        	<?php
+        		if(!isMobile()) {
+        	?>
+	        	<!-- play song and update counter -->
+				<div class="play-song">
+        			<div id="wave_<?php echo $song->id; ?>"></div>
+				</div>
+			<?php
+				}
+				else {		
+			?>
+				<audio id="mobile_<?php echo $song->id; ?>" class="upload-counter" controls>
+					<source src="music/<?php echo $song->file; ?>" />
+				</audio>
+				
+				<script type="text/javascript">
+					document.getElementById('mobile_<?php echo $song->id; ?>').addEventListener('play', function(){
+						
+						if($(this).hasClass('upload-counter')) {
+							
+							// Counter for the number of plays				
+							var playCount = parseInt($('.play-count-<?php echo $song->id; ?>').text());
+						  	playCount++;
+					  	
+						  	// Update the counter text with the new value			  	
+						  	$('.play-count-<?php echo $song->id; ?>').text(playCount);
+					  	
+						  	// Post the number of plays to the database
+							$.post('/api/music/add_play/', { song_id: <?php echo $song->id; ?> });
+							
+							$(this).removeClass('upload-counter');
+						}
+					});
+				</script>
+			<?php
+				}
+			?>
+				
         </div>
         
         <div class="col-md-10">
-			
-			<!-- play, download and share -->
-			<button id="music-controls-<?php echo $song->id; ?>" type="button" class="btn btn-default btn-lg action-btn upload-counter">
-				<span class="glyphicon glyphicon-play"></span> <span class="hide-mobile">Play</span>
-			</button>
-			
+			<?php
+        		if(!isMobile()) {
+        	?>
+				<!-- play, download and share -->
+				<button id="music-controls-<?php echo $song->id; ?>" type="button" class="btn btn-default btn-lg action-btn upload-counter">
+					<span class="glyphicon glyphicon-play"></span> <span class="hide-mobile">Play</span>
+				</button>
+			<?php
+				}
+			?>
+							
 			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='/song/download/' + '<?php echo $song->id; ?>'">
 				<span class="glyphicon glyphicon-save"></span> <span class="hide-mobile">Download</span>
 			</button>
@@ -143,67 +194,73 @@
 			</div>
 		</div>
 		
-		<script type="text/javascript">
+		<?php
+			if(!isMobile()){
+		?>
+			<script type="text/javascript">
                 
-        	// Generate waveforms for each of the mp3's
+	        	// Generate waveforms for each of the mp3's
+				
+				var wavesurfer_<?php echo $song->id; ?> = Object.create(WaveSurfer);
+				
+				wavesurfer_<?php echo $song->id; ?>.init({
+					container: document.getElementById('wave_<?php echo $song->id; ?>'),
+					fillParent: true,
+					height: 60,
+					waveColor: '#5174a5'
+				});
+				
+				// Music events
+				
+				wavesurfer_<?php echo $song->id; ?>.on('play', function () {
 			
-			var wavesurfer_<?php echo $song->id; ?> = Object.create(WaveSurfer);
-			
-			wavesurfer_<?php echo $song->id; ?>.init({
-				container: document.getElementById('wave_<?php echo $song->id; ?>'),
-				fillParent: true,
-				height: 60,
-				waveColor: '#5174a5'
-			});
-			
-			// Music events
-			
-			wavesurfer_<?php echo $song->id; ?>.on('play', function () {
-		
-				// If we can update the number of plays do so only once
+					// If we can update the number of plays do so only once
+					
+					if($('#music-controls-<?php echo $song->id ?>').hasClass('upload-counter')) {
+						// Counter for the number of plays
+					
+						var playCount = parseInt($('.play-count-<?php echo $song->id; ?>').text());
+					  	playCount++;
+					  	
+					  	// Update the counter text with the new value
+					  	
+					  	$('.play-count-<?php echo $song->id; ?>').text(playCount);
+					  	
+					  	// Post the number of plays to the database
+					  	
+						$.post('/api/music/add_play/', { song_id: <?php echo $song->id; ?> });
+					}
+				});
+									
+				$('#music-controls-<?php echo $song->id ?>').on('click', function() {
 				
-				if($('#music-controls-<?php echo $song->id ?>').hasClass('upload-counter')) {
-					// Counter for the number of plays
-				
-					var playCount = parseInt($('.play-count-<?php echo $song->id; ?>').text());
-				  	playCount++;
-				  	
-				  	// Update the counter text with the new value
-				  	
-				  	$('.play-count-<?php echo $song->id; ?>').text(playCount);
-				  	
-				  	// Post the number of plays to the database
-				  	
-					$.post('/api/music/add_play/', { song_id: <?php echo $song->id; ?> });
-				}
-			});
-								
-			$('#music-controls-<?php echo $song->id ?>').on('click', function() {
-			
-				// Toggle the audio between play and pause
-				
-				wavesurfer_<?php echo $song->id; ?>.playPause();
-				
-				// Update the button to reflect the current play state
-				
-				if($(this).children('span.glyphicon').hasClass('glyphicon-play')) {
-					$(this).removeClass('upload-counter');
-					$(this).children('span.glyphicon').removeClass('glyphicon-play');
-					$(this).children('span.glyphicon').addClass('glyphicon-pause');
-					$(this).children('span.glyphicon').next().text('Pause');
-				}
-				else
-				{
-					$(this).children('span.glyphicon').removeClass('glyphicon-pause');
-					$(this).children('span.glyphicon').addClass('glyphicon-play');
-					$(this).children('span.glyphicon').next().text('Play');
-				}				
-			});
-				
-			// Loading the audio file
-			wavesurfer_<?php echo $song->id; ?>.load('music/<?php echo $song->file; ?>');
-
-        </script>
+					// Toggle the audio between play and pause
+					
+					wavesurfer_<?php echo $song->id; ?>.playPause();
+					
+					// Update the button to reflect the current play state
+					
+					if($(this).children('span.glyphicon').hasClass('glyphicon-play')) {
+						$(this).removeClass('upload-counter');
+						$(this).children('span.glyphicon').removeClass('glyphicon-play');
+						$(this).children('span.glyphicon').addClass('glyphicon-pause');
+						$(this).children('span.glyphicon').next().text('Pause');
+					}
+					else
+					{
+						$(this).children('span.glyphicon').removeClass('glyphicon-pause');
+						$(this).children('span.glyphicon').addClass('glyphicon-play');
+						$(this).children('span.glyphicon').next().text('Play');
+					}				
+				});
+					
+				// Loading the audio file
+				wavesurfer_<?php echo $song->id; ?>.load('music/<?php echo $song->file; ?>');
+	
+	        </script>
+		<?php
+			}
+		?>
     </div>
     <?php
     endforeach;

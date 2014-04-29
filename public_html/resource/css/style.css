@@ -472,7 +472,7 @@ input.openid {
 
 .tags {
     color: #fff;
-    background-color: #5174a5;
+    background-color: #ddd;
     border-radius: 5px;
     padding: 2px 10px;
     margin-left: 2.5px;
@@ -605,7 +605,11 @@ input.openid {
     .navbar-nav>li {
         border: none;
     }
-    
+    	
+    .dropdown-menu {
+	    padding: 9.5px 0 0 0;
+	}
+
     .get-started {
         float: left;
         width: 100%;
@@ -718,8 +722,8 @@ input.openid {
     }
     
     audio {
-        position: relative;
-        top: 3.5px;
+        margin: 7.5px 0 5px 0;
+        width: 100%;
     }
     
     .search input[type=text] {
