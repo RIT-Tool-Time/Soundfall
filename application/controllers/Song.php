@@ -65,7 +65,7 @@ class Song extends CI_Controller
 	if($claim !=  NULL)
 	{
 	    //check if this song can still be claimed
-	    if($data['song']->owner === NULL || $data['song']->owner2 === NULL && $data['song']->owner != $data['account']->id)
+	    if($data['song']->owner === NULL || ($data['song']->owner2 === NULL && $data['song']->owner != $this->session->userdata('account_id')))
 	    {
 		$data['claim'] = TRUE;
 		
@@ -110,6 +110,10 @@ class Song extends CI_Controller
 	    // Retrieve sign in user
 	    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 	}
+	else
+	{
+	    redirect('song/'.$id);
+	}
         
         if($id === NULL || !is_numeric($id))
         {
@@ -119,9 +123,9 @@ class Song extends CI_Controller
         $data['song'] = $this->Music_model->get($id);
         
         //check that the song author is accessing this, if not redirect
-        if($data['song']->owner != $this->session->userdata('account_id'))
+        if($data['song']->owner != $this->session->userdata('account_id') || $data['song']->owner2 != $this->session->userdata('account_id'))
         {
-            $this->Index($id);
+            redirect('song/'.$id);
         }
 	
 	$this->load->library('form_validation');

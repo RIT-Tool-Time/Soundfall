@@ -14,13 +14,25 @@ CREATE TABLE IF NOT EXISTS `music` (
   `picture` VARCHAR(255) NULL DEFAULT NULL,
   `date` DATETIME NOT NULL,
   `file` VARCHAR(255) NOT NULL,
-  `tags` BLOB NULL DEFAULT NULL,
+  `tags` TEXT NULL DEFAULT NULL,
   `plays` INT NOT NULL DEFAULT 0,
   `downloads` INT NOT NULL DEFAULT 0,
   `private` TINYINT(2) NOT NULL DEFAULT 0,
   `control_code` VARCHAR(5) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+-- -----------------------------------------------------
+-- Table `tags`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tags` ;
+
+CREATE TABLE IF NOT EXISTS `tags` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`))
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 
 -- -----------------------------------------------------
@@ -32,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `users_following` (
   `user_id` BIGINT(20) NOT NULL,
   `following` BIGINT(20) NOT NULL,
   PRIMARY KEY (`user_id`, `following`))
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 
 -- -----------------------------------------------------
@@ -44,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `saved_music` (
   `user_id` INT NOT NULL,
   `music_id` INT NOT NULL,
   PRIMARY KEY (`user_id`, `music_id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 -- -----------------------------------------------------
 -- Table `logs` for the API

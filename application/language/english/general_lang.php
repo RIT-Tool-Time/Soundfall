@@ -7,13 +7,14 @@
 */
 $lang['website_title'] = 'Soundfall';
 $lang['website_welcome_username'] = 'Welcome, %s!';
-$lang['website_account'] = 'Account Settings';
-$lang['website_profile'] = 'Manage Profile';
+$lang['website_account'] = 'Settings';
+$lang['website_profile'] = 'Profile';
 $lang['website_linked'] = 'Linked Accounts';
 $lang['website_password'] = 'Password';
 $lang['website_manage_users'] = 'Manage Users';
 $lang['website_manage_permissions'] = 'Manage Permissions';
 $lang['website_manage_roles'] = 'Manage Roles';
+$lang['website_manage_tags'] = 'Manage Tags';
 $lang['website_sign_out'] = 'Logout';
 $lang['website_sign_in'] = 'Login';
 $lang['website_sign_up'] = 'Get Started';

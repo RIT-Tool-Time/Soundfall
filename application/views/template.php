@@ -49,15 +49,41 @@
                     
                     <?php else: ?>
                     	<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">My Profile</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Settings</a></li>
-								<li class="divider"></li>
-								 <li><?php echo anchor('account/sign_out', lang('website_sign_out')); ?></li>
-							</ul>
-						</li>
+			    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+			    <ul class="dropdown-menu">
+				    <li><?php echo anchor('account/settings', lang('website_profile')); ?></li>
+				    <?php if ($account->password) : ?>
+				    <li class="divider"></li>
+				    <li><?php echo anchor('account/password', lang('website_password')); ?></li>
+				    <?php endif; ?>
+				    <li class="divider"></li>
+				    <li><?php echo anchor('account/profile', lang('website_account')); ?></li>
+				    <li class="divider"></li>
+				    <li><?php echo anchor('account/linked_accounts', lang('website_linked')); ?></li>
+				    <?php if ($this->authorization->is_permitted( array('retrieve_users', 'retrieve_roles', 'retrieve_permissions') )) : ?>
+					<li class="divider"></li>
+					<li class="dropdown-header"><strong><?php echo lang('website_admin_panel'); ?></strong></li>
+					<?php if ($this->authorization->is_permitted('retrieve_users')) : ?>
+					    <li class="divider"></li>
+					    <li><?php echo anchor('admin/manage_users', lang('website_manage_users')); ?></li>
+					<?php endif; ?>
+					<?php if ($this->authorization->is_permitted('retrieve_roles')) : ?>
+					    <li class="divider"></li>
+					    <li><?php echo anchor('admin/manage_roles', lang('website_manage_roles')); ?></li>
+					<?php endif; ?>
+					<?php if ($this->authorization->is_permitted('retrieve_permissions')) : ?>
+					    <li class="divider"></li>
+					    <li><?php echo anchor('admin/manage_permissions', lang('website_manage_permissions')); ?></li>
+					<?php endif; ?>
+					<?php if ($this->authorization->is_permitted('manage_tags')) : ?>
+					    <li class="divider"></li>
+					    <li><?php echo anchor('admin/tags', lang('website_manage_tags')); ?></li>
+					<?php endif; ?>
+				    <?php endif; ?>
+				    <li class="divider"></li>
+				    <li><?php echo anchor('account/sign_out', lang('website_sign_out')); ?></li>
+			    </ul>
+			</li>
                     <?php endif; ?>
                 </ul>
             </div>

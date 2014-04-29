@@ -118,8 +118,7 @@ class Music_model extends CI_Model
             $tags = serialize($tags);
         }
         
-        $this->load->helper('date');
-        $this->db->insert('music', array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'picture' => $picture, 'date' => now(), 'file' => $file, 'tags' => $tags, 'private' => $private, 'control_code' => $control_code));
+        $this->db->insert('music', array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'picture' => $picture, 'date' => date("Y-m-d H:i:s"), 'file' => $file, 'tags' => $tags, 'private' => $private, 'control_code' => $control_code));
         return $this->db->insert_id();
     }
     
