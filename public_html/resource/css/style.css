@@ -422,7 +422,7 @@ input.openid {
 
 .song-list {
     color: #c9c9c9;
-    margin-bottom: 3.35em;
+    margin-bottom: 75px;
     display: inline-block;
     padding-left: 30px;
     width: 100%;
@@ -434,10 +434,12 @@ input.openid {
 
 .song-list .col-md-10 {
     padding-left: 0;
+    width: 79.2%;
 }
 
 .song-list .col-md-2 {
-    margin-bottom: 190px;
+    margin-bottom: 50px;
+    width: 19.8%;
 }
 
 .song-list p {
@@ -482,11 +484,10 @@ input.openid {
 .album-art {
     border-radius: 7.5px;
     width: 100%;
-    max-width: 140px;
 }
 
 .play-song {
-    padding: 15px;
+    padding: 27.5px 15px;
     background-color: #fff;
     margin-bottom: 10px;
     border: 1px solid #eaeaea;
@@ -548,7 +549,7 @@ input.openid {
         float: left;
     }
     
-    #song-listing .col-md-10 {
+    .song-list .col-md-10 {
         width: 100%;
         float: left;
     }
@@ -675,6 +676,7 @@ input.openid {
     
     .song-list .col-md-10 {
         padding: 0;
+        width: 100%;
     }
     
     .song-list .col-md-6,.song-list .col-md-8 {
