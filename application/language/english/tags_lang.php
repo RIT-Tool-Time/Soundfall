@@ -4,6 +4,7 @@
 | Language of the tags administration
 |--------------------------------------------------------------------------
 */
+$lang['tags_admin_title'] = "Tags manager";
 $lang['tags_name'] = "Name";
 $lang['tags_add'] = "Add a new tag";
 $lang['tags_update'] = "Update";

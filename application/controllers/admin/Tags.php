@@ -10,6 +10,7 @@ class Tags extends CI_Controller {
   function __construct()
   {
     parent::__construct();
+    $this->load->library('form_validation');
     $this->load->model('Tags_model');
     $this->load->language('tags');
   }
@@ -37,8 +38,10 @@ class Tags extends CI_Controller {
     }
     
     //get the tags
-    $data['tags'] = $this->Tags_model->get();
+    $data['tags'] = $this->Tags_model->get_all();
     
+    $data['content'] = $this->load->view('admin/tags', $data, TRUE);
+    $this->load->view('template', $data);
   }
   
   public function create()

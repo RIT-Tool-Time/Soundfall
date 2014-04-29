@@ -12,7 +12,7 @@ class Tags_model extends CI_Model
      */
     public function get_all()
     {
-        return $this->db->get('tags')->result;
+        return $this->db->get('tags')->result();
     }
     
     /**

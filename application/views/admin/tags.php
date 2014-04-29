@@ -17,20 +17,28 @@ if(isset($message))
             break;
     }
 }
-?>
-<?php if(count($tags) > 0): ?>
+
+$add_form = form_open('admin/tags/create', array('role' => 'form', 'class' => 'form-inline'));
+$add_form .= form_fieldset(lang('tags_add'));
+$add_form .= form_input(array('class' => 'form-control', 'placeholder' => lang('tags_name'), 'name' => 'tag_name'));
+$add_form .= form_submit(array('class' => 'btn btn-success'), lang('tags_add'));
+$add_form .= form_fieldset_close();
+$add_form .= form_close();
+echo $add_form;
+
+if(count($tags) > 0): ?>
 <table class="table table-condensed table-hover">
     <thead>
         <tr>
             <th><?php echo lang('tags_name'); ?></th>
-            <th><?php echo anchor('', lang('tags_add'), array('class' => "btn btn-success")); ?></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($tags as $tag): ?>
         <tr>
             <?php echo form_open('admin/tags/update/', array('role' => 'form'), array('tag_id' => $tag->id)); ?>
-            <th><?php echo form_input(array('class' => 'form-input', 'name' => 'tag_name'), $tag->name); ?></th>
+            <th><?php echo form_input(array('class' => 'form-control', 'name' => 'tag_name'), $tag->name); ?></th>
             <th><?php echo form_submit(array('class' => 'btn btn-warning'), lang('tags_update')) ?></th>
             <?php echo form_close(); ?>
         </tr>
