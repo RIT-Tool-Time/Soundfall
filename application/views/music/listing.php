@@ -28,14 +28,9 @@
 			<h3>Color</h3>
 			<div>
 				<form name="explore" role="form">
-	    			<input name="box" value="Average" type="checkbox">Fast<br>
-		    		<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Slow<br>
-	    			<input name="box" value="Average" type="checkbox">Ethereal<br>
-	    			<input name="box" value="Average" type="checkbox">Space<br>
-	    			<input name="box" value="Average" type="checkbox">Water<br>
-	    			<input name="box" value="Average" type="checkbox">Snappy<br>
-	    			<input name="box" value="Average" type="checkbox">Funky<br>
+	    			<input name="box" value="Average" type="checkbox">Red<br>
+		    		<input name="box" value="Average" type="checkbox">Green<br>
+	    			<input name="box" value="Average" type="checkbox">Blue<br>
 				</form>
 			</div>
 			<h3>Patterns</h3>
@@ -111,10 +106,10 @@
         <div class="col-md-10">
         	<div class="play-song">
 	        	<audio id="audio<?php echo $song->id; ?>" class="upload-counter" controls>
-					<source src="music/<?php echo $song->file; ?>" />
+					<source src="/music/<?php echo $song->file; ?>" />
 				</audio>
         	</div>				
-			<script type="text/javascript">
+			<script type="text/javascript">				
 				document.getElementById('audio<?php echo $song->id; ?>').addEventListener('play', function(){
 					
 					if($(this).hasClass('upload-counter')) {
@@ -136,9 +131,17 @@
         </div>
         
         <div class="col-md-10">					
-			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='/song/download/' + '<?php echo $song->id; ?>'">
+			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='/song/download/<?php echo $song->id; ?>'">
 				<span class="glyphicon glyphicon-save"></span> <span class="hide-mobile">Download</span>
 			</button>
+			<?php if (isset($account)) { ?>				
+			
+				<button type="button" class="btn btn-default btn-lg action-btn">
+					<span class="glyphicon glyphicon-floppy-saved"></span> <span class="hide-mobile">Save</span>
+				</button>
+
+			<?php } ?>
+			
 			<button type="button" class="btn btn-default btn-lg action-btn">
 				<span class="glyphicon glyphicon-share-alt"></span> <span class="hide-mobile">Share</span>
 			</button>
@@ -233,7 +236,7 @@
 	
 	$('#accordion').accordion({
 		collapsible: true,
-		active: false
+		heightStyle: 'content'
 	});
 	     
 	// When a user reaches the bottom of the page, and ajax call is made

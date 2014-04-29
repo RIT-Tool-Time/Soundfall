@@ -51,13 +51,13 @@
                     	<li class="dropdown">
 			    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
 			    <ul class="dropdown-menu">
-				    <li><?php echo anchor('account/settings', lang('website_profile')); ?></li>
+				    <li><?php echo anchor('account/profile', lang('website_profile')); ?></li>
+				    <li class="divider"></li>
+				    <li><?php echo anchor('account/settings', lang('website_account')); ?></li>
 				    <?php if ($account->password) : ?>
 				    <li class="divider"></li>
 				    <li><?php echo anchor('account/password', lang('website_password')); ?></li>
 				    <?php endif; ?>
-				    <li class="divider"></li>
-				    <li><?php echo anchor('account/profile', lang('website_account')); ?></li>
 				    <li class="divider"></li>
 				    <li><?php echo anchor('account/linked_accounts', lang('website_linked')); ?></li>
 				    <?php if ($this->authorization->is_permitted( array('retrieve_users', 'retrieve_roles', 'retrieve_permissions') )) : ?>

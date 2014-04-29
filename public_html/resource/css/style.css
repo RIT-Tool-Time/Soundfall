@@ -9,7 +9,6 @@ html {
 
 body {
     overflow-x: hidden;
-    overflow-y: scroll;
     background: #f6f6f6;
     color: #888;
     font-family: 'Open Sans', sans-serif;
@@ -45,7 +44,8 @@ a:hover {
 
 audio {
     width: 100%;
-    height: 30px;
+	height: 30px;
+	vertical-align: bottom;
 }
 
 input:focus {
@@ -449,7 +449,7 @@ input.openid {
 .song-list h4 {
     color: #5174a5;
     display: inline-block;
-    margin: 4px 0 6px;
+    margin: 4px 0 10px 0;
     width: 100%;
 }
 
@@ -487,7 +487,7 @@ input.openid {
 }
 
 .play-song {
-    padding: 27.5px 15px;
+    padding: 56.5px 0 0 0;
     background-color: #fff;
     margin-bottom: 10px;
     border: 1px solid #eaeaea;
@@ -521,6 +521,15 @@ input.openid {
     margin: 0 4px 0 7.5px;
     top: 2.5px;
 }
+
+.song-activity {
+	padding: 10px 0;
+	border-bottom: 1px solid #eaeaea;
+}
+
+	.song-activity .glyphicon {
+		padding-left: 10px;
+	}
 
 .time-stamp {
     text-align: right;
@@ -685,6 +694,7 @@ input.openid {
     
     .play-song {
         margin-top: 5px;
+        padding: 15px;
     }
     
     .song-name,.creators {
@@ -721,11 +731,6 @@ input.openid {
     .song-stats {
         margin-left: 0;
         width: 56%;
-    }
-    
-    audio {
-        margin: 7.5px 0 5px 0;
-        width: 100%;
     }
     
     .search input[type=text] {
