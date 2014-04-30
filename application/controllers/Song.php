@@ -123,7 +123,7 @@ class Song extends CI_Controller
         $data['song'] = $this->Music_model->get($id);
         
         //check that the song author is accessing this, if not redirect
-        if($data['song']->owner != $this->session->userdata('account_id') || $data['song']->owner2 != $this->session->userdata('account_id'))
+        if( ! $data['song']->owner == $this->session->userdata('account_id') || ! $data['song']->owner2 == $this->session->userdata('account_id'))
         {
             redirect('song/'.$id);
         }

@@ -108,7 +108,13 @@ class Sign_up extends CI_Controller {
 					), TRUE));
 					if($this->email->send())
 					{
-						// Load reset password sent view
+						if($this->config->item("sign_up_auto_sign_in"))
+						{
+							// Run sign in routine
+							$this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE));
+						}
+						
+						// Load confirmation view
 						$data['content'] = $this->load->view('account/account_validation_send', isset($data) ? $data : NULL, TRUE);
 						$this->load->view('template', $data);
 					}
