@@ -94,11 +94,10 @@
 					<!-- tags -->
 		            <div class="song-tags">
 		            	<?php if($song->tags != NULL): ?>
-			            	<span class="tags">&amp;<?php echo $song->tags; ?></span>
-						<?php endif; ?>
-						<span class="tags">Space</span>
-						<span class="tags">Funky</span>
-						<span class="tags">Fast</span>
+					<?php foreach($song->tags as $id => $tag): ?>
+						<span class="tags tag-<?php echo $id; ?>"><?php echo $tag; ?></span>
+					<?php endforeach; ?>
+				<?php endif; ?>
 		            </div>
 				</h4>
 			</div>
@@ -134,7 +133,7 @@
 			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='/song/download/<?php echo $song->id; ?>'">
 				<span class="glyphicon glyphicon-save"></span> <span class="hide-mobile">Download</span>
 			</button>
-			<?php if (isset($account)) { ?>				
+			<?php if ($this->authentication->is_signed_in()) { ?>				
 			
 				<button type="button" class="btn btn-default btn-lg action-btn">
 					<span class="glyphicon glyphicon-floppy-saved"></span> <span class="hide-mobile">Save</span>

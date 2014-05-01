@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS `music` (
   `picture` VARCHAR(255) NULL DEFAULT NULL,
   `date` DATETIME NOT NULL,
   `file` VARCHAR(255) NOT NULL,
-  `tags` TEXT NULL DEFAULT NULL,
   `plays` INT NOT NULL DEFAULT 0,
   `downloads` INT NOT NULL DEFAULT 0,
   `private` TINYINT(2) NOT NULL DEFAULT 0,
@@ -34,6 +33,16 @@ CREATE TABLE IF NOT EXISTS `tags` (
   UNIQUE KEY `name` (`name`))
 ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
+-- -----------------------------------------------------
+-- Table `music_tags`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `music_tags` ;
+
+CREATE TABLE IF NOT EXISTS `music_tags` (
+  `music_id` INT NOT NULL,
+  `tag_id` INT NOT NULL,
+  PRIMARY KEY (`music_id`, `tag_id`))
+ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 -- -----------------------------------------------------
 -- Table `users_following`

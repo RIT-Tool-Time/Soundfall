@@ -15,10 +15,16 @@ class Music_model extends CI_Model
     public function get($id)
     {
         $song = $this->db->get_where('music', array('id' => $id))->row();
-        if($song->tags != NULL)
+        //get the tags
+        $this->db->where('music_id', $song->id);
+        $this->db->join('tags', 'music_tags.tag_id = tags.id');
+        $tags = $this->db->get('music_tags')->result();
+        $song->tags = array();
+        foreach($tags as $tag)
         {
-            $song->tags = unserialize($song->tags);
+            $song->tags[$tag->id] = $tag->name;
         }
+        
         return $song;
     }
     
@@ -35,9 +41,14 @@ class Music_model extends CI_Model
         $results = $this->db->get('music')->result();
         foreach($results AS $song)
         {
-            if($song->tags != NULL)
+            //get the tags
+            $this->db->where('music_id', $song->id);
+            $this->db->join('tags', 'music_tags.tag_id = tags.id');
+            $tags = $this->db->get('music_tags')->result();
+            $song->tags = array();
+            foreach($tags as $tag)
             {
-                $song->tags = unserialize($song->tags);
+                $song->tags[$tag->id] = $tag->name;
             }
         }
         return $results;
@@ -65,7 +76,20 @@ class Music_model extends CI_Model
         $this->db->limit($number, $offset);
         $this->db->where('owner', $id);
         $this->db->or_where('owner2', $id);
-        return $this->db->get('music')->result();
+        $music = $this->db->get('music')->result();
+        foreach($music as $song)
+        {
+            //get the tags
+            $this->db->where('music_id', $song->id);
+            $this->db->join('tags', 'music_tags.tag_id = tags.id');
+            $tags = $this->db->get('music_tags')->result();
+            $song->tags = array();
+            foreach($tags as $tag)
+            {
+                $song->tags[$tag->id] = $tag->name;
+            }
+        }
+        return $music;
     }
     
     /**
@@ -104,7 +128,7 @@ class Music_model extends CI_Model
      * @param String $email2 E-mail of the second player
      * @param Boolean $private Is the song private?
      * @param String $picture Picture for the song
-     * @param Array $tags Array of tags assigned to this song
+     * @param Array $tags Array of tags ids assigned to this song
      * @param Numeric $owner ID of the first player
      * @param Numeric $owner2 ID of the second player
      * @param String $description Description for the song
@@ -112,14 +136,19 @@ class Music_model extends CI_Model
      */
     public function add($name, $file, $control_code, $email, $email2 = NULL, $private = FALSE, $picture = NULL, $tags = NULL, $owner = NULL, $owner2 = NULL, $description = NULL)
     {
-        if($tags != NULL)
+        $this->db->insert('music', array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'picture' => $picture, 'date' => date("Y-m-d H:i:s"), 'file' => $file, 'private' => $private, 'control_code' => $control_code));
+        
+        $insert_id = $this->db->insert_id();
+        
+        if($tags != NULL && $insert_id != NULL)
         {
-            //change the tags array to string
-            $tags = serialize($tags);
+            foreach($tags as $tag)
+            {
+                $this->db->insert('music_tags', array('music_id' => $insert_id, 'tag_id' => $tag));
+            }
         }
         
-        $this->db->insert('music', array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'picture' => $picture, 'date' => date("Y-m-d H:i:s"), 'file' => $file, 'tags' => $tags, 'private' => $private, 'control_code' => $control_code));
-        return $this->db->insert_id();
+        return $insert_id;
     }
     
     /**
@@ -174,16 +203,7 @@ class Music_model extends CI_Model
             $private = $song->private;
         }
         
-        $update = array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'tags' => $tags, 'private' => $private);
-        if($tags != NULL)
-        {
-            //change the tags array to string
-            $update['tags'] = serialize($tags);
-        }
-        else
-        {
-            $tags = $song->tags;
-        }
+        $update = array('owner' => $owner, 'owner2' => $owner2, 'email' => $email, 'email2' => $email2, 'name' => $name, 'description' => $description, 'private' => $private);
         
         $this->db->where('id', $id);
         $this->db->update('music', $update);
@@ -219,21 +239,19 @@ class Music_model extends CI_Model
         }
         
         $results = $this->db->get('music')->result();
-        if($results != NULL)
+        foreach($results as $song)
         {
-            foreach($results AS $song)
+            //get the tags
+            $this->db->where('music_id', $song->id);
+            $this->db->join('tags', 'music_tags.tag_id = tags.id');
+            $tags = $this->db->get('music_tags')->result();
+            $song->tags = array();
+            foreach($tags as $tag)
             {
-                if($song->tags != NULL)
-                {
-                    $song->tags = unserialize($song->tags);
-                }
+                $song->tags[$tag->id] = $tag->name;
             }
-            return $results;
         }
-        else
-        {
-            return NULL;
-        }
+        return $results;
         
     }
     
@@ -291,6 +309,5 @@ class Music_model extends CI_Model
         }
     }
 }
-
 /* End of file Music_model.php */
 /* Location: ./application/models/Music_model.php */

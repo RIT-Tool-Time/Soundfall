@@ -12,10 +12,9 @@ class Listing extends CI_Controller
     {
         parent::__construct();
         
-        $this->load->model(array('Music_model', 'account/Account_details_model'));
+        $this->load->model(array('Music_model', 'Saved_music_model', 'account/Account_details_model'));
 	$this->load->language('music');
 	$this->load->helper('account/account');
-        
     }
     
     /**
