@@ -281,6 +281,10 @@ input.openid {
     margin-bottom: 10px;
 }
 
+.modal {
+	overflow-y: hidden;	
+}
+
 .modal-dialog {
     width: 85%;
     max-width: 1030px;
