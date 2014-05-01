@@ -238,12 +238,12 @@
 			</div>
 		</div>
 		
-		<div id="confirm_password" class="form-group <?php echo (form_error('sign_up_confirm_password')) ? 'error' : ''; ?>">
-			<div id="confirm_password_controls">
-				<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password_modal', 'value' => set_value('sign_up_confirm_password'), 'class' => 'form-control', 'placeholder' => lang('sign_up_confirm_password'))); ?>
-				<?php if (form_error('sign_up_confirm_password')) : ?>
+		<div id="password_confirm" class="form-group <?php echo (form_error('sign_up_password_confirm')) ? 'error' : ''; ?>">
+			<div id="password_confirm_controls">
+				<?php echo form_password(array('name' => 'sign_up_password_confirm', 'id' => 'sign_up_password_confirm_modal', 'value' => set_value('sign_up_password_confirm'), 'class' => 'form-control', 'placeholder' => lang('sign_up_password_confirm'))); ?>
+				<?php if (form_error('sign_up_password_confirm')) : ?>
 				    <span class="alert alert-danger">
-					<?php echo form_error('sign_up_confirm_password'); ?>
+					<?php echo form_error('sign_up_password_confirm'); ?>
 				    </span>
 				<?php endif; ?>
 			</div>

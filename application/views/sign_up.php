@@ -64,9 +64,9 @@
 		
 		<div id="confirm_password" class="form-group <?php echo (form_error('sign_up_confirm_password')) ? 'alert alert-danger' : ''; ?>">
 			<div id="confirm_password_controls">
-				<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password', 'value' => set_value('sign_up_confirm_password'), 'class' => 'form-control', 'placeholder' => lang('sign_up_confirm_password'))); ?>
-				<?php if (form_error('sign_up_confirm_password')) : ?>
-					<?php echo form_error('sign_up_confirm_password'); ?>
+				<?php echo form_password(array('name' => 'sign_up_password_confirm', 'id' => 'sign_up_password_confirm', 'value' => set_value('sign_up_password_confirm'), 'class' => 'form-control', 'placeholder' => lang('sign_up_password_confirm'))); ?>
+				<?php if (form_error('sign_up_password_confirm')) : ?>
+					<?php echo form_error('sign_up_password_confirm'); ?>
 				<?php endif; ?>
 			</div>
 		</div>

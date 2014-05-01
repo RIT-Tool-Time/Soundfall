@@ -51,7 +51,7 @@ class Sign_up extends CI_Controller {
 							array('field' => 'sign_up_email',
 							      'label' => 'lang:sign_up_email',
 							      'rules' => 'trim|required|valid_email|max_length[160]|callback_email_check'),
-							array('field' => 'sign_up_confirm_password',
+							array('field' => 'sign_up_password_confirm',
 							      'label' => 'lang:sign_up_password_confirm',
 							      'rules' => 'trim|required|min_length[6]|matches[sign_up_password]'),
 							array('field' => 'sign_up_terms',
