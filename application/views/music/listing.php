@@ -1,51 +1,32 @@
+<script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1390424384513284',
+          xfbml      : true,
+          version    : 'v2.0'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
 <!-- searching and filtering -->
 <div class="search visible-xs">
 	<?php echo form_open('search', array('role' => 'form')); ?>
 		<input type="text" id="search" name="search" placeholder="Search">
 	<?php echo form_close(); ?></div>
-<div id="filters" class="col-lg-2">
+<div id="filters" class="col-lg-2 invisible-xs">
 	<div class="sidebar">
 	    <h2 style="font-weight: 500;">Explore</h2>
 		<div class="search"> 
 			<?php echo form_open('search', array('role' => 'form')); ?>
 				<input type="text" id="search" name="search" placeholder="Search">
 			<?php echo form_close(); ?>
-		</div>
-		<div id="accordion">
-			<h3>Tags</h3>
-			<div>
-	    		<form name="explore" role="form">
-	    			<input name="box" value="Average" type="checkbox">Fast<br>
-		    		<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Slow<br>
-	    			<input name="box" value="Average" type="checkbox">Ethereal<br>
-	    			<input name="box" value="Average" type="checkbox">Space<br>
-	    			<input name="box" value="Average" type="checkbox">Water<br>
-	    			<input name="box" value="Average" type="checkbox">Snappy<br>
-	    			<input name="box" value="Average" type="checkbox">Funky<br>
-				</form>
-			</div>
-			<h3>Color</h3>
-			<div>
-				<form name="explore" role="form">
-	    			<input name="box" value="Average" type="checkbox">Red<br>
-		    		<input name="box" value="Average" type="checkbox">Green<br>
-	    			<input name="box" value="Average" type="checkbox">Blue<br>
-				</form>
-			</div>
-			<h3>Patterns</h3>
-			<div>
-				<form name="explore" role="form">
-	    			<input name="box" value="Average" type="checkbox">Fast<br>
-		    		<input name="box" value="Average" type="checkbox">Average<br>
-	    			<input name="box" value="Average" type="checkbox">Slow<br>
-	    			<input name="box" value="Average" type="checkbox">Ethereal<br>
-	    			<input name="box" value="Average" type="checkbox">Space<br>
-	    			<input name="box" value="Average" type="checkbox">Water<br>
-	    			<input name="box" value="Average" type="checkbox">Snappy<br>
-	    			<input name="box" value="Average" type="checkbox">Funky<br>
-				</form>
-			</div>
 		</div>
 	</div>
 </div>
@@ -131,20 +112,47 @@
         
         <div class="col-md-10">					
 			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='/song/download/<?php echo $song->id; ?>'">
-				<span class="glyphicon glyphicon-save"></span> <span class="hide-mobile">Download</span>
+				<span class="glyphicon glyphicon-save"></span> <span class="hide-mobile"><?php echo lang('music_download'); ?></span>
 			</button>
-			<?php if ($this->authentication->is_signed_in()) { ?>				
-			
+			<?php if ($this->authentication->is_signed_in()): ?>				
 				<button type="button" class="btn btn-default btn-lg action-btn">
-					<span class="glyphicon glyphicon-floppy-saved"></span> <span class="hide-mobile">Save</span>
+					<span class="glyphicon glyphicon-floppy-saved"></span> <span class="hide-mobile"><?php echo lang('music_save'); ?></span>
 				</button>
-
-			<?php } ?>
+			<?php endif; ?>
 			
-			<button type="button" class="btn btn-default btn-lg action-btn">
-				<span class="glyphicon glyphicon-share-alt"></span> <span class="hide-mobile">Share</span>
+			<button type="button" class="btn btn-default btn-lg action-btn" data-toggle="modal" data-target="#share-modal-<?php echo $song->id; ?>">
+				<span class="glyphicon glyphicon-share-alt"></span> <span class="hide-mobile"><?php echo lang('music_share'); ?></span>
 			</button>
-			<!-- plays, downloads, and shares -->
+			<!-- share modal -->
+			<div class="modal fade" id="share-modal-<?php echo $song->id; ?>" tabindex="-1" role="dialog" aria-labelledby="share-modal-<?php echo $song->id; ?>-label" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				      <h4 class="modal-title" id="share-modal-<?php echo $song->id; ?>-label"><?php echo lang('music_share'); ?></h4>
+				    </div>
+				    <div class="modal-body">
+					<div class="sharing-options text-center">
+					<!-- Facebook -->
+					<div class="fb-share-button" data-href="<?php echo base_url('song/'.$song->id); ?>" data-type="button_count"></div><br/>
+					<!-- /Facebook -->
+					<!-- Twitter -->
+					<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="<?php echo base_url('song/'.$song->id); ?>">Tweet</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><br/>
+					<!-- /Twitter -->
+					<!-- Google+ -->
+					<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+<div class="g-plus" data-action="share" data-annotation="bubble" data-href="<?php echo base_url('song/'.$song->id); ?>"></div><br/>
+					<!-- /Google+ -->
+					</div>
+				    </div>
+				    <div class="modal-footer">
+				      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			
 			<div class="song-stats">
 				<span class="glyphicon glyphicon-play-circle"></span><span class="play-count-<?php echo $song->id; ?>"><?php echo $song->plays; ?></span>
 				<span class="glyphicon glyphicon-save"></span><span><?php echo $song->downloads; ?></span>
@@ -271,3 +279,4 @@
 	    }
 	});
 </script>
+<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>

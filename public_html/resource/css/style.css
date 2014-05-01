@@ -285,7 +285,7 @@ input.openid {
 	overflow-y: hidden;	
 }
 
-.modal-dialog {
+.modal-xl {
     width: 85%;
     max-width: 1030px;
     position: absolute;
@@ -297,18 +297,18 @@ input.openid {
     display: table;
 }
 
-.modal-content {
+.modal-xl .modal-content {
     max-width: 934px;
     margin: auto;
 }
 
-.modal-content .col-lg-6 {
+.modal-xl .modal-content .col-lg-6 {
     text-align: center;
     width: 50%;
     float: left;
 }
 
-.modal-content .col-md-6 {
+.modal-xl .modal-content .col-md-6 {
     display: inline-block;
     text-align: center;
     float: none;
@@ -316,7 +316,7 @@ input.openid {
     padding: 0;
 }
 
-.modal-content .checkbox {
+.modal-xl .modal-content .checkbox {
     display: inline-block;
     text-align: left;
     width: 100%;
@@ -328,14 +328,14 @@ input.openid {
     padding: 0;
 }
 
-.modal-content .checkbox label {
+.modal-xl .modal-content .checkbox label {
     font-size: 15px;
     font-weight: 300;
     margin: 5px 5px 5px 0;
     display: inline-block;
 }
 
-.modal-content .btn-submit {
+.modal-xl .modal-content .btn-submit {
     width: 100%;
     margin-bottom: 1px;
     float: none;
@@ -344,20 +344,24 @@ input.openid {
     padding: 10px 30px;
 }
 
-.modal-content .btn-submit i {
+.modal-xl .modal-content .btn-submit i {
     padding-right: 5px;
     top: 2.5px;
 }
 
-.modal-header {
+.modal-xl .modal-header {
     border: none;
     padding-bottom: 0;
 }
 
-.modal-body {
+.modal-xl .modal-body {
     width: 100%;
     display: inline-block;
     padding: 15px;
+}
+
+.sharing-options{
+	width: 107px;
 }
 
 /* Account Styles */
