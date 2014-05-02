@@ -162,7 +162,7 @@
     <?php
     endforeach;
     else:
-	echo '<div class="alert alert-warning">'.lang('music_none')."</div>";
+	echo '<div class="alert alert-danger">'.lang('music_none')."</div>";
     endif;
     ?>
 </div>
