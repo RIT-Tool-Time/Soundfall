@@ -69,8 +69,8 @@ div.inner_wrapper
 
 .evo_main_area /* Left column */
 {
-	width: 75%;
-	float: left;
+	width: 100%;
+	
 	overflow: hidden;
 }
 
@@ -84,6 +84,7 @@ div.inner_wrapper
 	width: 20%;
 	float: right;
 	overflow: hidden;
+	display:none;
 }
 
 p.baseline,
