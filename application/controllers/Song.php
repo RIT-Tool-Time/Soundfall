@@ -144,6 +144,9 @@ class Song extends CI_Controller
 		  'label' => 'lang:song_private',
 		  'rules' => 'trim|xss_clean')
 	));
+	
+	print_r($this->input->post('song_tags', TRUE));
+	
         //check if we have a form submit
 	if($this->form_validation->run())
 	{
