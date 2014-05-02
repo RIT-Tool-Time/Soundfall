@@ -49,12 +49,13 @@ class Music extends REST_Controller{
      * @param String $email
      * @param String $picture
      */
-    public function song_post()
+    public function add_song_post()
     {
         $name = $this->post('name');
         $file = $this->post('file');
         $email = $this->post('email');
         $email2 = $this->post('email2');
+        $tags = $this->post('tags');
         $picture = $this->post('picture');
         
         //@TODO generate the control code
@@ -65,6 +66,14 @@ class Music extends REST_Controller{
         }
         
         $response = $this->Music_model->add($name, $file, $control_code, $email, $email2, FALSE, $picture);
+        if($tags != NULL && is_array($tags))
+        {
+            $this->load->model('Music_tags_model');
+            foreach($tags as $tag)
+            {
+                $this->Music_tags_model->add_to_song($response, $tag);
+            }
+        }
         if($response != NULL)
         {
             //@todo e-mail the user with their song info

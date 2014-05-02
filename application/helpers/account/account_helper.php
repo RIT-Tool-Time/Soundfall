@@ -22,7 +22,7 @@ function get_username($user_id)
 function get_avatar($user_id, $height, $width)
 {
     $CI =& get_instance();
-    $CI->load->model('Account_details_model');
+    $CI->load->model('account/Account_details_model');
     $account = $CI->Account_details_model->get_by_account_id($user_id);
     $picture = $account->picture;
     
