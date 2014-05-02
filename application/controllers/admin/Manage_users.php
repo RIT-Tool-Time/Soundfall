@@ -148,10 +148,6 @@ class Manage_users extends CI_Controller {
           'label' => 'lang:settings_email', 
           'rules' => 'trim|required|valid_email|max_length[160]'), 
         array(
-          'field' => 'users_fullname', 
-          'label' => 'lang:settings_fullname', 
-          'rules' => 'trim|max_length[160]'), 
-        array(
           'field' => 'users_firstname', 
           'label' => 'lang:settings_firstname', 
           'rules' => 'trim|max_length[80]'), 
@@ -256,7 +252,6 @@ class Manage_users extends CI_Controller {
 
         // Update account details
         $attributes = array();
-        $attributes['fullname'] = $this->input->post('users_fullname', TRUE) ? $this->input->post('users_fullname', TRUE) : NULL;
         $attributes['firstname'] = $this->input->post('users_firstname', TRUE) ? $this->input->post('users_firstname', TRUE) : NULL;
         $attributes['lastname'] = $this->input->post('users_lastname', TRUE) ? $this->input->post('users_lastname', TRUE) : NULL;
         $this->Account_details_model->update($id, $attributes);

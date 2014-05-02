@@ -120,7 +120,14 @@ class Sign_up extends CI_Controller {
 					}
 					else
 					{
-						echo($this->email->print_debugger());
+						if(ENVIRONMENT == 'development')
+						{
+							$data['content'] = $this->email->print_debugger();
+						}
+						else
+						{
+							show_error('There was an error sending an e-mail. Please contact the webmaster.');
+						}
 					}
 					
 					return;
