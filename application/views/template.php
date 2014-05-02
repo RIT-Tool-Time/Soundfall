@@ -49,7 +49,7 @@
                     
                     <?php else: ?>
                     	<li class="dropdown">
-			    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+			    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="account-name"><?php echo $account->username; ?></span><img class="img-circle" src="<?php echo get_avatar($account->id, 40, 40);?>" width="40" height="40" alt="profile image" /></a>
 			    <ul class="dropdown-menu">
 				    <li><?php echo anchor('account/profile', lang('website_profile')); ?></li>
 				    <li class="divider"></li>
