@@ -366,8 +366,25 @@ input.openid {
     padding: 15px;
 }
 
-.sharing-options{
-	width: 107px;
+.modal-sm {
+	width: 325px;
+}
+
+	.modal-sm .modal-header {
+		padding: 0 15px 15px 15px;
+	}
+	
+		.modal-sm .modal-header .close {
+			position: relative;
+			top: 10px;
+		}
+		
+			.modal-sm .modal-header h4 {
+				margin: -10px 0;
+			}
+			
+.facebook-container, .twitter-container, .google-container {
+	display: inline-block;
 }
 
 /* Account Styles */
