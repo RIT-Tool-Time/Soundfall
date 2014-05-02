@@ -123,10 +123,15 @@ class Song extends CI_Controller
         $data['song'] = $this->Music_model->get($id);
         
         //check that the song author is accessing this, if not redirect
-        if( ! $data['song']->owner == $this->session->userdata('account_id') || ! $data['song']->owner2 == $this->session->userdata('account_id'))
+        if($data['song']->owner == $this->session->userdata('account_id') || $data['song']->owner2 == $this->session->userdata('account_id'))
         {
-            redirect('song/'.$id);
+            //allow access
         }
+	else
+	{
+	    //show 404
+	    show_404();
+	}
 	
 	$this->load->library('form_validation');
 	
@@ -145,8 +150,6 @@ class Song extends CI_Controller
 		  'rules' => 'trim|xss_clean')
 	));
 	
-	print_r($this->input->post('song_tags', TRUE));
-	
         //check if we have a form submit
 	if($this->form_validation->run())
 	{
@@ -154,10 +157,41 @@ class Song extends CI_Controller
 	    $name = $this->input->post('song_name', TRUE);
 	    $desc = $this->input->post('song_description', TRUE);
 	    $private = $this->input->post('song_private', TRUE);
-	    $tags = NULL;
+	    $tags = $this->input->post('song_tags', TRUE);
 	    
 	    //update the DB
 	    $this->Music_model->update($id, $name, $tags, $desc, NULL, NULL, NULL, NULL, $private);
+	    $this->load->model('Music_tags_model');
+	    $old_tags = $this->Music_tags_model->get_by_song($id);
+	    foreach($tags as $tag)
+	    {
+		$not_to_remove = array();
+		foreach($old_tags as $old_tag)
+		{
+		    if($old_tag != $tag)
+		    {
+			//add the new tag tag to the DB
+			$this->Music_tags_model->add_to_song($id, $tag);
+		    }
+		    else
+		    {
+			//old tag = new tag, so add to array for not removing
+			$not_to_remove[] = $tag;
+		    }
+		}
+		
+		foreach($old_tags as $old_tag)
+		{
+		    foreach($not_to_remove as $ntr)
+		    {
+			if($old_tag != $ntr)
+			{
+			    //remove the old tags that are not kept
+			    $this->Music_tags_model->remove_tag_from_song($id, $old_tag);
+			}
+		    }
+		}
+	    }
 	    
 	    redirect('song/'.$id);    
 	}

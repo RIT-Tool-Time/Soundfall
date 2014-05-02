@@ -1,5 +1,16 @@
-<script type="text/javascript" src="<?php echo base_url().RES_DIR; ?>js/bootstrap-multiselect.js"></script>
-<link rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>css/bootstrap-multiselect.css" type="text/css"/>
+<script type="text/javascript" src="<?php echo base_url().RES_DIR; ?>/js/bootstrap-multiselect.js"></script>
+<script>
+//load the CSS
+$(document).ready(function()
+{
+    var fileref = document.createElement("link");
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("type", "text/css");
+    fileref.setAttribute("href", "<?php echo base_url().RES_DIR; ?>/css/bootstrap-multiselect.css");
+    document.getElementsByTagName("head")[0].appendChild(fileref);
+});    
+</script>
+
 <?php
 echo validation_errors();
 $form = form_open('', array('role' => 'form'));
@@ -17,8 +28,9 @@ $form .= form_checkbox(array('class' => 'checkbox', 'id' => 'song_private', 'nam
 $form .= '</div>';
 
 $form .= '<div class="form-group">';
-$form .= '<select id="tags" name="tags[]" class="multiselect" multiple="multiple">';
-foreach($tags as $key => $tag)
+$form .= form_label(lang('song_tags'), 'song_tags');
+$form .= '<select id="song_tags" name="song_tags[]" class="multiselect" multiple="multiple">';
+foreach($song->tags as $key => $tag)
 {
     $selected = NULL;
     foreach($song->tags as $id => $nm)
@@ -30,6 +42,10 @@ foreach($tags as $key => $tag)
     }
     $form .= '<option value="'.$key.'" '.$selected.'>'.$tag.'</option>';
 }
+$form .= '<option value="test">test</option>';
+$form .= '<option value="9">test1</option>';
+$form .= '<option value="8">test2</option>';
+$form .= '<option value="4">test3</option>';
 $form .= '</select>';
 $form .= '</div>';
 
@@ -46,22 +62,23 @@ $(document).ready(function() {$('.multiselect').multiselect({
 });
 
 //make sure that only 4 can be selected
-$(document).ready(function() {
-    $('#example37').multiselect({
+$(document).ready(function()
+    {
+    $('#song_tags').multiselect({
         onChange: function(option, checked)
         {
             // Get selected options.
-            var selectedOptions = $('#example37 option:selected');
+            var selectedOptions = $('#song_tags option:selected');
             
             if (selectedOptions.length >= 4)
             {
                 // Disable all other checkboxes.
-                var nonSelectedOptions = $('#example37 option').filter(function()
+                var nonSelectedOptions = $('#song_tags option').filter(function()
                 {
                     return !$(this).is(':selected');
                 });
                 
-                var dropdown = $('#example37').siblings('.multiselect-container');
+                var dropdown = $('#song_tags').siblings('.multiselect-container');
                 nonSelectedOptions.each(function()
                 {
                     var input = $('input[value="' + $(this).val() + '"]');
@@ -72,8 +89,8 @@ $(document).ready(function() {
             else
             {
                 // Enable all checkboxes.
-                var dropdown = $('#example37').siblings('.multiselect-container');
-                $('#example37 option').each(function()
+                var dropdown = $('#song_tags').siblings('.multiselect-container');
+                $('#song_tags option').each(function()
                 {
                     var input = $('input[value="' + $(this).val() + '"]');
                     input.prop('disabled', false);
