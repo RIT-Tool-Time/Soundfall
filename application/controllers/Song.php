@@ -184,16 +184,14 @@ class Song extends CI_Controller
 		    {
 			foreach($old_tags as $old_tag)
 			{
-			    if($old_tag->tag_id != $tag)
+			    if($old_tag->tag_id === $tag)
 			    {
-				//add the new tag tag to the DB
-				$this->Music_tags_model->add_to_song($id, $tag);
+				$not_to_remove[] = $tag;
 			    }
 			    else
 			    {
-				echo "stop3";
-				//old tag = new tag, so add to array for not removing
-				$not_to_remove[] = $tag;
+				//add the new tag tag to the DB
+				$this->Music_tags_model->add_to_song($id, $tag);
 			    }
 			}
 		    }

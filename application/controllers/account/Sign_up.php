@@ -111,12 +111,11 @@ class Sign_up extends CI_Controller {
 						if($this->config->item("sign_up_auto_sign_in"))
 						{
 							// Run sign in routine
-							$this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE));
+							$this->authentication->sign_in_by_id($user_id);
 						}
 						
 						// Load confirmation view
 						$data['content'] = $this->load->view('account/account_validation_send', isset($data) ? $data : NULL, TRUE);
-						$this->load->view('template', $data);
 					}
 					else
 					{
@@ -129,15 +128,13 @@ class Sign_up extends CI_Controller {
 							show_error('There was an error sending an e-mail. Please contact the webmaster.');
 						}
 					}
-					
-					return;
 				}
 				else
 				{
 					if ($this->config->item("sign_up_auto_sign_in"))
 					{
 						// Run sign in routine
-						$this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE));
+						$this->authentication->sign_in_by_id($user_id);
 					}
 					redirect('account/sign_in');
 				}
@@ -151,8 +148,8 @@ class Sign_up extends CI_Controller {
 			
 			// Load sign up view
 			$data['content'] = $this->load->view('sign_up', isset($data) ? $data : NULL, TRUE);
-			$this->load->view('template', $data);
 		}
+		$this->load->view('template', $data);
 	}
 
 	/**

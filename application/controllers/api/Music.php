@@ -55,7 +55,7 @@ class Music extends REST_Controller{
         $file = $this->post('file');
         $email = $this->post('email');
         $email2 = $this->post('email2');
-        $tags = $this->post('tags');
+        $tags = trim($this->post('tags'));
         $picture = $this->post('picture');
         
         //@TODO generate the control code
