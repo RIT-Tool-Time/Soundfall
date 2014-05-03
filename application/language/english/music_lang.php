@@ -26,7 +26,7 @@ $lang['music_song_edit'] = "Edit Song Information";
 
 //e-mail properties after a song is added
 $lang['music_add_email_subject'] = "Claim your song from Cascade!";
-$lang['music_add_email_text'] = "Thank you for joining us at our exhibit! Claim your song, sign up, and start tagging and sharing with other Cascade users!<br/>Claim your song here: %s <br/>Your control code is: %s";
+$lang['music_add_email_text'] = "<p>Hi,</p><p>We hope you enjoyed your time at the exhibit and had fun creating your song!</p> <p>Sign up (if you haven't already) to begin tagging and sharing songs with other Cascade users!</p><br/>Claim your song here: %s <br/>And here is your control code: %s <br/> <p>On behalf of the entire ToolTime team, thank you for joining us at Imagine RIT!</p> ";
 
 $lang['song_private'] = "Private song";
 $lang['song_name'] = "Name";
