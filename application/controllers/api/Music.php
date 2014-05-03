@@ -78,12 +78,12 @@ class Music extends REST_Controller{
         {
             //@todo e-mail the user with their song info
             $this->load->library('email');
+            $this->load->language('music');
             
             //email setup
             $this->email->from('cascade@rit.edu', 'Cascade');
             $this->email->bcc($email);
             $this->email->bcc($email2);
-            $this->load->language('Music_lang');
             $this->email->subject(lang('music_add_email_subject'));
             $this->email->message( sprintf(lang('music_add_email_text'), base_url('song/'.$response.'/'.$file), $control_code));
             
