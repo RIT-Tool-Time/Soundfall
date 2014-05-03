@@ -107,8 +107,8 @@ input:focus {
 }
 
 .navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-nav>li>a:focus {
-    color: #fff;
-    background-color: #5174a5;
+    background-color: #d9edf7;	
+	color: #31708f;
 }
 
 .navbar-toggle {
@@ -131,8 +131,8 @@ input:focus {
 }
 
 .navbar-default .navbar-nav>.open>a,.navbar-default .navbar-nav>.open>a:hover,.navbar-default .navbar-nav>.open>a:focus,.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
-    background-color: #5174a5;
-    color: #fff;
+    background-color: #d9edf7;	
+	color: #31708f;
 }
 
 .navbar-default .navbar-nav>li>a.dropdown-toggle:hover, .navbar-default .navbar-nav>li>a.dropdown-toggle:focus {
@@ -374,7 +374,11 @@ input.openid {
 .modal-sm {
 	width: 325px;
 }
-
+	
+	.modal-sm .modal-body {
+		padding: 20px 73px;
+	}
+	
 	.modal-sm .modal-header {
 		padding: 0 15px 15px 15px;
 	}
@@ -387,9 +391,18 @@ input.openid {
 			.modal-sm .modal-header h4 {
 				margin: -10px 0;
 			}
-			
+
+.sharing-options {
+	height: 23px;	
+}	
+		
 .facebook-container, .twitter-container, .google-container {
 	display: inline-block;
+	vertical-align: middle; 
+}
+
+.facebook-container {
+	margin-top: -5px;
 }
 
 /* Account Styles */

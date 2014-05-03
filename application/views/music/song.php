@@ -114,7 +114,7 @@
                         <!-- Google+ -->
                         <div class="google-container">
                         <script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
-                        <div class="g-plus" data-action="share" data-annotation="none" data-href="<?php echo base_url('song/'.$song->id); ?>"></div>
+                        <div class="g-plus" data-action="share" data-annotation="none" data-width="57" data-href="<?php echo base_url('song/'.$song->id); ?>"></div>
                         </div>
                         <!-- /Google+ -->
                     </div>

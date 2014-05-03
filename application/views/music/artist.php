@@ -1,12 +1,12 @@
-<div id="filters" class="col-lg-2">
+<div class="col-md-2">
 	<div class="sidebar">
-	    <h2 style="font-weight: 500;">Explore</h2>
-		<div class="search"> 
-			<?php echo form_open('search', array('role' => 'form')); ?>
-				<input type="text" id="search" name="search" placeholder="Search">
-			<?php echo form_close(); ?>
-		</div>
 		<div class="col-md-6">
+			<div class="profile-card">
+				<div class="profile-avatar">
+					<img class="img-rect" src="<?php echo get_avatar($account->id, 100, 100);?>" width="100" height="100" alt="profile avatar" />
+				</div>
+			</div>
+			
 			<div class="song-activity">
 		        <span class="glyphicon glyphicon-music"></span>
 				<span><?php echo $songs_count . ' ' . lang('music_songs'); ?></span>
