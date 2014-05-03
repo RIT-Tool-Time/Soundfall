@@ -24,6 +24,10 @@ $lang['music_claim'] = "Claim this song";
 $lang['music_claim_account_needed'] = "You need to be signed in in order to be able to claim this song.";
 $lang['music_song_edit'] = "Edit Song Information";
 
+//e-mail properties after a song is added
+$lang['music_add_email_subject'] = "Claim your song!";
+$lang['music_add_email_text'] = "Claim your song here: %s <br>Your control code is: %s";
+
 $lang['song_private'] = "Private song";
 $lang['song_name'] = "Name";
 $lang['song_description'] = "Description";

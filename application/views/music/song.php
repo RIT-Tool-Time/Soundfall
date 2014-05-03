@@ -23,11 +23,14 @@
                 <?php if($song->owner != NULL): 
                     echo anchor('artist/'.$song->owner, get_username($song->owner));
                     if($song->owner2 != NULL){ echo ' and ' . anchor('artist/'.$song->owner2, get_username($song->owner2)); } 
-                endif; 
+                endif;
+                if($this->authentication->is_signed_in())
+                {
                     if($song->owner == $this->session->userdata('account_id') || $song->owner2 == $this->session->userdata('account_id'))
                     {
                         echo '<div class="pull-right">' . anchor('song/edit/'.$song->id, '<span class="glyphicon glyphicon-pencil"></span> ' . lang('music_song_edit'), array('class' => 'btn btn-warning')) . '</div>';
                     }
+                }
                 ?>
                 
                 <!-- upload date -->

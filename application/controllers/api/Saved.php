@@ -19,8 +19,11 @@ class Music extends REST_Controller{
      * @param Numeric $music_id
      * @param Numeric $user_id
      */
-    public function Save($music_id, $user_id)
+    public function Save_post()
     {
+        $music_id = $this->post('song');
+        $user_id = $this->post('user');
+        
         if($this->Saved_music_model->Save($music_id, $user_id))
         {
             $this->response(NULL, 201);
@@ -36,8 +39,11 @@ class Music extends REST_Controller{
      * @param Numeric $music_id
      * @param Numeric $user_id
      */
-    public function Delete($music_id, $user_id)
+    public function Delete_post()
     {
+        $music_id = $this->post('song');
+        $user_id = $this->post('user');
+        
         if($this->Saved_music_model->Delete($music_id, $user_id))
         {
             $this->response(NULL, 201);

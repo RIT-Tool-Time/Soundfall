@@ -34,7 +34,7 @@ class Music_tags_model extends CI_Model
      */
     public function remove_tag_from_song($song_id, $tag_id)
     {
-        $this->db->where('song_id', $song_id);
+        $this->db->where('music_id', $song_id);
         $this->db->where('tag_id', $tag_id);
         $this->db->delete('music_tags');
         return $this->db->affected_rows();

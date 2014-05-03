@@ -105,14 +105,14 @@ class Song extends CI_Controller
         // Enable SSL?
         maintain_ssl($this->config->item("ssl_enabled"));
         
-        if ($this->authentication->is_signed_in())
+        if($this->authentication->is_signed_in())
 	{
 	    // Retrieve sign in user
 	    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 	}
 	else
 	{
-	    redirect('song/'.$id);
+	    show_404();
 	}
         
         if($id === NULL || !is_numeric($id))
@@ -121,15 +121,15 @@ class Song extends CI_Controller
         }
         
         $data['song'] = $this->Music_model->get($id);
+	$this->load->model('Tags_model');
+	$data['tags'] = $this->Tags_model->get_all();
         
         //check that the song author is accessing this, if not redirect
         if($data['song']->owner == $this->session->userdata('account_id') || $data['song']->owner2 == $this->session->userdata('account_id'))
         {
-            //allow access
         }
 	else
 	{
-	    //show 404
 	    show_404();
 	}
 	
@@ -163,37 +163,60 @@ class Song extends CI_Controller
 	    $this->Music_model->update($id, $name, $tags, $desc, NULL, NULL, NULL, NULL, $private);
 	    $this->load->model('Music_tags_model');
 	    $old_tags = $this->Music_tags_model->get_by_song($id);
-	    foreach($tags as $tag)
+	    
+	    if($tags == NULL)
 	    {
-		$not_to_remove = array();
-		foreach($old_tags as $old_tag)
+		//remove all tags
+		if($old_tags != NULL)
 		{
-		    if($old_tag != $tag)
+		    foreach($old_tags as $old_tag)
 		    {
-			//add the new tag tag to the DB
-			$this->Music_tags_model->add_to_song($id, $tag);
+			$this->Music_tags_model->remove_tag_from_song($id, $old_tag->tag_id);
+		    }
+		}
+	    }
+	    else
+	    {
+		foreach($tags as $tag)
+		{
+		    $not_to_remove = array();
+		    if($old_tags != NULL)
+		    {
+			foreach($old_tags as $old_tag)
+			{
+			    if($old_tag->tag_id != $tag)
+			    {
+				//add the new tag tag to the DB
+				$this->Music_tags_model->add_to_song($id, $tag);
+			    }
+			    else
+			    {
+				echo "stop3";
+				//old tag = new tag, so add to array for not removing
+				$not_to_remove[] = $tag;
+			    }
+			}
 		    }
 		    else
 		    {
-			//old tag = new tag, so add to array for not removing
-			$not_to_remove[] = $tag;
+			echo "stop4";
+			$this->Music_tags_model->add_to_song($id, $tag);
 		    }
-		}
-		
-		foreach($old_tags as $old_tag)
-		{
-		    foreach($not_to_remove as $ntr)
+		    
+		    foreach($old_tags as $old_tag)
 		    {
-			if($old_tag != $ntr)
+			foreach($not_to_remove as $ntr)
 			{
-			    //remove the old tags that are not kept
-			    $this->Music_tags_model->remove_tag_from_song($id, $old_tag);
+			    if($old_tag != $ntr)
+			    {
+				//remove the old tags that are not kept
+				$this->Music_tags_model->remove_tag_from_song($id, $ntr);
+			    }
 			}
 		    }
 		}
 	    }
-	    
-	    redirect('song/'.$id);    
+	    //redirect('song/'.$id);    
 	}
         
         //load the view

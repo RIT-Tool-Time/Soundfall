@@ -83,9 +83,9 @@ class Music extends REST_Controller{
             $this->email->from('cascade@rit.edu', 'Cascade');
             $this->email->bcc($email);
             $this->email->bcc($email2);
-            
-            $this->email->subject('Cascade Email Test');
-            $this->email->message('Claim your song here: ' . base_url('song/'.$response.'/'.$file) . "<br /> Your control code is: " . $control_code);
+            $this->load->language('Music_lang');
+            $this->email->subject(lang('music_add_email_subject'));
+            $this->email->message( sprintf(lang('music_add_email_text'), base_url('song/'.$response.'/'.$file), $control_code));
             
             $this->email->send();
             

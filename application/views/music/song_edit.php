@@ -1,5 +1,6 @@
 <script type="text/javascript" src="<?php echo base_url().RES_DIR; ?>/js/bootstrap-multiselect.js"></script>
 <script>
+//https://davidstutz.github.io/bootstrap-multiselect/
 //load the CSS
 $(document).ready(function()
 {
@@ -30,22 +31,19 @@ $form .= '</div>';
 $form .= '<div class="form-group">';
 $form .= form_label(lang('song_tags'), 'song_tags');
 $form .= '<select id="song_tags" name="song_tags[]" class="multiselect" multiple="multiple">';
-foreach($song->tags as $key => $tag)
+
+foreach($tags as $tag)
 {
     $selected = NULL;
     foreach($song->tags as $id => $nm)
     {
-        if($id === $key)
+        if($id == $tag->id)
         {
             $selected = "selected";
         }
     }
-    $form .= '<option value="'.$key.'" '.$selected.'>'.$tag.'</option>';
+    $form .= '<option value="'.$tag->id.'" '.$selected.'>'.$tag->name.'</option>';
 }
-$form .= '<option value="test">test</option>';
-$form .= '<option value="9">test1</option>';
-$form .= '<option value="8">test2</option>';
-$form .= '<option value="4">test3</option>';
 $form .= '</select>';
 $form .= '</div>';
 
@@ -57,20 +55,20 @@ echo $form;
 <!-- Script for multiselect -->
 <script>
 $(document).ready(function() {$('.multiselect').multiselect({
-    numberDisplayed: 4
+    numberDisplayed: 3,
     });
 });
 
-//make sure that only 4 can be selected
+//make sure that only 3 can be selected
 $(document).ready(function()
-    {
+{
     $('#song_tags').multiselect({
         onChange: function(option, checked)
         {
             // Get selected options.
             var selectedOptions = $('#song_tags option:selected');
             
-            if (selectedOptions.length >= 4)
+            if(selectedOptions.length >= 3)
             {
                 // Disable all other checkboxes.
                 var nonSelectedOptions = $('#song_tags option').filter(function()
