@@ -18,15 +18,15 @@ $lang['music_share'] = "Share";
 $lang['music_shares'] = "Shares";
 $lang['music_yours'] = "Your songs";
 $lang['music_none'] = "Sorry there are no songs to be found.";
-$lang['music_download'] = "Download this song";
+$lang['music_download'] = "Download";
 $lang['music_control_code'] = "Control Code";
 $lang['music_claim'] = "Claim this song";
 $lang['music_claim_account_needed'] = "You need to be signed in in order to be able to claim this song.";
 $lang['music_song_edit'] = "Edit Song Information";
 
 //e-mail properties after a song is added
-$lang['music_add_email_subject'] = "Claim your song!";
-$lang['music_add_email_text'] = "Claim your song here: %s <br>Your control code is: %s";
+$lang['music_add_email_subject'] = "Claim your song from Cascade!";
+$lang['music_add_email_text'] = "Thank you for joining us at our exhibit! Claim your song, sign up, and start tagging and sharing with other Cascade users!<br/>Claim your song here: %s <br/>Your control code is: %s";
 
 $lang['song_private'] = "Private song";
 $lang['song_name'] = "Name";

@@ -135,6 +135,11 @@ input:focus {
     color: #fff;
 }
 
+.navbar-default .navbar-nav>li>a.dropdown-toggle:hover, .navbar-default .navbar-nav>li>a.dropdown-toggle:focus {
+	color: #adadad;
+	background-color: transparent; 
+}
+
 .navbar-nav .open .dropdown-menu>li>a, .navbar-nav .open .dropdown-menu .dropdown-header {
 	padding: 5px 15px;
 }

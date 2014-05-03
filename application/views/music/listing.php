@@ -132,22 +132,25 @@
 				      <h4 class="modal-title" id="share-modal-<?php echo $song->id; ?>-label"><?php echo lang('music_share'); ?></h4>
 				    </div>
 				    <div class="modal-body">
-					<div class="sharing-options text-center">
-					<!-- Facebook -->
-					<div class="fb-share-button" data-href="<?php echo base_url('song/'.$song->id); ?>" data-type="button_count"></div><br/>
-					<!-- /Facebook -->
-					<!-- Twitter -->
-					<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="<?php echo base_url('song/'.$song->id); ?>">Tweet</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><br/>
-					<!-- /Twitter -->
-					<!-- Google+ -->
-					<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
-<div class="g-plus" data-action="share" data-annotation="bubble" data-href="<?php echo base_url('song/'.$song->id); ?>"></div><br/>
-					<!-- /Google+ -->
-					</div>
-				    </div>
-				    <div class="modal-footer">
-				      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<div class="sharing-options">
+							<!-- Facebook -->
+							<div class="facebook-container">
+							<div class="fb-share-button" data-href="<?php echo base_url('song/'.$song->id); ?>" data-type="button"></div>
+							</div>
+							<!-- /Facebook -->
+							<!-- Twitter -->
+							<div class="twitter-container">
+							<a href="https://twitter.com/share" data-dnt="true" data-count="none" class="twitter-share-button" data-lang="en" data-url="<?php echo base_url('song/'.$song->id); ?>">Tweet</a>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+							</div>
+							<!-- /Twitter -->
+							<!-- Google+ -->
+							<div class="google-container">
+							<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+							<div class="g-plus" data-action="share" data-annotation="none" data-href="<?php echo base_url('song/'.$song->id); ?>"></div>
+							</div>
+							<!-- /Google+ -->
+						</div>
 				    </div>
 				  </div>
 				</div>
