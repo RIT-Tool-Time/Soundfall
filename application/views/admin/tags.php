@@ -17,6 +17,7 @@ if(isset($message))
             break;
     }
 }
+echo validation_errors();
 
 $add_form = form_open('admin/tags/create', array('role' => 'form', 'class' => 'form-inline'));
 $add_form .= form_fieldset(lang('tags_add'));

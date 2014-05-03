@@ -82,7 +82,10 @@ class Tags extends CI_Controller {
             $data['message'] = 'fail';
         }
     }
-    
+    else
+    {
+        $data['message'] = 'fail';
+    }
     $this->Index();
   }
 }
