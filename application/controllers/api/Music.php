@@ -61,7 +61,7 @@ class Music extends REST_Controller{
         //@TODO generate the control code
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $control_code = '';
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $control_code .= $characters[rand(0, strlen($characters) - 1)];
         }
         
