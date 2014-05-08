@@ -7,9 +7,16 @@
  */
 function get_username($user_id)
 {
-    $CI =& get_instance();
-    $account = $CI->Account_model->get_by_id($user_id);
-    return $account->username;
+    if($user_id != NULL)
+    {
+        $CI =& get_instance();
+        $account = $CI->Account_model->get_by_id($user_id);
+        return $account->username;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 /**
@@ -21,6 +28,12 @@ function get_username($user_id)
  */
 function get_avatar($user_id, $height, $width)
 {
+    if($user_id == NULL)
+    {
+        return NULL;
+        die();
+    }
+    
     $CI =& get_instance();
     $CI->load->model('account/Account_details_model');
     $account = $CI->Account_details_model->get_by_account_id($user_id);

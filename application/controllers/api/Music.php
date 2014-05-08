@@ -39,7 +39,16 @@ class Music extends REST_Controller{
         {
             $offset = ($page-1)*$limit;
         }
-        $this->response($this->Music_model->get_batch($limit, $offset), 201);
+        $this->load->helper('account/account');
+        $data = $this->Music_model->get_batch($limit, $offset);
+        
+        foreach($data as $song)
+        {
+            $song->username = get_username($song->owner);
+            $song->username2 = get_username($song->owner2);
+        }
+        
+        $this->response($data, 201);
     }
     
     /**
