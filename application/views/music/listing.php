@@ -320,6 +320,24 @@
 	
 							$('#song-listing').append('<div class="song-list"><div class="col-md-2 visible-lg"><!-- song image --><img class="album-art hide-mobile" src="'+picture+'" /></div><div class="col-md-10"><div class="col-md-6"><!-- album art --><div class="song-image"><img class="album-art visible-md visible-sm visible-xs" src="'+picture+'" /></div><!-- creators --><div class="creators">'+username+username2+'<!-- upload date --><span class="pull-right">'+date+'</span></div><!-- song name --><h4 class="song-name"><a href="song/'+id+'">'+name+'</a><!-- tags --></h4></div></div><div class="col-md-10"><div class="play-song"><audio id="audio'+id+'" class="upload-counter" controls><source src="/music/'+file+'" /></audio></div></div><div class="col-md-10">'+btns+'<!-- share modal -->'+shareModal+songStats+'</div>');
 							
+							document.getElementById('audio'+id+'').addEventListener('play', function(){
+					
+								if($(this).hasClass('upload-counter')) {
+									
+									// Counter for the number of plays				
+									var playCount = parseInt($('.play-count-'+id+'').text());
+								  	playCount++;
+							  	
+								  	// Update the counter text with the new value			  	
+								  	$('.play-count-'+id+'').text(playCount);
+							  	
+								  	// Post the number of plays to the database
+									$.post('/api/music/add_play/', { song_id: id });
+									
+									$(this).removeClass('upload-counter');
+								}
+							});
+							
 							// Add each of the script elements to the necessary containers
 							setTimeout(function(){								
 								// Twitter container
