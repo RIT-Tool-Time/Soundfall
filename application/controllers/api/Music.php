@@ -60,19 +60,19 @@ class Music extends REST_Controller{
      */
     public function add_song_post()
     {
-        $name = $this->post('name');
-        $file = $this->post('file');
-        $email = $this->post('email');
-        $email2 = $this->post('email2');
-        $tags = trim($this->post('tags'));
-        $picture = $this->post('picture');
-        
-        //@TODO generate the control code
+        //generate the control code
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $control_code = '';
         for ($i = 0; $i < 5; $i++) {
             $control_code .= $characters[rand(0, strlen($characters) - 1)];
         }
+        
+        $name = $this->post('name', TRUE);
+        $file = $this->post('file', TRUE);
+        $email = $this->post('email', TRUE);
+        $email2 = $this->post('email2', TRUE);
+        $tags = trim($this->post('tags', TRUE));
+        $picture = $this->post('picture', TRUE);
         
         $response = $this->Music_model->add($name, $file, $control_code, $email, $email2, FALSE, $picture);
         if($tags != NULL && is_array($tags))
@@ -83,23 +83,35 @@ class Music extends REST_Controller{
                 $this->Music_tags_model->add_to_song($response, $tag);
             }
         }
+        
         if($response != NULL)
         {
-            //@todo e-mail the user with their song info
+            //e-mail the user with their song info
             $this->load->library('email');
             $this->load->language('music');
             
             //email setup
-            $this->email->from('cascade@rit.edu', 'Cascade');
-            $this->email->bcc($email);
-            $this->email->bcc($email2);
+            $this->email->from('Stegalldesign@outlook.com', 'Cascade');
+            $this->email->to($email);
+            if($email2 != NULL)
+            {
+                $this->email->cc($email2);
+            }
             $this->email->subject(lang('music_add_email_subject'));
-            $this->email->message( sprintf(lang('music_add_email_text'), base_url('song/'.$response.'/'.$file), $control_code));
+            $this->email->message(sprintf(lang('music_add_email_text'), base_url('song/'.$response.'/'.$file), $control_code));
             
-            $this->email->send();
-            
-            //API response
-            $this->response(array('song_id' => $response),201);
+            if(!$this->email->send())
+            {
+                
+                //echo $email;
+                echo $this->email->print_debugger();
+                die();
+            }
+            else
+            {
+                //API response
+                $this->response(array('song_id' => $response),201);
+            }
         }
         else
         {
