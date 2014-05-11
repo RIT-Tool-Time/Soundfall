@@ -1,9 +1,27 @@
-<div class="col-md-2">
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1390424384513284',
+      xfbml      : true,
+      version    : 'v2.0'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class="col-md-2 artist_container">
 	<div class="sidebar">
 		<div class="col-md-6">
 			<div class="profile-card">
-				<div class="profile-avatar">
-					<img class="img-rect" src="<?php echo get_avatar($account->id, 100, 100);?>" width="100" height="100" alt="profile avatar" />
+				<div class="profile-avatar text-center">
+					<img class="img-rect" src="<?php echo get_avatar($artist->id, 100, 100);?>" width="100" height="100" alt="profile avatar" />
+					<h2><?php echo $artist->username; ?></h2>
 				</div>
 			</div>
 			
@@ -37,9 +55,9 @@
     	<div class="col-md-2 visible-lg">
             <!-- song image -->
 			<?php if($song->picture != NULL): ?>
-				<img class="album-art hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+				<img class="album-art hide-mobile" src="/resource/img/album_art/<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
 			<?php else: ?>
-			<?php echo '<img class="album-art" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
+				<img class="album-art" src="/resource/img/Background_Triangles_Blue.png" />
 		<?php endif; ?>
         </div>        
         <div class="col-md-10">
@@ -47,12 +65,11 @@
 				
 			<!-- album art -->
 			<?php if($song->picture != NULL): ?>
-				<img class="visible-xs" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
-		        <?php endif; ?>
-		        <div class="song-image">
-				<?php echo '<img class="album-art visible-md visible-sm visible-xs" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
-		        </div>
-
+				<div class="song-image">
+					<img class="album-art visible-md visible-sm visible-xs" src="/resource/img/album_art/<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+				</div>
+		    <?php endif; ?>
+		        
 				<!-- creators -->
 				<div class="creators">
 					<?php if($song->owner != NULL): ?>
@@ -109,9 +126,42 @@
 			<button type="button" class="btn btn-default btn-lg action-btn" onclick="document.location='/song/download/<?php echo $song->id; ?>'">
 				<span class="glyphicon glyphicon-save"></span> <span class="hide-mobile">Download</span>
 			</button>
-			<button type="button" class="btn btn-default btn-lg action-btn">
-				<span class="glyphicon glyphicon-share-alt"></span> <span class="hide-mobile">Share</span>
+			<button type="button" class="btn btn-default btn-lg action-btn" data-toggle="modal" data-target="#share-modal-<?php echo $song->id; ?>">
+				<span class="glyphicon glyphicon-share-alt"></span> <span class="hide-mobile"><?php echo lang('music_share'); ?></span>
 			</button>
+			<!-- share modal -->
+			<div class="modal fade" id="share-modal-<?php echo $song->id; ?>" tabindex="-1" role="dialog" aria-labelledby="share-modal-<?php echo $song->id; ?>-label" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				      <h4 class="modal-title" id="share-modal-<?php echo $song->id; ?>-label"><?php echo lang('music_share'); ?></h4>
+				    </div>
+				    <div class="modal-body">
+						<div class="sharing-options">
+							<!-- Facebook -->
+							<div class="facebook-container">
+							<div class="fb-share-button" data-href="<?php echo base_url('song/'.$song->id); ?>" data-type="button"></div>
+							</div>
+							<!-- /Facebook -->
+							<!-- Twitter -->
+							<div class="twitter-container">
+							<a href="https://twitter.com/share" data-dnt="true" data-count="none" class="twitter-share-button" data-lang="en" data-url="<?php echo base_url('song/'.$song->id); ?>">Tweet</a>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+							</div>
+							<!-- /Twitter -->
+							<!-- Google+ -->
+							<div class="google-container">
+							<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+							<div class="g-plus" data-action="share" data-annotation="none" data-width="57" data-href="<?php echo base_url('song/'.$song->id); ?>"></div>
+							</div>
+							<!-- /Google+ -->
+						</div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			
 			<!-- plays, downloads, and shares -->
 			<div class="song-stats">
 				<span class="glyphicon glyphicon-play-circle"></span><span class="play-count-<?php echo $song->id; ?>"><?php echo $song->plays; ?></span>
@@ -121,6 +171,7 @@
     </div>
     <?php
     endforeach;
-    endif;
-    ?>
+    else: ?>
+    	<div class="alert alert-danger">Sorry this user has no saved songs.</div>
+    <?php endif; ?>
 </div>

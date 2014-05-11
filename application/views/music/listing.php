@@ -41,7 +41,7 @@
         <div class="col-md-2 visible-lg">
             <!-- song image -->
 			<?php if($song->picture != NULL): ?>
-				<img class="album-art hide-mobile" src="/resource/img/<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+				<img class="album-art hide-mobile" src="/resource/img/album_art/<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
 			<?php else: ?>
 				<img class="album-art hide-mobile" src="/resource/img/Background_Triangles_Blue.png" alt="<?php echo $song->name; ?>" />
 			<?php endif; ?>
@@ -306,7 +306,10 @@
 								username2 = '';
 							}
 							
-							if(picture == '' || picture === null) {
+							if(picture !== null) {
+								picture = 'resource/img/album_art/'+picture;
+							}
+							else {
 								picture = 'resource/img/Background_Triangles_Blue.png';
 							}
 							

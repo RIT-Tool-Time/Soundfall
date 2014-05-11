@@ -1,9 +1,26 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1390424384513284',
+      xfbml      : true,
+      version    : 'v2.0'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 <div id="song-listing" class="is-col-lg-12">
 <div class="song-list">
     <div class="col-md-2 visible-lg">
         <!-- song image -->
         <?php if($song->picture != NULL): ?>
-            <img class="album-art hide-mobile" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
+            <img class="album-art hide-mobile" src="/resource/img/album_art/<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
         <?php else: ?>
             <?php echo '<img class="album-art" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
         <?php endif; ?>
@@ -12,12 +29,11 @@
             <div class="col-md-6 is-col-md-6">
                 <!-- album art -->
                 <?php if($song->picture != NULL): ?>
-                    <img class="visible-xs" src="<?php echo $song->picture; ?>" alt="<?php echo $song->name; ?>" />
-                <?php endif; ?>
-                <div class="song-image">
-                    <?php echo '<img class="album-art visible-md visible-sm visible-xs" src="/resource/img/Background_Triangles_Blue.png" />'; ?>
-                </div>
-
+	                <div class="song-image">
+	                    <img class="album-art visible-md visible-sm visible-xs" src="/resource/img/album_art/<?php echo $song->picture; ?>" />
+	                </div>
+				<?php endif; ?>
+                
                 <!-- creators -->
                 <div class="creators">
                 <?php if($song->owner != NULL): 
