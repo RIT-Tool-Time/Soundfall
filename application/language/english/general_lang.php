@@ -18,7 +18,6 @@ $lang['website_manage_tags'] = 'Manage Tags';
 $lang['website_sign_out'] = 'Logout';
 $lang['website_sign_in'] = 'Login';
 $lang['website_sign_up'] = 'Get Started';
-$lang['website_connect_with_facebook'] = 'Connect with Facebook';
 $lang['website_page_rendered_in_x_seconds'] = 'Rendered in %s seconds';
 $lang['website_create'] = 'Create';
 $lang['website_update'] = 'Update';
