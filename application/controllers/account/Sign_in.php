@@ -1,8 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-/*
- * Sign_in Controller
+/**
+ * Sign in
+ *
+ * @package A3M
+ * @subpackage Controllers
  */
-class Sign_in extends CI_Controller {
+class Sign_in extends CI_Controller
+{
 
 	/**
 	 * Constructor

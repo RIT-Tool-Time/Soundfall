@@ -1,6 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
- * Account_linked Controller
+/**
+ * Linked Accounts
+ *
+ * @package A3M
+ * @subpackage Controllers
  */
 class Linked_accounts extends CI_Controller {
 
@@ -20,7 +23,9 @@ class Linked_accounts extends CI_Controller {
 	}
 
 	/**
-	 * Linked accounts
+	 * Linked accounts page
+	 *
+	 * Displays all the social media accounts that have been linked by the user to this page and offers an option to add or remove connections.
 	 */
 	function index()
 	{
@@ -48,9 +53,6 @@ class Linked_accounts extends CI_Controller {
 		$data['content'] = $this->load->view('account/account_linked', $data, TRUE);
 		$this->load->view('template', $data);
 	}
-
 }
-
-
 /* End of file Connect_accounts.php */
 /* Location: ./application/controllers/account/Connect_accounts.php */

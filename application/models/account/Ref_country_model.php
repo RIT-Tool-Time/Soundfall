@@ -1,6 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Ref_country_model extends CI_Model {
+/**
+ * Ref_country
+ *
+ * Model for the Ref_country table.
+ * Refferencing country information.
+ *
+ * @package A3M
+ * @subpackage Models
+ */
+class Ref_country_model extends CI_Model
+{
 
 	/**
 	 * Get ref country
@@ -15,7 +25,7 @@ class Ref_country_model extends CI_Model {
 		$this->db->or_where('alpha3', $country);
 		$this->db->or_where('numeric', $country);
 		$this->db->or_where('country', $country);
-		$query = $this->db->get('ref_country');
+		$query = $this->db->get($this->db->dbprefix . 'ref_country');
 		if ($query->num_rows()) return $query->row();
 	}
 
@@ -30,11 +40,8 @@ class Ref_country_model extends CI_Model {
 	function get_all()
 	{
 		$this->db->order_by('country', 'asc');
-		return $this->db->get('ref_country')->result();
+		return $this->db->get($this->db->dbprefix . 'ref_country')->result();
 	}
-
 }
-
-
 /* End of file Ref_country_model.php */
 /* Location: ./application/models/account/Ref_country_model.php */

@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
- * Reset_password Controller
+/**
+ * Reset password
+ * @package A3M
+ * @subpackage Controllers
  */
 class Reset_password extends CI_Controller {
 
@@ -21,8 +23,10 @@ class Reset_password extends CI_Controller {
 
 	/**
 	 * Reset password
+	 *
+	 * Password reset landing after clicking on a link in the 
 	 */
-	function index($id=null)
+	function index()
 	{
 		// Enable SSL?
 		maintain_ssl($this->config->item("ssl_enabled"));
@@ -50,8 +54,8 @@ class Reset_password extends CI_Controller {
 			return;
 		}
 
-		// Get account by email
-		if ($account = $this->Account_model->get_by_id($this->input->get('id')))
+		// Get account by id
+		if ($account = $this->Account_model->get_by_id($this->input->get('id', TRUE)))
 		{
 			// Check if reset password has expired
 			if (now() < (strtotime($account->resetsenton) + $this->config->item("password_reset_expiration")))

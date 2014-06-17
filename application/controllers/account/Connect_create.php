@@ -1,8 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
- * Connect_create Controller
+/**
+ * Create connection between provider and our site
+ * @package A3M
+ * @subpackage Controllers
  */
-class Connect_create extends CI_Controller {
+class Connect_create extends CI_Controller
+{
 
 	/**
 	 * Constructor
@@ -20,7 +23,7 @@ class Connect_create extends CI_Controller {
 	}
 
 	/**
-	 * Complete facebook's authentication process
+	 * Creates a new entry in the providers table so that user is remembered
 	 *
 	 * @access public
 	 * @return void
@@ -88,7 +91,7 @@ class Connect_create extends CI_Controller {
 	 * Check if a username exist
 	 *
 	 * @access public
-	 * @param string
+	 * @param string $username
 	 * @return bool
 	 */
 	function username_check($username)
@@ -100,7 +103,7 @@ class Connect_create extends CI_Controller {
 	 * Check if an email exist
 	 *
 	 * @access public
-	 * @param string
+	 * @param string $email
 	 * @return bool
 	 */
 	function email_check($email)

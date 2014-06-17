@@ -1,8 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
- * Forgot_password Controller
+/**
+ * Forgot password page
+ * 
+ * @package A3M
+ * @subpackage Controllers
  */
-class Forgot_password extends CI_Controller {
+class Forgot_password extends CI_Controller
+{
 
 	/**
 	 * Constructor
@@ -88,9 +92,9 @@ class Forgot_password extends CI_Controller {
 					$password_reset_url = site_url('account/reset_password?id='.$account->id.'&token='.sha1($account->id.$time.$this->config->item('password_reset_secret')));
 
 					// Send reset password email
-					$this->email->from($this->config->item('password_reset_email'), lang('reset_password_email_sender'));
+					$this->email->from($this->config->item('password_reset_email'), lang('website_title'));
 					$this->email->to($account->email);
-					$this->email->subject(lang('reset_password_email_subject'));
+					$this->email->subject( sprintf(lang('reset_password_email_subject'), lang('website_title')));
 					$this->email->message($this->load->view('account/reset_password_email', array(
 						'username' => $account->username,
 						'password_reset_url' => anchor($password_reset_url, $password_reset_url)
@@ -111,6 +115,7 @@ class Forgot_password extends CI_Controller {
 							show_error('There was an error sending the e-mail. Please contact the webmaster.');
 						}
 					}
+					
 					$this->load->view('template', $data);
 					return;
 				}
@@ -128,7 +133,12 @@ class Forgot_password extends CI_Controller {
 	}
 	
 	/**
+	 * Will check for username or e-mail
+	 *
+	 * Will check if the username or e-mail is available and return boolean value.
+	 * This is for AJAX requests.
 	 * 
+	 * @access public
 	 * @param object $str Possible username or e-mail to be checked
 	 * @return boolean
 	 */
@@ -156,11 +166,8 @@ class Forgot_password extends CI_Controller {
 				$this->form_validation->set_message('check_username_or_email', 'Invalid username format');
 				return FALSE;
 			}
-
 		}
-
 	}
-
 }
 
 /* End of file Forgot_password.php */

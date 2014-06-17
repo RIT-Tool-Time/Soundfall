@@ -1,9 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
- * Manage_roles Controller
+/**
+ * Manage roles
+ * @package A3M
+ * @subpackage Controllers
  */
-class Manage_roles extends CI_Controller {
-
+class Manage_roles extends CI_Controller
+{
   /**
    * Constructor
    */
@@ -20,7 +22,7 @@ class Manage_roles extends CI_Controller {
   }
 
   /**
-   * Manage Roles
+   * Roles overview
    */
   function index()
   {
@@ -87,9 +89,15 @@ class Manage_roles extends CI_Controller {
 
 
   /**
-   * Manage Roles
+   * Create/Edit role
+   *
+   * If role if is passed in, it will allow to edit the given role.
+   * If NULL, then it will show form to create a new role.
+   *
+   * @param int $id Role ID
+   * 
    */
-  function save($id=null)
+  function save($id = NULL)
   {
     // Keep track if this is a new role
     $is_new = empty($id);
@@ -205,7 +213,7 @@ class Manage_roles extends CI_Controller {
    * Check if the role name exist
    *
    * @access public
-   * @param string
+   * @param string $role_name
    * @return bool
    */
   function name_check($role_name)

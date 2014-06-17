@@ -1,7 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Account_model extends CI_Model {
-	
+/**
+ * Account_model
+ *
+ * Model for basic interaction with user accounts.
+ *
+ * @package A3M
+ * @subpackage Models
+ */
+class Account_model extends CI_Model
+{
+	/**
+	 * Constructor
+	 */
 	function __construct()
 	{
 		parent::__construct();
@@ -15,7 +26,7 @@ class Account_model extends CI_Model {
 	 */
 	function get()
 	{
-		return $this->db->get('a3m_account')->result();
+		return $this->db->get($this->db->dbprefix . 'a3m_account')->result();
 	}
 
 	/**
@@ -27,7 +38,7 @@ class Account_model extends CI_Model {
 	 */
 	function get_by_id($account_id)
 	{
-		return $this->db->get_where('a3m_account', array('id' => $account_id))->row();
+		return $this->db->get_where($this->db->dbprefix . 'a3m_account', array('id' => $account_id))->row();
 	}
 
 	// --------------------------------------------------------------------
@@ -41,7 +52,7 @@ class Account_model extends CI_Model {
 	 */
 	function get_by_username($username)
 	{
-		return $this->db->get_where('a3m_account', array('username' => $username))->row();
+		return $this->db->get_where($this->db->dbprefix . 'a3m_account', array('username' => $username))->row();
 	}
 
 	// --------------------------------------------------------------------
@@ -55,7 +66,7 @@ class Account_model extends CI_Model {
 	 */
 	function get_by_email($email)
 	{
-		return $this->db->get_where('a3m_account', array('email' => $email))->row();
+		return $this->db->get_where($this->db->dbprefix . 'a3m_account', array('email' => $email))->row();
 	}
 
 	// --------------------------------------------------------------------
@@ -69,7 +80,7 @@ class Account_model extends CI_Model {
 	 */
 	function get_by_username_email($username_email)
 	{
-		return $this->db->where('username', $username_email)->or_where('email', $username_email)->get('a3m_account')->row();
+		return $this->db->where('username', $username_email)->or_where('email', $username_email)->get($this->db->dbprefix . 'a3m_account')->row();
 	}
 
 	// --------------------------------------------------------------------
@@ -79,7 +90,8 @@ class Account_model extends CI_Model {
 	 *
 	 * @access public
 	 * @param string $username
-	 * @param string $hashed_password
+	 * @param string $email
+-	 * @param string $password Password in plain. Will be hashed before inserted into DB
 	 * @return int insert id
 	 */
 	function create($username, $email = NULL, $password = NULL)
@@ -93,7 +105,7 @@ class Account_model extends CI_Model {
 		}
 
 		$this->load->helper('date');
-		$this->db->insert('a3m_account', array('username' => $username, 'email' => $email, 'password' => isset($hashed_password) ? $hashed_password : NULL, 'createdon' => mdate('%Y-%m-%d %H:%i:%s', now())));
+		$this->db->insert($this->db->dbprefix . 'a3m_account', array('username' => $username, 'email' => $email, 'password' => isset($hashed_password) ? $hashed_password : NULL, 'createdon' => mdate('%Y-%m-%d %H:%i:%s', now())));
 
 		return $this->db->insert_id();
 	}
@@ -110,7 +122,7 @@ class Account_model extends CI_Model {
 	 */
 	function update_username($account_id, $new_username)
 	{
-		$this->db->update('a3m_account', array('username' => $new_username), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('username' => $new_username), array('id' => $account_id));
 	}
 
 	// --------------------------------------------------------------------
@@ -125,7 +137,7 @@ class Account_model extends CI_Model {
 	 */
 	function update_email($account_id, $new_email)
 	{
-		$this->db->update('a3m_account', array('email' => $new_email), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('email' => $new_email), array('id' => $account_id));
 	}
 
 	// --------------------------------------------------------------------
@@ -135,7 +147,7 @@ class Account_model extends CI_Model {
 	 *
 	 * @access public
 	 * @param int $account_id
-	 * @param int $hashed_password
+	 * @param int $password_new
 	 * @return void
 	 */
 	function update_password($account_id, $password_new)
@@ -144,7 +156,7 @@ class Account_model extends CI_Model {
 		$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
 		$new_hashed_password = $hasher->HashPassword($password_new);
 
-		$this->db->update('a3m_account', array('password' => $new_hashed_password, 'forceresetpass' => FALSE), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('password' => $new_hashed_password), array('id' => $account_id));
 	}
 
 	// --------------------------------------------------------------------
@@ -160,7 +172,7 @@ class Account_model extends CI_Model {
 	{
 		$this->load->helper('date');
 
-		$this->db->update('a3m_account', array('lastsignedinon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('lastsignedinon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
 	}
 
 	// --------------------------------------------------------------------
@@ -178,7 +190,7 @@ class Account_model extends CI_Model {
 
 		$resetsenton = mdate('%Y-%m-%d %H:%i:%s', now());
 
-		$this->db->update('a3m_account', array('resetsenton' => $resetsenton), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('resetsenton' => $resetsenton), array('id' => $account_id));
 
 		return strtotime($resetsenton);
 	}
@@ -192,7 +204,7 @@ class Account_model extends CI_Model {
 	 */
 	function remove_reset_sent_datetime($account_id)
 	{
-		$this->db->update('a3m_account', array('resetsenton' => NULL), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('resetsenton' => NULL), array('id' => $account_id));
 	}
 
 	// --------------------------------------------------------------------
@@ -208,7 +220,7 @@ class Account_model extends CI_Model {
 	{
 		$this->load->helper('date');
 
-		$this->db->update('a3m_account', array('deletedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('deletedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
 	}
 
 	/**
@@ -220,7 +232,7 @@ class Account_model extends CI_Model {
 	 */
 	function remove_deleted_datetime($account_id)
 	{
-		$this->db->update('a3m_account', array('deletedon' => NULL), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('deletedon' => NULL), array('id' => $account_id));
 	}
 
 	// --------------------------------------------------------------------
@@ -236,7 +248,7 @@ class Account_model extends CI_Model {
 	{
 		$this->load->helper('date');
 
-		$this->db->update('a3m_account', array('suspendedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('suspendedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
 	}
 	
 	// --------------------------------------------------------------------
@@ -250,7 +262,7 @@ class Account_model extends CI_Model {
 	 */
 	function remove_suspended_datetime($account_id)
 	{
-		$this->db->update('a3m_account', array('suspendedon' => NULL), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('suspendedon' => NULL), array('id' => $account_id));
 	}
 	
 	// --------------------------------------------------------------------
@@ -286,7 +298,7 @@ class Account_model extends CI_Model {
 	 */
 	public function force_reset_password($account_id, $action)
 	{
-		$this->db->update('a3m_account', array('forceresetpass' => $action), array('id' => $account_id));
+		$this->db->update($this->db->dbprefix . 'a3m_account', array('forceresetpass' => $action), array('id' => $account_id));
 		
 		if($this->db->affected_rows() === 1)
 		{
@@ -296,7 +308,5 @@ class Account_model extends CI_Model {
 		return FALSE;
 	}
 }
-
-
 /* End of file Account_model.php */
 /* Location: ./application/models/account/Account_model.php */
