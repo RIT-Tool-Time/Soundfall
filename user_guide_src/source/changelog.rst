@@ -61,6 +61,7 @@ Release Date: Not Released
    -  Added availability checks where usage of dangerous functions like ``eval()`` and ``exec()`` is required.
    -  Added support for changing the file extension of log files using ``$config['log_file_extension']``.
    -  Added support for turning newline standardization on/off via ``$config['standardize_newlines']`` and set it to FALSE by default.
+   -  Added configuration setting ``$config['composer_autoload']`` to enable loading of a `Composer <https://getcomposer.org/>`_ auto-loader.
 
 -  Helpers
 
@@ -79,6 +80,7 @@ Release Date: Not Released
       - :func:`url_title()` will now trim extra dashes from beginning and end.
       - :func:`anchor_popup()` will now fill the *href* attribute with the URL and its JS code will return FALSE instead.
       - Added JS window name support to the :func:`anchor_popup()` function.
+      - Added support for menubar attribute to the :func:`anchor_popup()`.
       - Added support (auto-detection) for HTTP/1.1 response codes 303, 307 in :func:`redirect()`.
       - Changed :func:`redirect()` to choose the **refresh** method only on IIS servers, instead of all servers on Windows (when **auto** is used).
       - Changed :func:`anchor()`, :func:`anchor_popup()`, and :func:`redirect()` to support protocol-relative URLs (e.g. *//ellislab.com/codeigniter*).
@@ -135,6 +137,7 @@ Release Date: Not Released
       - Added *word_length* and *pool* options to allow customization of the generated word.
       - Added *colors* configuration to allow customization for the *background*, *border*, *text* and *grid* colors.
       - Added *filename* to the returned array elements.
+      - Updated to use `imagepng()` in case that `imagejpeg()` isn't available.
 
    -  :doc:`Text Helper <helpers/text_helper>` changes include:
 
@@ -506,6 +509,7 @@ Release Date: Not Released
       -  Added ``$config['csrf_regeneration']``, which makes token regeneration optional.
       -  Added ``$config['csrf_exclude_uris']``, which allows you list URIs which will not have the CSRF validation methods run.
       -  Modified method ``sanitize_filename()`` to read a public ``$filename_bad_chars`` property for getting the invalid characters list.
+      -  Return status code of 403 instead of a 500 if CSRF protection is enabled but a token is missing from a request.
 
    -  :doc:`Language Library <libraries/language>` changes include:
 
@@ -530,7 +534,7 @@ Release Date: Not Released
       - `Multibyte String <http://php.net/mbstring>`_ (limited support).
       - `Hash <http://php.net/hash>`_ (``hash_equals()``, ``hash_pbkdf2()``).
       - `Password Hashing <http://php.net/password>`_.
-      - `Array Functions <http://php.net/book.array>`_ (``array_column()``, ``array_replace()``, ``array_replace_recursive()``).
+      - `Standard Functions ``array_column()``, ``array_replace()``, ``array_replace_recursive()``, ``hex2bin()``, ``quoted_printable_encode()``.
 
    -  Removed ``CI_CORE`` boolean constant from *CodeIgniter.php* (no longer Reactor and Core versions).
    -  Log Library will now try to create the **log_path** directory if it doesn't exist.
@@ -736,6 +740,7 @@ Bug fixes for 3.0
 -  Partially fixed a bug (#261) - UTF-8 class method ``clean_string()`` generating log messages and/or not producing the desired result due to an upstream bug in iconv.
 -  Fixed a bug where ``CI_Xmlrpcs::parseRequest()`` could fail if ``$HTTP_RAW_POST_DATA`` is not populated.
 -  Fixed a bug in :doc:`Zip Library <libraries/zip>` internal method ``_get_mod_time()`` where it was not parsing result returned by ``filemtime()``.
+-  Fixed a bug (#3161) - :doc:`Cache Library <libraries/cache>` methods `increment()`, `decrement()` didn't auto-create non-existent items when using redis and/or file storage.
 
 Version 2.2.0
 =============

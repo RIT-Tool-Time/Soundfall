@@ -1,8 +1,8 @@
 <?php
-/*!
+/**
 * HybridAuth
 * http://hybridauth.sourceforge.net | http://github.com/hybridauth/hybridauth
-* (c) 2009-2012, HybridAuth authors | http://hybridauth.sourceforge.net/licenses.html
+* (c) 2009-2014, HybridAuth authors | http://hybridauth.sourceforge.net/licenses.html
 */
 
 /**
@@ -17,19 +17,34 @@
  */
 class Hybrid_Provider_Adapter
 {
-	/* Provider ID (or unique name) */
+	/**
+	 * Provider ID (or unique name)
+	 * @var Numeric/String
+	 */
 	public $id       = NULL ;
 
-	/* Provider adapter specific config */
+	/**
+	 * Provider adapter specific config
+	 * @var Array
+	 */
 	public $config   = NULL ;
 
-	/* Provider adapter extra parameters */
-	public $params   = NULL ; 
+	/**
+	 * Provider adapter extra parameters
+	 * @var array
+	 */
+	public $params   = array() ; 
 
-	/* Provider adapter wrapper path */
+	/**
+	 * Provider adapter wrapper path
+	 * @var String
+	 */
 	public $wrapper  = NULL ;
 
-	/* Provider adapter instance */
+	/**
+	 * Provider adapter instance
+	 * @var object
+	 */
 	public $adapter  = NULL ;
 
 	// --------------------------------------------------------------------
@@ -40,7 +55,7 @@ class Hybrid_Provider_Adapter
 	* @param string  $id      The id or name of the IDp
 	* @param array   $params  (optional) required parameters by the adapter 
 	*/
-	function factory( $id, $params = NULL )
+	function factory( $id, $params = array() )
 	{
 		Hybrid_Logger::info( "Enter Hybrid_Provider_Adapter::factory( $id )" );
 
@@ -123,6 +138,11 @@ class Hybrid_Provider_Adapter
 			$HYBRID_AUTH_URL_BASE = Hybrid_Auth::$config["base_url"];
 		}
 
+        // make sure params is array
+        if( !is_array( $this->params ) ){
+            $this->params = array();
+        }
+
 		# we make use of session_id() as storage hash to identify the current user
 		# using session_regenerate_id() will be a problem, but ..
 		$this->params["hauth_token"] = session_id();
@@ -139,9 +159,13 @@ class Hybrid_Provider_Adapter
 		# 	auth.done   required  the IDp ID
 		$this->params["login_done"]  = $HYBRID_AUTH_URL_BASE . ( strpos( $HYBRID_AUTH_URL_BASE, '?' ) ? '&' : '?' ) . "hauth.done={$this->id}";
 
-		Hybrid_Auth::storage()->set( "hauth_session.{$this->id}.hauth_return_to"    , $this->params["hauth_return_to"] );
-		Hybrid_Auth::storage()->set( "hauth_session.{$this->id}.hauth_endpoint"     , $this->params["login_done"] ); 
-		Hybrid_Auth::storage()->set( "hauth_session.{$this->id}.id_provider_params" , $this->params );
+        if( isset( $this->params["hauth_return_to"] ) ){
+            Hybrid_Auth::storage()->set( "hauth_session.{$this->id}.hauth_return_to", $this->params["hauth_return_to"] );
+        }
+        if( isset( $this->params["login_done"] ) ){
+            Hybrid_Auth::storage()->set( "hauth_session.{$this->id}.hauth_endpoint" , $this->params["login_done"] ); 
+        }
+        Hybrid_Auth::storage()->set( "hauth_session.{$this->id}.id_provider_params" , $this->params );
 
 		// store config to be used by the end point 
 		Hybrid_Auth::storage()->config( "CONFIG", Hybrid_Auth::$config );
@@ -193,12 +217,16 @@ class Hybrid_Provider_Adapter
 			throw new Exception( "Call to undefined function Hybrid_Providers_{$this->id}::$name()." );
 		}
 
-		if( count( $arguments ) ){
-			return $this->adapter->$name( $arguments[0] ); 
-		} 
-		else{
-			return $this->adapter->$name(); 
-		}
+        $counter = count( $arguments );
+        if( $counter == 1 ){
+            return $this->adapter->$name( $arguments[0] ); 
+        }
+        elseif( $counter == 2 ){
+            return $this->adapter->$name( $arguments[0], $arguments[1] ); 
+        }
+        else{
+            return $this->adapter->$name(); 
+        }
 	}
 
 	// --------------------------------------------------------------------

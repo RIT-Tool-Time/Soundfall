@@ -1,8 +1,8 @@
 <?php
-/*!
+/**
 * HybridAuth
 * http://hybridauth.sourceforge.net | http://github.com/hybridauth/hybridauth
-* (c) 2009-2012, HybridAuth authors | http://hybridauth.sourceforge.net/licenses.html
+* (c) 2009-2014, HybridAuth authors | http://hybridauth.sourceforge.net/licenses.html
 */
 
 /**
@@ -14,7 +14,7 @@
  */
 class Hybrid_Auth 
 {
-	public static $version = "2.2.0-dev";
+	public static $version = "2.3.0-dev";
 
 	public static $config  = array();
 
@@ -68,6 +68,7 @@ class Hybrid_Auth
 
 		# load hybridauth required files, a autoload is on the way...
 		require_once $config["path_base"] . "Error.php";
+		require_once $config["path_base"] . "Exception.php";
 		require_once $config["path_base"] . "Logger.php";
 
 		require_once $config["path_base"] . "Provider_Adapter.php";
@@ -82,9 +83,9 @@ class Hybrid_Auth
 		require_once $config["path_base"] . "User_Contact.php";
 		require_once $config["path_base"] . "User_Activity.php";
 
-        if(!class_exists("Hybrid_Storage")){
-            require_once $config["path_base"] . "Storage.php";
-        }
+		if ( ! class_exists("Hybrid_Storage", false) ){
+			require_once $config["path_base"] . "Storage.php";
+        	}
 
 		// hash given config
 		Hybrid_Auth::$config = $config;
@@ -260,11 +261,11 @@ class Hybrid_Auth
 			Hybrid_Logger::info( "Hybrid_Auth::setup( $providerId ), no stored params found for this provider. Initialize a new one for new session" );
 		}
 
-		if( ! isset( $params["hauth_return_to"] ) ){
+		if( is_array($params) && ! isset( $params["hauth_return_to"] ) ){
 			$params["hauth_return_to"] = Hybrid_Auth::getCurrentUrl(); 
-		}
 
-		Hybrid_Logger::debug( "Hybrid_Auth::setup( $providerId ). HybridAuth Callback URL set to: ", $params["hauth_return_to"] );
+			Hybrid_Logger::debug( "Hybrid_Auth::setup( $providerId ). HybridAuth Callback URL set to: ", $params["hauth_return_to"] );
+		}
 
 		# instantiate a new IDProvider Adapter
 		$provider   = new Hybrid_Provider_Adapter();
