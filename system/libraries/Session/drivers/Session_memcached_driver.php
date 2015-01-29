@@ -2,26 +2,37 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 5.2.4 or newer
+ * An open source application development framework for PHP
  *
- * NOTICE OF LICENSE
+ * This content is released under the MIT License (MIT)
  *
- * Licensed under the Open Software License version 3.0
+ * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
  *
- * This source file is subject to the Open Software License (OSL 3.0) that is
- * bundled with this package in the files license.txt / license.rst.  It is
- * also available through the world wide web at this URL:
- * http://opensource.org/licenses/OSL-3.0
- * If you did not receive a copy of the license and are unable to obtain it
- * through the world wide web, please send an email to
- * licensing@ellislab.com so we can send you a copy immediately.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * @package		CodeIgniter
- * @author		Andrey Andreev
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 3.0
+ * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ * @since	Version 3.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -29,20 +40,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter Session Memcached Driver
  *
- * @package		CodeIgniter
+ * @package	CodeIgniter
  * @subpackage	Libraries
  * @category	Sessions
- * @author		Andrey Andreev
- * @link		http://codeigniter.com/user_guide/libraries/sessions.html
+ * @author	Andrey Andreev
+ * @link	http://codeigniter.com/user_guide/libraries/sessions.html
  */
 class CI_Session_memcached_driver extends CI_Session_driver implements SessionHandlerInterface {
-
-	/**
-	 * Save path
-	 *
-	 * @var	string
-	 */
-	protected $_save_path;
 
 	/**
 	 * Memcached instance
@@ -77,12 +81,12 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 	{
 		parent::__construct($params);
 
-		if (empty($this->_save_path))
+		if (empty($this->_config['save_path']))
 		{
 			log_message('error', 'Session: No Memcached save path configured.');
 		}
 
-		if ($this->_match_ip === TRUE)
+		if ($this->_config['match_ip'] === TRUE)
 		{
 			$this->_key_prefix .= $_SERVER['REMOTE_ADDR'].':';
 		}
@@ -90,19 +94,29 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Open
+	 *
+	 * Sanitizes save_path and initializes connections.
+	 *
+	 * @param	string	$save_path	Server path(s)
+	 * @param	string	$name		Session cookie name, unused
+	 * @return	bool
+	 */
 	public function open($save_path, $name)
 	{
 		$this->_memcached = new Memcached();
+		$this->_memcached->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE); // required for touch() usage
 		$server_list = array();
 		foreach ($this->_memcached->getServerList() as $server)
 		{
 			$server_list[] = $server['host'].':'.$server['port'];
 		}
 
-		if ( ! preg_match_all('#,?([^,:]+)\:(\d{1,5})(?:\:(\d+))?#', $this->_save_path, $matches, PREG_SET_ORDER))
+		if ( ! preg_match_all('#,?([^,:]+)\:(\d{1,5})(?:\:(\d+))?#', $this->_config['save_path'], $matches, PREG_SET_ORDER))
 		{
 			$this->_memcached = NULL;
-			log_message('error', 'Session: Invalid Memcached save path format: '.$this->_save_path);
+			log_message('error', 'Session: Invalid Memcached save path format: '.$this->_config['save_path']);
 			return FALSE;
 		}
 
@@ -121,7 +135,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 			}
 			else
 			{
-				$server_list[] = $server['host'].':'.$server['port'];
+				$server_list[] = $match[1].':'.$match[2];
 			}
 		}
 
@@ -136,10 +150,21 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Read
+	 *
+	 * Reads session data and acquires a lock
+	 *
+	 * @param	string	$session_id	Session ID
+	 * @return	string	Serialized session data
+	 */
 	public function read($session_id)
 	{
 		if (isset($this->_memcached) && $this->_get_lock($session_id))
 		{
+			// Needed by write() to detect session_regenerate_id() calls
+			$this->_session_id = $session_id;
+
 			$session_data = (string) $this->_memcached->get($this->_key_prefix.$session_id);
 			$this->_fingerprint = md5($session_data);
 			return $session_data;
@@ -148,14 +173,41 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 		return FALSE;
 	}
 
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Write
+	 *
+	 * Writes (create / update) session data
+	 *
+	 * @param	string	$session_id	Session ID
+	 * @param	string	$session_data	Serialized session data
+	 * @return	bool
+	 */
 	public function write($session_id, $session_data)
 	{
-		if (isset($this->_memcached, $this->_lock_key))
+		if ( ! isset($this->_memcached))
+		{
+			return FALSE;
+		}
+		// Was the ID regenerated?
+		elseif ($session_id !== $this->_session_id)
+		{
+			if ( ! $this->_release_lock() OR ! $this->_get_lock($session_id))
+			{
+				return FALSE;
+			}
+
+			$this->_fingerprint = md5('');
+			$this->_session_id = $session_id;
+		}
+
+		if (isset($this->_lock_key))
 		{
 			$this->_memcached->replace($this->_lock_key, time(), 5);
 			if ($this->_fingerprint !== ($fingerprint = md5($session_data)))
 			{
-				if ($this->_memcached->set($this->_key_prefix.$session_id, $session_data, $this->_expiration))
+				if ($this->_memcached->set($this->_key_prefix.$session_id, $session_data, $this->_config['expiration']))
 				{
 					$this->_fingerprint = $fingerprint;
 					return TRUE;
@@ -164,7 +216,7 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 				return FALSE;
 			}
 
-			return $this->_memcached->touch($this->_key_prefix.$session_id, $this->_expiration);
+			return $this->_memcached->touch($this->_key_prefix.$session_id, $this->_config['expiration']);
 		}
 
 		return FALSE;
@@ -172,6 +224,13 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Close
+	 *
+	 * Releases locks and closes connection.
+	 *
+	 * @return	void
+	 */
 	public function close()
 	{
 		if (isset($this->_memcached))
@@ -191,26 +250,51 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Destroy
+	 *
+	 * Destroys the current session.
+	 *
+	 * @param	string	$session_id	Session ID
+	 * @return	bool
+	 */
 	public function destroy($session_id)
 	{
 		if (isset($this->_memcached, $this->_lock_key))
 		{
 			$this->_memcached->delete($this->_key_prefix.$session_id);
-			return ($this->_cookie_destroy() && $this->close());
+			return $this->_cookie_destroy();
 		}
 
-		return $this->close();
+		return FALSE;
 	}
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Garbage Collector
+	 *
+	 * Deletes expired sessions
+	 *
+	 * @param	int 	$maxlifetime	Maximum lifetime of sessions
+	 * @return	bool
+	 */
 	public function gc($maxlifetime)
 	{
+		// Not necessary, Memcached takes care of that.
 		return TRUE;
 	}
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Get lock
+	 *
+	 * Acquires an (emulated) lock.
+	 *
+	 * @param	string	$session_id	Session ID
+	 * @return	bool
+	 */
 	protected function _get_lock($session_id)
 	{
 		if (isset($this->_lock_key))
@@ -264,6 +348,13 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Release lock
+	 *
+	 * Releases a previously acquired lock
+	 *
+	 * @return	bool
+	 */
 	protected function _release_lock()
 	{
 		if (isset($this->_memcached, $this->_lock_key) && $this->_lock)
@@ -282,6 +373,3 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 	}
 
 }
-
-/* End of file Session_memcached_driver.php */
-/* Location: ./system/libraries/Session/drivers/Session_memcached_driver.php */

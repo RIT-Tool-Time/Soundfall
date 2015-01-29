@@ -2,26 +2,37 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 5.2.4 or newer
+ * An open source application development framework for PHP
  *
- * NOTICE OF LICENSE
+ * This content is released under the MIT License (MIT)
  *
- * Licensed under the Open Software License version 3.0
+ * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
  *
- * This source file is subject to the Open Software License (OSL 3.0) that is
- * bundled with this package in the files license.txt / license.rst.  It is
- * also available through the world wide web at this URL:
- * http://opensource.org/licenses/OSL-3.0
- * If you did not receive a copy of the license and are unable to obtain it
- * through the world wide web, please send an email to
- * licensing@ellislab.com so we can send you a copy immediately.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * @package		CodeIgniter
- * @author		Andrey Andreev
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 3.0
+ * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ * @since	Version 3.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -29,20 +40,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter Session Redis Driver
  *
- * @package		CodeIgniter
+ * @package	CodeIgniter
  * @subpackage	Libraries
  * @category	Sessions
- * @author		Andrey Andreev
- * @link		http://codeigniter.com/user_guide/libraries/sessions.html
+ * @author	Andrey Andreev
+ * @link	http://codeigniter.com/user_guide/libraries/sessions.html
  */
 class CI_Session_redis_driver extends CI_Session_driver implements SessionHandlerInterface {
-
-	/**
-	 * Save path
-	 *
-	 * @var	string
-	 */
-	protected $_save_path;
 
 	/**
 	 * phpRedis instance
@@ -77,13 +81,14 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 	{
 		parent::__construct($params);
 
-		if (empty($this->_save_path))
+		if (empty($this->_config['save_path']))
 		{
 			log_message('error', 'Session: No Redis save path configured.');
 		}
-		elseif (preg_match('#(?:tcp://)?([^:]+)(?:\:(\d+))?(\?.+)?#', $this->_save_path, $matches))
+		elseif (preg_match('#(?:tcp://)?([^:?]+)(?:\:(\d+))?(\?.+)?#', $this->_config['save_path'], $matches))
 		{
-			$this->_save_path = array(
+			isset($matches[3]) OR $matches[3] = ''; // Just to avoid undefined index notices below
+			$this->_config['save_path'] = array(
 				'host' => $matches[1],
 				'port' => empty($matches[2]) ? NULL : $matches[2],
 				'password' => preg_match('#auth=([^\s&]+)#', $matches[3], $match) ? $match[1] : NULL,
@@ -95,10 +100,10 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 		}
 		else
 		{
-			log_message('error', 'Session: Invalid Redis save path format: '.$this->_save_path);
+			log_message('error', 'Session: Invalid Redis save path format: '.$this->_config['save_path']);
 		}
 
-		if ($this->_match_ip === TRUE)
+		if ($this->_config['match_ip'] === TRUE)
 		{
 			$this->_key_prefix .= $_SERVER['REMOTE_ADDR'].':';
 		}
@@ -106,25 +111,34 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Open
+	 *
+	 * Sanitizes save_path and initializes connection.
+	 *
+	 * @param	string	$save_path	Server path
+	 * @param	string	$name		Session cookie name, unused
+	 * @return	bool
+	 */
 	public function open($save_path, $name)
 	{
-		if (empty($this->_save_path))
+		if (empty($this->_config['save_path']))
 		{
 			return FALSE;
 		}
 
 		$redis = new Redis();
-		if ( ! $redis->connect($this->_save_path['host'], $this->_save_path['port'], $this->_save_path['timeout']))
+		if ( ! $redis->connect($this->_config['save_path']['host'], $this->_config['save_path']['port'], $this->_config['save_path']['timeout']))
 		{
 			log_message('error', 'Session: Unable to connect to Redis with the configured settings.');
 		}
-		elseif (isset($this->_save_path['password']) && ! $redis->auth($this->_save_path['password']))
+		elseif (isset($this->_config['save_path']['password']) && ! $redis->auth($this->_config['save_path']['password']))
 		{
 			log_message('error', 'Session: Unable to authenticate to Redis instance.');
 		}
-		elseif (isset($this->_save_path['database']) && ! $redis->select($this->_save_path['database']))
+		elseif (isset($this->_config['save_path']['database']) && ! $redis->select($this->_config['save_path']['database']))
 		{
-			log_message('error', 'Session: Unable to select Redis database with index '.$this->_save_path['database']);
+			log_message('error', 'Session: Unable to select Redis database with index '.$this->_config['save_path']['database']);
 		}
 		else
 		{
@@ -137,10 +151,21 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Read
+	 *
+	 * Reads session data and acquires a lock
+	 *
+	 * @param	string	$session_id	Session ID
+	 * @return	string	Serialized session data
+	 */
 	public function read($session_id)
 	{
 		if (isset($this->_redis) && $this->_get_lock($session_id))
 		{
+			// Needed by write() to detect session_regenerate_id() calls
+			$this->_session_id = $session_id;
+
 			$session_data = (string) $this->_redis->get($this->_key_prefix.$session_id);
 			$this->_fingerprint = md5($session_data);
 			return $session_data;
@@ -149,14 +174,41 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 		return FALSE;
 	}
 
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Write
+	 *
+	 * Writes (create / update) session data
+	 *
+	 * @param	string	$session_id	Session ID
+	 * @param	string	$session_data	Serialized session data
+	 * @return	bool
+	 */
 	public function write($session_id, $session_data)
 	{
-		if (isset($this->_redis, $this->_lock_key))
+		if ( ! isset($this->_redis))
+		{
+			return FALSE;
+		}
+		// Was the ID regenerated?
+		elseif ($session_id !== $this->_session_id)
+		{
+			if ( ! $this->_release_lock() OR ! $this->_get_lock($session_id))
+			{
+				return FALSE;
+			}
+
+			$this->_fingerprint = md5('');
+			$this->_session_id = $session_id;
+		}
+
+		if (isset($this->_lock_key))
 		{
 			$this->_redis->setTimeout($this->_lock_key, 5);
 			if ($this->_fingerprint !== ($fingerprint = md5($session_data)))
 			{
-				if ($this->_redis->set($this->_key_prefix.$session_id, $session_data, $this->_expiration))
+				if ($this->_redis->set($this->_key_prefix.$session_id, $session_data, $this->_config['expiration']))
 				{
 					$this->_fingerprint = $fingerprint;
 					return TRUE;
@@ -165,7 +217,7 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 				return FALSE;
 			}
 
-			return $this->_redis->setTimeout($this->_key_prefix.$session_id, $this->_expiration);
+			return $this->_redis->setTimeout($this->_key_prefix.$session_id, $this->_config['expiration']);
 		}
 
 		return FALSE;
@@ -173,6 +225,13 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Close
+	 *
+	 * Releases locks and closes connection.
+	 *
+	 * @return	void
+	 */
 	public function close()
 	{
 		if (isset($this->_redis))
@@ -196,11 +255,19 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 			return TRUE;
 		}
 
-		return FALSE;
+		return TRUE;
 	}
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Destroy
+	 *
+	 * Destroys the current session.
+	 *
+	 * @param	string	$session_id	Session ID
+	 * @return	bool
+	 */
 	public function destroy($session_id)
 	{
 		if (isset($this->_redis, $this->_lock_key))
@@ -210,25 +277,38 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 				log_message('debug', 'Session: Redis::delete() expected to return 1, got '.var_export($result, TRUE).' instead.');
 			}
 
-			return ($this->_cookie_destroy() && $this->close());
+			return $this->_cookie_destroy();
 		}
 
-		return $this->close();
+		return FALSE;
 	}
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Garbage Collector
+	 *
+	 * Deletes expired sessions
+	 *
+	 * @param	int 	$maxlifetime	Maximum lifetime of sessions
+	 * @return	bool
+	 */
 	public function gc($maxlifetime)
 	{
-		// TODO: keys()/getKeys() is said to be performance-intensive,
-		// although it supports patterns (*, [charlist] at the very least).
-		// scan() seems to be recommended, but requires redis 2.8
-		// Not sure if we need any of these though, as we set keys with expire times
+		// Not necessary, Redis takes care of that.
 		return TRUE;
 	}
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Get lock
+	 *
+	 * Acquires an (emulated) lock.
+	 *
+	 * @param	string	$session_id	Session ID
+	 * @return	bool
+	 */
 	protected function _get_lock($session_id)
 	{
 		if (isset($this->_lock_key))
@@ -288,6 +368,13 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * Release lock
+	 *
+	 * Releases a previously acquired lock
+	 *
+	 * @return	bool
+	 */
 	protected function _release_lock()
 	{
 		if (isset($this->_redis, $this->_lock_key) && $this->_lock)
@@ -306,6 +393,3 @@ class CI_Session_redis_driver extends CI_Session_driver implements SessionHandle
 	}
 
 }
-
-/* End of file Session_redis_driver.php */
-/* Location: ./system/libraries/Session/drivers/Session_redis_driver.php */

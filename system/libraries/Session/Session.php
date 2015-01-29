@@ -2,26 +2,37 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 5.2.4 or newer
+ * An open source application development framework for PHP
  *
- * NOTICE OF LICENSE
+ * This content is released under the MIT License (MIT)
  *
- * Licensed under the Open Software License version 3.0
+ * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
  *
- * This source file is subject to the Open Software License (OSL 3.0) that is
- * bundled with this package in the files license.txt / license.rst.  It is
- * also available through the world wide web at this URL:
- * http://opensource.org/licenses/OSL-3.0
- * If you did not receive a copy of the license and are unable to obtain it
- * through the world wide web, please send an email to
- * licensing@ellislab.com so we can send you a copy immediately.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 2.0
+ * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	http://codeigniter.com
+ * @since	Version 2.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -37,7 +48,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Session {
 
+	/**
+	 * Userdata array
+	 *
+	 * Just a reference to $_SESSION, for BC purposes.
+	 */
+	public $userdata;
+
 	protected $_driver = 'files';
+	protected $_config;
 
 	// ------------------------------------------------------------------------
 
@@ -65,8 +84,7 @@ class CI_Session {
 			$this->_driver = $params['driver'];
 			unset($params['driver']);
 		}
-		// Note: Make the autoloader pass sess_* params to this constructor
-		elseif (empty($params) && $driver = config_item('sess_driver'))
+		elseif ($driver = config_item('sess_driver'))
 		{
 			$this->_driver = $driver;
 		}
@@ -81,7 +99,10 @@ class CI_Session {
 			return;
 		}
 
-		$class = new $class($params);
+		// Configuration ...
+		$this->_configure($params);
+
+		$class = new $class($this->_config);
 		if ($class instanceof SessionHandlerInterface)
 		{
 			if (is_php('5.4'))
@@ -108,14 +129,66 @@ class CI_Session {
 			return;
 		}
 
+		// Sanitize the cookie, because apparently PHP doesn't do that for userspace handlers
+		if (isset($_COOKIE[$this->_config['cookie_name']])
+			&& (
+				! is_string($_COOKIE[$this->_config['cookie_name']])
+				OR ! preg_match('/^[0-9a-f]{40}$/', $_COOKIE[$this->_config['cookie_name']])
+			)
+		)
+		{
+			unset($_COOKIE[$this->_config['cookie_name']]);
+		}
+
 		session_start();
+
+		// Is session ID auto-regeneration configured? (ignoring ajax requests)
+		if ( ! empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+			&& strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+			&& ($regenerate_time = config_item('sess_time_to_update')) > 0
+		)
+		{
+			if ( ! isset($_SESSION['__ci_last_regenerate']))
+			{
+				$_SESSION['__ci_last_regenerate'] = time();
+			}
+			elseif ($_SESSION['__ci_last_regenerate'] < (time() - $regenerate_time))
+			{
+				$this->sess_regenerate(FALSE);
+			}
+		}
+		// Another work-around ... PHP doesn't seem to send the session cookie
+		// unless it is being currently created or regenerated
+		elseif (isset($_COOKIE[$this->_config['cookie_name']]) && $_COOKIE[$this->_config['cookie_name']] === session_id())
+		{
+			setcookie(
+				$this->_config['cookie_name'],
+				session_id(),
+				(empty($this->_config['cookie_lifetime']) ? 0 : time() + $this->_config['cookie_lifetime']),
+				$this->_config['cookie_path'],
+				$this->_config['cookie_domain'],
+				$this->_config['cookie_secure'],
+				TRUE
+			);
+		}
+
 		$this->_ci_init_vars();
 
-		log_message('debug', "Session: Class initialized using '".$this->_driver."' driver.");
+		log_message('info', "Session: Class initialized using '".$this->_driver."' driver.");
 	}
 
 	// ------------------------------------------------------------------------
 
+	/**
+	 * CI Load Classes
+	 *
+	 * An internal method to load all possible dependency and extension
+	 * classes. It kind of emulates the CI_Driver library, but is
+	 * self-sufficient.
+	 *
+	 * @param	string	$driver	Driver name
+	 * @return	string	Driver class name
+	 */
 	protected function _ci_load_classes($driver)
 	{
 		// PHP 5.4 compatibility
@@ -138,6 +211,17 @@ class CI_Session {
 		}
 
 		$class = 'Session_'.$driver.'_driver';
+
+		// Allow custom drivers without the CI_ or MY_ prefix
+		if ( ! class_exists($class, FALSE) && file_exists($file_path = APPPATH.'libraries/Session/drivers/'.$class.'.php'))
+		{
+			require_once($file_path);
+			if (class_exists($class, FALSE))
+			{
+				return $class;
+			}
+		}
+
 		if ( ! class_exists('CI_'.$class, FALSE))
 		{
 			if (file_exists($file_path = APPPATH.'libraries/Session/drivers/'.$class.'.php') OR file_exists($file_path = BASEPATH.'libraries/Session/drivers/'.$class.'.php'))
@@ -145,7 +229,7 @@ class CI_Session {
 				require_once($file_path);
 			}
 
-			if ( ! class_exists('CI_'.$class, FALSE))
+			if ( ! class_exists('CI_'.$class, FALSE) && ! class_exists($class, FALSE))
 			{
 				log_message('error', "Session: Configured driver '".$driver."' was not found. Aborting.");
 				return FALSE;
@@ -166,6 +250,77 @@ class CI_Session {
 		}
 
 		return 'CI_'.$class;
+	}
+
+	// ------------------------------------------------------------------------
+
+	/**
+	 * Configuration
+	 *
+	 * Handle input parameters and configuration defaults
+	 *
+	 * @param	array	&$params	Input parameters
+	 * @return	void
+	 */
+	protected function _configure(&$params)
+	{
+		$expiration = config_item('sess_expiration');
+
+		if (isset($params['cookie_lifetime']))
+		{
+			$params['cookie_lifetime'] = (int) $params['cookie_lifetime'];
+		}
+		else
+		{
+			$params['cookie_lifetime'] = ( ! isset($expiration) && config_item('sess_expire_on_close'))
+				? 0 : (int) $expiration;
+		}
+
+		isset($params['cookie_name']) OR $params['cookie_name'] = config_item('sess_cookie_name');
+		if (empty($params['cookie_name']))
+		{
+			$params['cookie_name'] = ini_get('session.name');
+		}
+		else
+		{
+			ini_set('session.name', $params['cookie_name']);
+		}
+
+		isset($params['cookie_path']) OR $params['cookie_path'] = config_item('cookie_path');
+		isset($params['cookie_domain']) OR $params['cookie_domain'] = config_item('cookie_domain');
+		isset($params['cookie_secure']) OR $params['cookie_secure'] = (bool) config_item('cookie_secure');
+
+		session_set_cookie_params(
+			$params['cookie_lifetime'],
+			$params['cookie_path'],
+			$params['cookie_domain'],
+			$params['cookie_secure'],
+			TRUE // HttpOnly; Yes, this is intentional and not configurable for security reasons
+		);
+
+		if (empty($expiration))
+		{
+			$params['expiration'] = (int) ini_get('session.gc_maxlifetime');
+		}
+		else
+		{
+			$params['expiration'] = (int) $expiration;
+			ini_set('session.gc_maxlifetime', $expiration);
+		}
+
+		$params['match_ip'] = (bool) (isset($params['match_ip']) ? $params['match_ip'] : config_item('sess_match_ip'));
+
+		isset($params['save_path']) OR $params['save_path'] = config_item('sess_save_path');
+
+		$this->_config = $params;
+
+		// Security is king
+		ini_set('session.use_trans_id', 0);
+		ini_set('session.use_strict_mode', 1);
+		ini_set('session.use_cookies', 1);
+		ini_set('session.use_only_cookies', 1);
+		ini_set('session.hash_function', 1);
+		ini_set('session.hash_bits_per_character', 4);
 	}
 
 	// ------------------------------------------------------------------------
@@ -203,6 +358,8 @@ class CI_Session {
 				unset($_SESSION['__ci_vars']);
 			}
 		}
+
+		$this->userdata =& $_SESSION;
 	}
 
 	// ------------------------------------------------------------------------
@@ -469,6 +626,7 @@ class CI_Session {
 	 */
 	public function sess_regenerate($destroy = FALSE)
 	{
+		$_SESSION['__ci_last_regenerate'] = time();
 		session_regenerate_id($destroy);
 	}
 
@@ -651,7 +809,7 @@ class CI_Session {
 	public function set_flashdata($data, $value = NULL)
 	{
 		$this->set_userdata($data, $value);
-		$this->mark_as_flash($data);
+		$this->mark_as_flash(is_array($data) ? array_keys($data) : $data);
 	}
 
 	// ------------------------------------------------------------------------
@@ -735,6 +893,3 @@ class CI_Session {
 	}
 
 }
-
-/* End of file Session.php */
-/* Location: ./system/libraries/Session/Session.php */
