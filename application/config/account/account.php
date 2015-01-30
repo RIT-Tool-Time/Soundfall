@@ -23,6 +23,9 @@ $config['sign_in_recaptcha_offset'] 	= 3;
 $config['sign_up_recaptcha_enabled'] 	= FALSE;
 $config['sign_up_auto_sign_in'] 	= TRUE;
 $config['sign_up_default_user_group']   = 2;
+$config['sign_up_username_min_length']  = 2;
+$config['sign_up_username_max_length']  = 24;
+$config['sign_up_password_min_length']  = 6;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,62 +56,47 @@ $config['third_party_auth'] = array(
 "providers" => array (
         // openid providers
         "OpenID" => array (
-            "enabled" => TRUE
+                "enabled" => TRUE
         ),
 
         "Yahoo" => array (
-            "enabled" => TRUE,
-            "keys"    => array ( "key" => "", "secret" => "" ),
+                "enabled" => FALSE,
+                "keys"    => array ( "key" => "", "secret" => "" ),
         ),
 
         "AOL"  => array (
-            "enabled" => TRUE
+                "enabled" => TRUE
         ),
 
         "Google" => array (
-            "enabled" => TRUE,
-            "keys"    => array ( "id" => "", "secret" => "" ),
+                "enabled" => FALSE,
+                "keys"    => array ( "id" => "", "secret" => "" ),
         ),
 
         "Facebook" => array (
-            "enabled" => TRUE,
-            "keys"    => array ( "id" => "", "secret" => "" ),
+                "enabled" => FALSE,
+                "keys"    => array ( "id" => "", "secret" => "" ),
         ),
 
         "Twitter" => array (
-            "enabled" => TRUE,
-            "keys"    => array ( "key" => "", "secret" => "" )
+                "enabled" => FALSE,
+                "keys"    => array ( "key" => "", "secret" => "" )
         ),
 
         // windows live
         "Live" => array (
-            "enabled" => TRUE,
-            "keys"    => array ( "id" => "", "secret" => "" )
+                "enabled" => FALSE,
+                "keys"    => array ( "id" => "", "secret" => "" )
         ),
 
         "LinkedIn" => array (
-            "enabled" => TRUE,
-            "keys"    => array ( "key" => "", "secret" => "" )
+                "enabled" => FALSE,
+                "keys"    => array ( "key" => "", "secret" => "" )
         ),
-        
-        "LastFM" => array (
-            "enabled" => TRUE,
-            "keys" => array ( "key" => "", "secret" => "" )
-        ),
-        
-        "Vimeo" => array (
-            "enabled" => TRUE,
-            "keys" => array ( "key" => "", "secret" => "" )
-        ),
-        
-        "Tumblr" => array (
-            "enabled" => TRUE,
-            "keys" => array ( "key" => "", "secret" => "" )
-        ),
-        
-        "Instagram" => array (
-            "enabled" => TRUE,
-            "keys" => array ( "key" => "", "secret" => "" )
+
+        "Foursquare" => array (
+                "enabled" => FALSE,
+                "keys"    => array ( "id" => "", "secret" => "" )
         ),
 ),
 
@@ -135,12 +123,13 @@ $config['password_reset_email'] 	= 'no-reply@a3m.net';
 
 /*
 |--------------------------------------------------------------------------
-| Confrimation E-mail for non-social media registration
+| Confrimation E-mail for registration
 |--------------------------------------------------------------------------
-|       account_
+|       
 |	account_email_validate               Will send out confirmation email for account email validation
 |       account_email_validation_required    Requires that the e-mail is validated before user can login
 |       account_email_confirm_sender        
+|       
 */
 $config['account_email_validate']           = TRUE;
 $config['account_email_validation_required']= TRUE;
